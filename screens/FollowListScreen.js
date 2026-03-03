@@ -186,28 +186,28 @@ const FollowListScreen = ({ route, navigation }) => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#0a0a1a',
+        backgroundColor: '#F2F2F2', // Light Theme
     },
     header: {
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
         padding: 20,
+        backgroundColor: '#F2F2F2',
         borderBottomWidth: 1,
-        borderBottomColor: '#222',
-        backgroundColor: '#1a1a2e'
+        borderBottomColor: '#E0E0E0',
     },
     headerTitle: {
         fontSize: 20,
         fontWeight: 'bold',
-        color: '#fff',
+        color: '#000',
     },
     userRow: {
         flexDirection: 'row',
         alignItems: 'center',
         paddingVertical: 15,
         borderBottomWidth: 1,
-        borderBottomColor: '#222'
+        borderBottomColor: '#E0E0E0'
     },
     avatar: {
         width: 50,
@@ -215,11 +215,11 @@ const styles = StyleSheet.create({
         borderRadius: 25,
         marginRight: 15,
         borderWidth: 1,
-        borderColor: '#333'
+        borderColor: '#C6A87C' // Gold border
     },
     username: {
         fontSize: 16,
-        color: '#fff',
+        color: '#000',
         fontWeight: 'bold'
     },
     emptyText: {
@@ -229,15 +229,15 @@ const styles = StyleSheet.create({
         marginTop: 20
     },
     removeButton: {
-        backgroundColor: '#333',
         paddingHorizontal: 12,
         paddingVertical: 6,
         borderRadius: 15,
         borderWidth: 1,
-        borderColor: '#555'
+        borderColor: '#C6A87C',
+        backgroundColor: '#fff'
     },
     removeButtonText: {
-        color: '#fff',
+        color: '#C6A87C',
         fontSize: 12,
         fontWeight: 'bold'
     }

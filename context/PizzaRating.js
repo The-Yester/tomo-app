@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { View, Text, TouchableOpacity, StyleSheet, PanResponder, Dimensions } from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet, PanResponder, Dimensions, Image } from 'react-native';
 import Svg, { Path, Circle, G } from 'react-native-svg';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 // Configuration
 const MAX_RATING = 5;
@@ -8,19 +9,20 @@ const NUM_MAIN_SLICES = 5;
 const NUM_HALF_SLICES = MAX_RATING * 2;
 const ANGLE_PER_HALF_SLICE = 360 / NUM_HALF_SLICES;
 
-// Colors (Dark Theme)
-const COLOR_BACKGROUND_CARD = '#1a1a2e';
-const COLOR_PIE_CANVAS = '#252535';
-const COLOR_SELECTED_FULL = '#ffda79';
-const COLOR_SELECTED_HALF = '#ccae62';
-const COLOR_UNSELECTED = '#333';
-const COLOR_PIE_BORDER = '#d35400';
+// Colors (Light/Gold Theme)
+const COLOR_BACKGROUND_CARD = '#FFFFFF';
+const COLOR_PIE_CANVAS = '#F5F5F5';
+const COLOR_SELECTED_FULL = '#d4a03e'; // TOPO Gold
+const COLOR_SELECTED_HALF = '#e6c88f';
+const COLOR_UNSELECTED = '#E0E0E0';
+const COLOR_PIE_BORDER = '#d4a03e';
 const PEPPERONI_COLOR = '#c0392b';
-const TEXT_COLOR_PRIMARY = '#FFFFFF';
-const TEXT_COLOR_SECONDARY = '#ccc';
-const BUTTON_COLOR_RESET = '#e74c3c';
-const BUTTON_TEXT_COLOR = '#FFFFFF';
-const BUTTON_COLOR_SUBMIT = '#ff8c00'; // TOPO Orange
+const TEXT_COLOR_PRIMARY = '#333333';
+const TEXT_COLOR_SECONDARY = '#666666';
+const BUTTON_COLOR_CANCEL = '#E0E0E0';
+const BUTTON_TEXT_COLOR_CANCEL = '#333333';
+const BUTTON_COLOR_SUBMIT = '#d4a03e';
+const BUTTON_TEXT_COLOR_SUBMIT = '#FFFFFF';
 
 // Dimensions
 const screenWidth = Dimensions.get('window').width;
@@ -46,7 +48,7 @@ const describeArc = (x, y, radius, startAngleDeg, endAngleDeg) => {
     ].join(' ');
 };
 
-const PizzaRating = ({ initialRating = 0, onSubmitRating, readonly = false, size }) => {
+const PizzaRating = ({ initialRating = 0, onSubmitRating, readonly = false, size, onCancel, artistName, albumArtwork, isPlayed, onTogglePlayed }) => {
     const [rating, setRating] = useState(parseFloat(initialRating));
 
     useEffect(() => {
@@ -195,7 +197,10 @@ const PizzaRating = ({ initialRating = 0, onSubmitRating, readonly = false, size
 
     return (
         <View style={styles.card}>
-            <Text style={styles.title}>Pizza Rating</Text>
+            <Text style={styles.title}>Rate {artistName || 'Artist'}</Text>
+            {albumArtwork && (
+                <Image source={{ uri: albumArtwork }} style={styles.coverArt} resizeMode="contain" />
+            )}
 
             <View
                 style={styles.pieContainer}
@@ -214,10 +219,26 @@ const PizzaRating = ({ initialRating = 0, onSubmitRating, readonly = false, size
             <Text style={styles.ratingValueText}>{rating.toFixed(1)} / {MAX_RATING}</Text>
             <Text style={styles.ratingDescriptionText}>{getRatingDescription(rating)}</Text>
 
+            <TouchableOpacity
+                style={[styles.playedToggle, isPlayed && styles.playedToggleActive]}
+                onPress={onTogglePlayed}
+            >
+                <MaterialCommunityIcons
+                    name={isPlayed ? "check-circle" : "circle-outline"}
+                    size={20}
+                    color={isPlayed ? "#FFFFFF" : BUTTON_TEXT_COLOR_CANCEL}
+                />
+                <Text style={[styles.playedToggleText, isPlayed && styles.playedToggleTextActive]}>
+                    Press to Add to Recently played
+                </Text>
+            </TouchableOpacity>
+
             <View style={styles.buttonsContainer}>
-                <TouchableOpacity style={styles.resetButton} onPress={resetRating}>
-                    <Text style={styles.resetButtonText}>Reset</Text>
-                </TouchableOpacity>
+                {onCancel && (
+                    <TouchableOpacity style={styles.cancelButton} onPress={onCancel}>
+                        <Text style={styles.cancelButtonText}>Cancel</Text>
+                    </TouchableOpacity>
+                )}
                 <TouchableOpacity style={styles.submitButton} onPress={handleSubmit}>
                     <Text style={styles.submitButtonText}>Submit Rating</Text>
                 </TouchableOpacity>
@@ -229,18 +250,19 @@ const PizzaRating = ({ initialRating = 0, onSubmitRating, readonly = false, size
 
 const styles = StyleSheet.create({
     card: {
-        backgroundColor: COLOR_BACKGROUND_CARD,
-        borderRadius: 15,
-        padding: 20,
         alignItems: 'center',
-        width: screenWidth * 0.92,
-        alignSelf: 'center',
-        marginTop: 10,
+        width: '100%',
     },
     title: {
-        fontSize: 22,
+        fontSize: screenWidth * 0.06,
         fontWeight: 'bold',
         color: TEXT_COLOR_PRIMARY,
+        marginBottom: 10,
+    },
+    coverArt: {
+        width: screenWidth * 0.3,
+        height: screenWidth * 0.3,
+        borderRadius: 10,
         marginBottom: 15,
     },
     pieContainer: {
@@ -264,37 +286,58 @@ const styles = StyleSheet.create({
         width: '100%',
         marginBottom: 10,
     },
-    resetButton: {
-        backgroundColor: BUTTON_COLOR_RESET,
+    cancelButton: {
+        backgroundColor: BUTTON_COLOR_CANCEL,
         paddingVertical: 12,
-        paddingHorizontal: 20,
         borderRadius: 25,
         flex: 1,
         marginRight: 10,
         alignItems: 'center',
     },
-    resetButtonText: {
-        color: BUTTON_TEXT_COLOR,
-        fontSize: 16,
+    cancelButtonText: {
+        color: BUTTON_TEXT_COLOR_CANCEL,
+        fontSize: screenWidth * 0.04,
         fontWeight: 'bold',
     },
     submitButton: {
         backgroundColor: BUTTON_COLOR_SUBMIT,
         paddingVertical: 12,
-        paddingHorizontal: 20,
         borderRadius: 25,
-        flex: 2,
+        flex: 1,
         alignItems: 'center',
     },
     submitButtonText: {
-        color: BUTTON_TEXT_COLOR,
-        fontSize: 16,
+        color: BUTTON_TEXT_COLOR_SUBMIT,
+        fontSize: screenWidth * 0.04,
         fontWeight: 'bold',
     },
     hintText: {
         fontSize: 12,
         color: TEXT_COLOR_SECONDARY,
     },
+    playedToggle: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'center',
+        backgroundColor: BUTTON_COLOR_CANCEL,
+        paddingVertical: 12,
+        paddingHorizontal: 20,
+        borderRadius: 25,
+        width: '100%',
+        marginBottom: 15,
+    },
+    playedToggleActive: {
+        backgroundColor: BUTTON_COLOR_SUBMIT,
+    },
+    playedToggleText: {
+        color: BUTTON_TEXT_COLOR_CANCEL,
+        fontSize: screenWidth * 0.035,
+        fontWeight: 'bold',
+        marginLeft: 8,
+    },
+    playedToggleTextActive: {
+        color: '#FFFFFF',
+    }
 });
 
 export default PizzaRating;

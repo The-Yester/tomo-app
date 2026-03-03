@@ -5,14 +5,15 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Login from './src/login';
 import SignUpScreen from './screens/SignUpScreen';
-import HomeScreen from './screens/HomeScreen';
-import StreamingServicesScreen from './screens/StreamingServicesScreen';
-import MovieDetailScreen from './screens/MovieDetailScreen';
-import { MoviesProvider } from './context/MoviesContext';
+import HomeScreenMusic from './screens/HomeScreenMusic';
+import TrendingScreen from './screens/TrendingScreen';
+import AlbumDetailScreen from './screens/AlbumDetailScreen';
+import { MusicProvider } from './context/MusicContext';
 import ListScreen from './screens/ListScreen';
 import ListDetailScreen from './screens/ListDetailScreen';
-import SearchScreen from './screens/SearchScreen';
-import MessageBoard from './screens/MessageBoard';
+import SearchScreenMusic from './screens/SearchScreenMusic';
+import CuratedCornerScreen from './screens/CuratedCornerScreen';
+import CreateCurationScreen from './screens/CreateCurationScreen';
 import ProfileScreen from './screens/ProfileScreen';
 import ProfileSettings from './screens/ProfileSettings';
 import 'react-native-get-random-values';
@@ -20,73 +21,75 @@ import * as Notifications from 'expo-notifications';
 import { useRef, useEffect, useState } from 'react';
 import { registerForPushNotificationsAsync } from './services/NotificationService';
 
-import GenreMovieScreen from './screens/GenreMovieScreen';
-import NowPlayingScreen from './screens/NowPlayingScreen';
-import NewStreamingScreen from './screens/NewStreamingScreen';
+
 import FollowListScreen from './screens/FollowListScreen';
-import MatchedMovieScreen from './screens/MatchedMovieScreen';
-import ConnectionDetailScreen from './screens/ConnectionDetailScreen';
-import RevealScreen from './screens/RevealScreen';
+
 import PublicProfileScreen from './screens/PublicProfileScreen';
-import AwardsHubScreen from './screens/AwardsHubScreen';
-import AdminAwardsScreen from './screens/AdminAwardsScreen';
 import RatingInstructionsScreen from './screens/RatingInstructionsScreen';
-import ActorDetailScreen from './screens/ActorDetailScreen';
+import ArtistDetailScreen from './screens/ArtistDetailScreen';
+import GenreDetailScreen from './screens/GenreDetailScreen';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 
-// Stack for the Home tab
-const HomeStack = createStackNavigator();
-function HomeStackNavigator() {
-    return (
-        <HomeStack.Navigator screenOptions={{ headerShown: false }}>
-            <HomeStack.Screen name="HomeScreen" component={HomeScreen} />
-            <HomeStack.Screen name="MovieDetails" component={MovieDetailScreen} />
-            <HomeStack.Screen name="ProfileSettings" component={ProfileSettings} />
-            <HomeStack.Screen name="FollowList" component={FollowListScreen} />
-        </HomeStack.Navigator>
+const createTabStack = (MainScreenName, MainComponent) => {
+    const TabStack = createStackNavigator();
+    const TabStackNavigator = () => (
+        <TabStack.Navigator screenOptions={{ headerShown: false }}>
+            <TabStack.Screen name={MainScreenName} component={MainComponent} />
+            <TabStack.Screen name="AlbumDetails" component={AlbumDetailScreen} />
+            <TabStack.Screen name="ArtistDetail" component={ArtistDetailScreen} />
+            <TabStack.Screen name="GenreDetail" component={GenreDetailScreen} />
+            <TabStack.Screen name="ListDetails" component={ListDetailScreen} />
+            <TabStack.Screen name="PublicProfile" component={PublicProfileScreen} />
+            <TabStack.Screen name="ProfileSettings" component={ProfileSettings} />
+            <TabStack.Screen name="FollowList" component={FollowListScreen} />
+        </TabStack.Navigator>
     );
-}
+    return TabStackNavigator;
+};
+
+// Stacks for each tab
+const HomeStackNavigator = createTabStack("HomeScreen", HomeScreenMusic);
+const TrendingStackNavigator = createTabStack("TrendingScreen", TrendingScreen);
+const ListStackNavigator = createTabStack("ListScreen", ListScreen);
+const CuratedCornerStackNavigator = createTabStack("CuratedCornerScreen", CuratedCornerScreen);
+const SearchStackNavigator = createTabStack("SearchScreen", SearchScreenMusic);
 
 // Bottom tab navigator
 function BottomTabs() {
     return (
-        <Tab.Navigator screenOptions={{ headerShown: false, tabBarActiveTintColor: '#ff8c00', tabBarInactiveTintColor: 'gray', tabBarStyle: { backgroundColor: '#0a0a1a', borderTopColor: '#222' } }}>
+        <Tab.Navigator screenOptions={{ headerShown: false, tabBarActiveTintColor: '#D4AF37', tabBarInactiveTintColor: '#888', tabBarStyle: { backgroundColor: '#FFFFFF', borderTopColor: '#DDD' } }}>
             <Tab.Screen
                 name="Home"
                 component={HomeStackNavigator}
                 options={{ tabBarIcon: ({ color, size }) => <Icon name="home" color={color} size={size} /> }}
             />
             <Tab.Screen
-                name="Streaming"
-                component={StreamingServicesScreen}
-                options={{ tabBarIcon: ({ color, size }) => <Icon name="tv" color={color} size={size} /> }}
-            />
-            <Tab.Screen
-                name="Film Friendzy"
-                component={MatchedMovieScreen}
+                name="Trending"
+                component={TrendingStackNavigator}
                 options={{
-                    tabBarLabel: 'Friendzy',
-                    tabBarIcon: ({ color, size }) => <Icon name="users" color={color} size={size} />
+                    tabBarLabel: 'Trending',
+                    tabBarIcon: ({ color, size }) => <Icon name="fire" color={color} size={size} />
                 }}
             />
+
             <Tab.Screen
                 name="List"
-                component={ListScreen}
+                component={ListStackNavigator}
                 options={{ tabBarIcon: ({ color, size }) => <Icon name="list" color={color} size={size} /> }}
             />
             <Tab.Screen
-                name="Message Board"
-                component={MessageBoard}
+                name="CuratedCorner"
+                component={CuratedCornerStackNavigator}
                 options={{
-                    tabBarLabel: 'Reelz',
-                    tabBarIcon: ({ color, size }) => <Icon name="comments" color={color} size={size} />
+                    tabBarLabel: 'The Corner',
+                    tabBarIcon: ({ color, size }) => <Icon name="diamond" color={color} size={size} />
                 }}
             />
             <Tab.Screen
                 name="Search"
-                component={SearchScreen}
+                component={SearchStackNavigator}
                 options={{ tabBarIcon: ({ color, size }) => <Icon name="search" color={color} size={size} /> }}
             />
         </Tab.Navigator>
@@ -120,36 +123,30 @@ function AppNavigator() {
     }, []);
 
     return (
-        <MoviesProvider>
+        <MusicProvider>
             <NavigationContainer>
                 <Stack.Navigator initialRouteName="Login">
                     <Stack.Screen name="Login" component={Login} options={{ headerShown: false }} />
                     <Stack.Screen name="SignUp" component={SignUpScreen} />
                     <Stack.Screen name="MainTabs" component={BottomTabs} options={{ headerShown: false }} />
 
-                    <Stack.Screen name="AwardsHub" component={AwardsHubScreen} options={{ headerShown: false }} />
-                    <Stack.Screen name="AdminAwards" component={AdminAwardsScreen} options={{ headerShown: false, presentation: 'modal' }} />
-
                     <Stack.Screen name="ListDetails" component={ListDetailScreen} />
                     <Stack.Screen name="Profile" component={ProfileScreen} />
                     <Stack.Screen name="ProfileSettings" component={ProfileSettings} />
-                    <Stack.Screen name="SearchScreen" component={SearchScreen} />
-                    <Stack.Screen name="MessageBoard" component={MessageBoard} />
-                    <Stack.Screen name="GenreMoviesScreen" component={GenreMovieScreen} />
-                    <Stack.Screen name="NowPlaying" component={NowPlayingScreen} />
-                    <Stack.Screen name="NewStreaming" component={NewStreamingScreen} />
-                    <Stack.Screen name="MovieDetails" component={MovieDetailScreen} options={{ headerShown: false }} />
+                    <Stack.Screen name="SearchScreen" component={SearchScreenMusic} />
 
-                    {/* Matched Movie Stack Screens */}
-                    <Stack.Screen name="ConnectionDetail" component={ConnectionDetailScreen} options={{ headerShown: false }} />
-                    <Stack.Screen name="RevealScreen" component={RevealScreen} options={{ headerShown: false }} />
+
+                    <Stack.Screen name="AlbumDetails" component={AlbumDetailScreen} options={{ headerShown: false }} />
+                    <Stack.Screen name="MovieDetails" component={AlbumDetailScreen} options={{ headerShown: false }} />
+
                     <Stack.Screen name="PublicProfile" component={PublicProfileScreen} options={{ headerShown: false }} />
                     <Stack.Screen name="FollowList" component={FollowListScreen} options={{ headerShown: false }} />
                     <Stack.Screen name="RatingInstructions" component={RatingInstructionsScreen} options={{ headerShown: false }} />
-                    <Stack.Screen name="ActorDetail" component={ActorDetailScreen} options={{ headerShown: false }} />
+                    <Stack.Screen name="ArtistDetail" component={ArtistDetailScreen} options={{ headerShown: false }} />
+                    <Stack.Screen name="CreateCuration" component={CreateCurationScreen} options={{ headerShown: false }} />
                 </Stack.Navigator>
             </NavigationContainer>
-        </MoviesProvider>
+        </MusicProvider>
     );
 }
 

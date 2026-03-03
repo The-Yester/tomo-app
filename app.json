@@ -1,8 +1,8 @@
 {
   "expo": {
-    "name": "TOPO",
-    "slug": "topo",
-    "version": "1.0.0",
+    "name": "TOMO",
+    "slug": "tomo",
+    "version": "1.0.1",
     "platforms": [
       "ios",
       "android"
@@ -12,14 +12,14 @@
     "userInterfaceStyle": "light",
     "newArchEnabled": false,
     "splash": {
-      "image": "./assets/TOPO_logo_Full.jpg",
+      "image": "./assets/TOMO_Logo_1.png",
       "resizeMode": "contain",
-      "backgroundColor": "#23242f"
+      "backgroundColor": "#0f0f11"
     },
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.ryester.topo",
-      "buildNumber": "8",
+      "bundleIdentifier": "com.ryanyester.tomo",
+      "buildNumber": "9",
       "infoPlist": {
         "ITSAppUsesNonExemptEncryption": false
       }
@@ -29,7 +29,7 @@
         "foregroundImage": "./assets/fixed-icon.png",
         "backgroundColor": "#23242f"
       },
-      "package": "com.ryester.topo",
+      "package": "com.ryanyester.tomo",
       "versionCode": 2
     },
     "extra": {

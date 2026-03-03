@@ -5,35 +5,30 @@ import {
   StyleSheet,
   ScrollView,
   Dimensions,
+  TouchableOpacity,
 } from 'react-native';
 import Slider from '@react-native-community/slider';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
-// Colors (Dark Theme)
-const COLOR_BG = '#1a1a2e';
-const COLOR_CARD_BG = '#252535';
-const COLOR_TEXT_PRIMARY = '#FFFFFF';
-const COLOR_TEXT_SECONDARY = '#ccc';
-const COLOR_ACCENT = '#ff8c00'; // TOPO Orange
-const COLOR_SLIDER_MAX = '#4A4A4A';
+// Colors (Light/Gold Theme)
+const COLOR_BG = 'transparent';
+const COLOR_CARD_BG = '#F2F2F2';
+const COLOR_TEXT_PRIMARY = '#000000';
+const COLOR_TEXT_SECONDARY = '#666666';
+const COLOR_ACCENT = '#d4a03e'; // TOPO Gold
+const COLOR_SLIDER_MAX = '#E0E0E0';
 
 const SCREEN_WIDTH = Dimensions.get('window').width;
 
 const AWARD_CATEGORIES = [
-  'Directing',
-  'Leading Actress',
-  'Leading Actor',
-  'Supporting Actress',
-  'Supporting Actor',
-  'Screenplay',
-  'Score',
-  'Song',
   'Sound',
-  'Makeup & Hairstyle',
-  'Costume Design',
-  'Cinematography',
-  'Production Design',
-  'Film Editing',
-  'Visual Effects'
+  'Style',
+  'Drums',
+  'Impact',
+  'Lyrics',
+  'Structure',
+  'Expression',
+  'Reception'
 ];
 
 // Memoized Row Component to ensure smooth slider performance
@@ -74,7 +69,7 @@ const CategoryRow = memo(({ category, value, onValueChange }) => {
 
 const DEFAULT_EXCLUDED = [];
 
-const AwardsRating = ({ initialRatings = {}, onChange, excludedCategories = DEFAULT_EXCLUDED }) => {
+const AwardsRating = ({ initialRatings = {}, onChange, excludedCategories = DEFAULT_EXCLUDED, isPlayed, onTogglePlayed }) => {
   const [ratings, setRatings] = useState(() => {
     const defaultRatings = {};
     AWARD_CATEGORIES.forEach(category => {
@@ -163,6 +158,19 @@ const AwardsRating = ({ initialRatings = {}, onChange, excludedCategories = DEFA
       <View style={styles.header}>
         <Text style={styles.title}>Awards Rating</Text>
         <Text style={styles.subtitle}>Rate categories 0-10 (0 = N/A)</Text>
+        <TouchableOpacity
+          style={[styles.playedToggle, isPlayed && styles.playedToggleActive]}
+          onPress={onTogglePlayed}
+        >
+          <MaterialCommunityIcons
+            name={isPlayed ? "check-circle" : "circle-outline"}
+            size={20}
+            color={isPlayed ? "#FFFFFF" : COLOR_TEXT_SECONDARY}
+          />
+          <Text style={[styles.playedToggleText, isPlayed && styles.playedToggleTextActive]}>
+            Press to Add to Recently played
+          </Text>
+        </TouchableOpacity>
         <View style={styles.averageContainer}>
           <Text style={styles.averageLabel}>Overall Score</Text>
           <Text style={styles.averageValue}>{getOverallScore()}</Text>
@@ -192,7 +200,7 @@ const styles = StyleSheet.create({
     padding: 20,
     backgroundColor: COLOR_BG,
     borderBottomWidth: 1,
-    borderBottomColor: '#333',
+    borderBottomColor: '#EEEEEE',
     alignItems: 'center',
   },
   title: {
@@ -225,14 +233,17 @@ const styles = StyleSheet.create({
     color: COLOR_ACCENT,
   },
   scrollContent: {
-    padding: 15,
+    paddingHorizontal: 5,
+    paddingVertical: 15,
     paddingBottom: 40,
   },
   row: {
     backgroundColor: COLOR_CARD_BG,
-    marginBottom: 10,
-    borderRadius: 12,
-    padding: 15,
+    marginBottom: 15,
+    borderRadius: 15,
+    paddingHorizontal: 15,
+    paddingVertical: 20,
+    width: '100%',
   },
   labelContainer: {
     flexDirection: 'row',
@@ -251,7 +262,7 @@ const styles = StyleSheet.create({
     color: COLOR_ACCENT,
   },
   valueTextDisabled: {
-    color: '#666',
+    color: '#999',
   },
   sliderContainer: {
     width: '100%',
@@ -266,8 +277,30 @@ const styles = StyleSheet.create({
   tickLabel: {
     fontSize: 10,
     color: '#666',
+  },
+  playedToggle: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#E0E0E0',
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    borderRadius: 25,
+    marginBottom: 15,
+    width: '100%',
+  },
+  playedToggleActive: {
+    backgroundColor: COLOR_ACCENT,
+  },
+  playedToggleText: {
+    color: COLOR_TEXT_SECONDARY,
+    fontSize: 14,
+    fontWeight: 'bold',
+    marginLeft: 8,
+  },
+  playedToggleTextActive: {
+    color: '#FFFFFF',
   }
-
 });
 
 export default AwardsRating;

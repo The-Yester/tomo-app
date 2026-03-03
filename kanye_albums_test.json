@@ -1,0 +1,432 @@
+{
+  "next": "/v1/catalog/us/artists/2715720/albums?offset=10",
+  "data": [
+    {
+      "id": "1443063578",
+      "type": "albums",
+      "href": "/v1/catalog/us/albums/1443063578",
+      "attributes": {
+        "artistName": "Kanye West",
+        "artwork": {
+          "bgColor": "f58c57",
+          "height": 3000,
+          "textColor1": "080404",
+          "textColor2": "040608",
+          "textColor3": "371f15",
+          "textColor4": "342018",
+          "url": "https://is1-ssl.mzstatic.com/image/thumb/Music126/v4/ab/74/4a/ab744ae9-235f-0a2f-9f8a-74ddee3c339e/16UMGIM37046.rgb.jpg/{w}x{h}bb.jpg",
+          "width": 3000
+        },
+        "contentRating": "explicit",
+        "copyright": "℗ 2016 Getting Out Our Dreams II, LLC, Distributed By Def Jam,  A Division of UMG Recordings, Inc.Good Music ™ and associated logo are trademarks of Mascotte Holdings, Inc.   All rights reserved.",
+        "editorialNotes": {
+          "short": "A luminescent, gospel-informed glimpse of Kanye’s constantly evolving worldview.",
+          "standard": "Despite (or perhaps thanks to) its turbulent gestation, <i>The Life of Pablo</i> crackles with twitchy genius. Kanye described his seventh record as a “gospel album with a lot of cussing” and spiritual inflections course through its best moments: “Ultralight Beam” is a celestial slow-burn that anoints the guesting Chance the Rapper Kanye’s chosen one, he casts Kim and himself as Mary and Joseph on the haunting “Wolves,” while the quickly infamous “Famous” has Rihanna <i>and</i> Nina Simone take it church. It’s a luminescent glimpse into Kanye’s constantly evolving worldview. "
+        },
+        "genreNames": [
+          "Hip-Hop/Rap",
+          "Music",
+          "Rap",
+          "Hardcore Rap"
+        ],
+        "isCompilation": false,
+        "isComplete": true,
+        "isMasteredForItunes": false,
+        "isSingle": false,
+        "name": "The Life of Pablo",
+        "playParams": {
+          "id": "1443063578",
+          "kind": "album"
+        },
+        "recordLabel": "Rock The World/IDJ/Kanye LP7",
+        "releaseDate": "2016-02-14",
+        "trackCount": 20,
+        "upc": "00602557027334",
+        "url": "https://music.apple.com/us/album/the-life-of-pablo/1443063578"
+      }
+    },
+    {
+      "id": "1484936940",
+      "type": "albums",
+      "href": "/v1/catalog/us/albums/1484936940",
+      "attributes": {
+        "artistName": "Kanye West",
+        "artwork": {
+          "bgColor": "0d1ba4",
+          "height": 3000,
+          "textColor1": "ffffff",
+          "textColor2": "d0d3f4",
+          "textColor3": "ced1ec",
+          "textColor4": "a9aee4",
+          "url": "https://is1-ssl.mzstatic.com/image/thumb/Music113/v4/21/fd/d3/21fdd3d4-0c00-53ef-3903-d0569c49a812/19UMGIM89397.rgb.jpg/{w}x{h}bb.jpg",
+          "width": 3000
+        },
+        "copyright": "℗ 2019 Getting Out Our Dreams II, LLC Distributed By Def Jam,  A Division of UMG Recordings, Inc.",
+        "editorialNotes": {
+          "short": "Ye looks to his faith—and the Sunday Service Choir—on his ninth album."
+        },
+        "genreNames": [
+          "Hip-Hop/Rap",
+          "Music",
+          "Christian",
+          "Gospel",
+          "Rap",
+          "Christian Rap"
+        ],
+        "isCompilation": false,
+        "isComplete": true,
+        "isMasteredForItunes": true,
+        "isSingle": false,
+        "name": "JESUS IS KING",
+        "playParams": {
+          "id": "1484936940",
+          "kind": "album"
+        },
+        "recordLabel": "Getting Out Our Dreams II / Def Jam Recordings",
+        "releaseDate": "2019-10-25",
+        "trackCount": 11,
+        "upc": "00602508400513",
+        "url": "https://music.apple.com/us/album/jesus-is-king/1484936940"
+      }
+    },
+    {
+      "id": "1435565663",
+      "type": "albums",
+      "href": "/v1/catalog/us/albums/1435565663",
+      "attributes": {
+        "artistName": "Kanye West & Lil Pump",
+        "artwork": {
+          "bgColor": "333738",
+          "height": 3000,
+          "textColor1": "f4f4f5",
+          "textColor2": "d4d7ef",
+          "textColor3": "cececf",
+          "textColor4": "b4b7ca",
+          "url": "https://is1-ssl.mzstatic.com/image/thumb/Music125/v4/a2/3c/93/a23c930f-a7e7-b2e0-89e3-61883133db4f/00602577081774.rgb.jpg/{w}x{h}bb.jpg",
+          "width": 3000
+        },
+        "contentRating": "explicit",
+        "copyright": "℗ 2018 Getting Out Our Dreams II, LLC & Warner Brothers Records, Distributed by Def Jam; a Division of UMG Recordings. Inc.",
+        "editorialNotes": {
+          "short": "A raunchy collaboration, fresh off its debut at the Kanye-curated Pornhub Awards."
+        },
+        "genreNames": [
+          "Hip-Hop/Rap",
+          "Music",
+          "Rap"
+        ],
+        "isCompilation": false,
+        "isComplete": true,
+        "isMasteredForItunes": true,
+        "isSingle": true,
+        "name": "I Love It - Single",
+        "playParams": {
+          "id": "1435565663",
+          "kind": "album"
+        },
+        "recordLabel": "Getting Out Our Dreams, Inc./Def Jam Recordings",
+        "releaseDate": "2018-09-06",
+        "trackCount": 1,
+        "upc": "00602577081774",
+        "url": "https://music.apple.com/us/album/i-love-it-single/1435565663"
+      }
+    },
+    {
+      "id": "1451901307",
+      "type": "albums",
+      "href": "/v1/catalog/us/albums/1451901307",
+      "attributes": {
+        "artistName": "Kanye West",
+        "artwork": {
+          "bgColor": "633083",
+          "height": 1500,
+          "textColor1": "ede3ee",
+          "textColor2": "eeddcc",
+          "textColor3": "d2bfd9",
+          "textColor4": "d3babe",
+          "url": "https://is1-ssl.mzstatic.com/image/thumb/Music116/v4/2f/db/2c/2fdb2c9d-171c-c6dc-57ee-4bae2b4bb11a/07UMGIM12671.rgb.jpg/{w}x{h}bb.jpg",
+          "width": 1500
+        },
+        "contentRating": "explicit",
+        "copyright": "A Roc-A-Fella Records release; ℗ 2007 UMG Recordings, Inc.",
+        "editorialNotes": {
+          "short": "This album crystallizes West's stratospheric success in 24-carat surround sound.",
+          "standard": "If <i>College Dropout</i> was our introduction and <i>Late Registration</i> a victory lap for a newly anointed champion, then <i>Graduation</i> crystallizes Kanye West's stratospheric success in 24-carat surround sound. Kanye's third album pushes his reflexive rhymes and musical imagination to new places. \"Good Life\" is a layer cake of silver-gilded synths that lets the listener bask in Kanye's luxurious dream life for three vivid minutes, while the Daft Punk-sampling \"Stronger\" beams us into a futuristic dance party, awash in neon color."
+        },
+        "genreNames": [
+          "Hip-Hop/Rap",
+          "Music"
+        ],
+        "isCompilation": false,
+        "isComplete": true,
+        "isMasteredForItunes": false,
+        "isSingle": false,
+        "name": "Graduation",
+        "playParams": {
+          "id": "1451901307",
+          "kind": "album"
+        },
+        "recordLabel": "Roc-A-Fella",
+        "releaseDate": "2007-09-11",
+        "trackCount": 14,
+        "upc": "00602577027864",
+        "url": "https://music.apple.com/us/album/graduation/1451901307"
+      }
+    },
+    {
+      "id": "1441460375",
+      "type": "albums",
+      "href": "/v1/catalog/us/albums/1441460375",
+      "attributes": {
+        "artistName": "Kanye West",
+        "artwork": {
+          "bgColor": "132330",
+          "height": 3000,
+          "textColor1": "e1e3e1",
+          "textColor2": "99b2d3",
+          "textColor3": "b8bcbe",
+          "textColor4": "7e95b3",
+          "url": "https://is1-ssl.mzstatic.com/image/thumb/Music125/v4/f8/92/62/f892628e-bfd5-2437-c1f5-0ebbd366de09/00602577303098.rgb.jpg/{w}x{h}bb.jpg",
+          "width": 3000
+        },
+        "contentRating": "clean",
+        "copyright": "℗ 2018 Getting Out Our Dreams II, LLC Distributed By Def Jam,  A Division of UMG Recordings, Inc.",
+        "editorialNotes": {
+          "short": "Yeezy is as candid and controversial as ever.",
+          "standard": "Kanye doesn’t shy away from darkness or drama on his eighth solo album, written and recorded while holed up with an extended circle of friends and collaborators amid the snowcapped mountains encircling Jackson Hole, Wyoming. As expected, he mentions recent controversies—including that notorious “slavery was a choice” comment—and possibly sparks some new ones, name-dropping the #MeToo movement and Stormy Daniels. Even those headline-grabbing asides, however, don't overshadow what are arguably the most candid lyrics of Kanye's career. His mental health is a constant theme: Kanye confesses to suicidal and homicidal thoughts within the album’s opening minute, then admits he’s bipolar on “Yikes”—but proclaims the condition is “my super-power…ain’t no disability.\" He praises wife Kim Kardashian for standing by him through \"the worst times” (“Wouldn’t Leave”) and reveals how his daughters have changed his views about women (“Violent Crimes\"). Like G.O.O.D. Music president Pusha-T’s <i>DAYTONA</i>, released a week prior and produced by Kanye in Wyoming, the album has just seven songs, most under four minutes—his most focused and concise project yet, even with yet another impressive, sprawling guest list (Kid Cudi, Ty Dolla $ign, Nicki Minaj, Charlie Wilson). And the production, as always, is often remarkable: Kanye’s political beliefs may have changed, but his ear for skillfully chopped-up samples and uplifting, gospel-informed vocal arrangements hasn’t."
+        },
+        "genreNames": [
+          "Hip-Hop/Rap",
+          "Music"
+        ],
+        "isCompilation": false,
+        "isComplete": true,
+        "isMasteredForItunes": true,
+        "isSingle": false,
+        "name": "ye",
+        "playParams": {
+          "id": "1441460375",
+          "kind": "album"
+        },
+        "recordLabel": "Getting Out Our Dreams, Inc./Def Jam Recordings",
+        "releaseDate": "2018-06-06",
+        "trackCount": 7,
+        "upc": "00602577303098",
+        "url": "https://music.apple.com/us/album/ye/1441460375"
+      }
+    },
+    {
+      "id": "1587795158",
+      "type": "albums",
+      "href": "/v1/catalog/us/albums/1587795158",
+      "attributes": {
+        "artistName": "Kanye West",
+        "artwork": {
+          "bgColor": "020205",
+          "height": 3000,
+          "textColor1": "f2f2f2",
+          "textColor2": "e5e5e5",
+          "textColor3": "c2c2c2",
+          "textColor4": "b8b8b8",
+          "url": "https://is1-ssl.mzstatic.com/image/thumb/Music125/v4/62/13/7b/62137b3f-7722-59f5-2ee1-b5aff9426869/21UMGIM64738.rgb.jpg/{w}x{h}bb.jpg",
+          "width": 3000
+        },
+        "copyright": "℗ 2021 Getting Out Our Dreams II, LLC Distributed By Def Jam Recordings,  A Division of UMG Recordings, Inc.",
+        "editorialNotes": {
+          "short": "All his pet sonic themes are present on his 10th solo studio album.",
+          "standard": "On Kanye West’s 10th studio album <i>Donda</i>, he enlists Syleena Johnson, who begins the album with a meditation on his late mother, whose name titles the project. West loops her voice and changes its rhythms, but retains a calming pulse throughout. It’s a throughline that West tries to harness throughout the project, which finds him melding the gospel impulses of 2019’s <i>Jesus is King</i> with the electro-thrash of his fan favorite, 2013’s <i>Yeezus</i>. \n\nAs always with West, the album features a smorgasbord of collaborators, including The Weeknd, Lil Yachty, Travis Scott, JAŸ-Z, Playboi Carti, Lil Baby, and more. It’s at times unrelentingly experimental, at others shooting for the top of the pop charts. Always, though, Kanye aims to keep that core peace that emanates from the “Donda Chant” opening. The album touches on many of West’s pet sonic themes, making it uniquely suited as a primer for his one-of-a-kind methods."
+        },
+        "genreNames": [
+          "Hip-Hop/Rap",
+          "Music"
+        ],
+        "isCompilation": false,
+        "isComplete": true,
+        "isMasteredForItunes": true,
+        "isSingle": false,
+        "name": "Donda",
+        "playParams": {
+          "id": "1587795158",
+          "kind": "album"
+        },
+        "recordLabel": "Rock The World/IDJ/Kanye LP7",
+        "releaseDate": "2021-08-29",
+        "trackCount": 27,
+        "upc": "00602438975563",
+        "url": "https://music.apple.com/us/album/donda/1587795158"
+      }
+    },
+    {
+      "id": "1396710872",
+      "type": "albums",
+      "href": "/v1/catalog/us/albums/1396710872",
+      "attributes": {
+        "artistName": "KIDS SEE GHOSTS, Kanye West & Kid Cudi",
+        "artwork": {
+          "bgColor": "f46b78",
+          "height": 3000,
+          "textColor1": "0b0408",
+          "textColor2": "06070a",
+          "textColor3": "39181e",
+          "textColor4": "351b20",
+          "url": "https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/2c/bc/1c/2cbc1cca-7881-2605-875c-536f553cc79a/00602567803881.rgb.jpg/{w}x{h}bb.jpg",
+          "width": 3000
+        },
+        "contentRating": "explicit",
+        "copyright": "℗ 2018 Getting Out Our Dreams II, LLC Distributed By Def Jam,  A Division of UMG Recordings, Inc.",
+        "editorialNotes": {
+          "short": "Two rap innovators unite for their first full-length collaboration.",
+          "standard": "If <i>ye</i>, Kanye West’s solo album released one week prior, was him proudly shouting about his superpower—bipolar disorder—from the peak of a snowcapped mountain, <i>KIDS SEE GHOSTS</i> is the fireside therapy session occurring at its base. Both Kid Cudi and West have dealt with controversy and mental illness throughout their intertwined careers. It’s all addressed here, on their long-awaited first joint album, with honesty and innate chemistry. Kanye’s production pulsates and rumbles beneath his signature confessional bars and religious affirmations, but, centered by Cudi’s gift for melodic depth and understated humility, his contributions, and the project overall, feel cathartic rather than bombastic and headline-grabbing. On “Freeee (Ghost Town, Pt. 2),” the sequel to <i>ye</i> highlight “Ghost Town,” both men bellow, “Nothing hurts me anymore…I feel free” with such tangible, full-bodied energy, it feels as though this very recording was, in itself, a moment of great healing."
+        },
+        "genreNames": [
+          "Hip-Hop/Rap",
+          "Music",
+          "Rap"
+        ],
+        "isCompilation": false,
+        "isComplete": true,
+        "isMasteredForItunes": true,
+        "isSingle": false,
+        "name": "KIDS SEE GHOSTS",
+        "playParams": {
+          "id": "1396710872",
+          "kind": "album"
+        },
+        "recordLabel": "Getting Out Our Dreams, Inc./Def Jam Recordings",
+        "releaseDate": "2018-06-08",
+        "trackCount": 7,
+        "upc": "00602567803881",
+        "url": "https://music.apple.com/us/album/kids-see-ghosts/1396710872"
+      }
+    },
+    {
+      "id": "1441456689",
+      "type": "albums",
+      "href": "/v1/catalog/us/albums/1441456689",
+      "attributes": {
+        "artistName": "Kanye West",
+        "artwork": {
+          "bgColor": "132330",
+          "height": 3000,
+          "textColor1": "e4e7e7",
+          "textColor2": "99b2d3",
+          "textColor3": "babfc2",
+          "textColor4": "7e95b3",
+          "url": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/76/1b/36/761b368d-a267-4a99-9689-f5daf9bb1325/18UMGIM26291.rgb.jpg/{w}x{h}bb.jpg",
+          "width": 3000
+        },
+        "contentRating": "explicit",
+        "copyright": "℗ 2018 Getting Out Our Dreams II, LLC Distributed By Def Jam,  A Division of UMG Recordings, Inc.",
+        "editorialNotes": {
+          "short": "Yeezy is as candid and controversial as ever.",
+          "standard": "Kanye doesn’t shy away from darkness or drama on his eighth solo album, written and recorded while holed up with an extended circle of friends and collaborators amid the snowcapped mountains encircling Jackson Hole, Wyoming. As expected, he mentions recent controversies—including that notorious “slavery was a choice” comment—and possibly sparks some new ones, name-dropping the #MeToo movement and Stormy Daniels. Even those headline-grabbing asides, however, don't overshadow what are arguably the most candid lyrics of Kanye's career. His mental health is a constant theme: Kanye confesses to suicidal and homicidal thoughts within the album’s opening minute, then admits he’s bipolar on “Yikes”—but proclaims the condition is “my super-power…ain’t no disability.\" He praises wife Kim Kardashian for standing by him through \"the worst times” (“Wouldn’t Leave”) and reveals how his daughters have changed his views about women (“Violent Crimes\"). Like G.O.O.D. Music president Pusha-T’s <i>DAYTONA</i>, released a week prior and produced by Kanye in Wyoming, the album has just seven songs, most under four minutes—his most focused and concise project yet, even with yet another impressive, sprawling guest list (Kid Cudi, Ty Dolla $ign, Nicki Minaj, Charlie Wilson). And the production, as always, is often remarkable: Kanye’s political beliefs may have changed, but his ear for skillfully chopped-up samples and uplifting, gospel-informed vocal arrangements hasn’t."
+        },
+        "genreNames": [
+          "Hip-Hop/Rap",
+          "Music"
+        ],
+        "isCompilation": false,
+        "isComplete": true,
+        "isMasteredForItunes": true,
+        "isSingle": false,
+        "name": "ye",
+        "playParams": {
+          "id": "1441456689",
+          "kind": "album"
+        },
+        "recordLabel": "Getting Out Our Dreams, Inc./Def Jam Recordings",
+        "releaseDate": "2018-06-01",
+        "trackCount": 7,
+        "upc": "00602577303135",
+        "url": "https://music.apple.com/us/album/ye/1441456689"
+      }
+    },
+    {
+      "id": "1378632290",
+      "type": "albums",
+      "href": "/v1/catalog/us/albums/1378632290",
+      "attributes": {
+        "artistName": "Travis Scott",
+        "artwork": {
+          "bgColor": "0d0d0e",
+          "height": 3000,
+          "textColor1": "d1bc81",
+          "textColor2": "a5a0d9",
+          "textColor3": "a9996a",
+          "textColor4": "8682b0",
+          "url": "https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/9e/7b/56/9e7b560d-59ce-dda7-5b8a-99130d4816a6/886447093788.jpg/{w}x{h}bb.jpg",
+          "width": 3000
+        },
+        "contentRating": "explicit",
+        "copyright": "℗ 2018 Cactus Jack Records, LLC under exclusive licensed to Epic Records, a division of Sony Music Entertainment",
+        "editorialNotes": {
+          "short": "Travis Scott compares watch sizes with 'Ye and Uzi."
+        },
+        "genreNames": [
+          "Hip-Hop/Rap",
+          "Music"
+        ],
+        "isCompilation": false,
+        "isComplete": true,
+        "isMasteredForItunes": true,
+        "isSingle": true,
+        "name": "Watch (feat. Lil Uzi Vert & Kanye West) - Single",
+        "playParams": {
+          "id": "1378632290",
+          "kind": "album"
+        },
+        "recordLabel": "Cactus Jack / Epic",
+        "releaseDate": "2018-05-04",
+        "trackCount": 1,
+        "upc": "886447093788",
+        "url": "https://music.apple.com/us/album/watch-feat-lil-uzi-vert-kanye-west-single/1378632290"
+      }
+    },
+    {
+      "id": "1440742903",
+      "type": "albums",
+      "href": "/v1/catalog/us/albums/1440742903",
+      "attributes": {
+        "artistName": "Kanye West",
+        "artwork": {
+          "bgColor": "ed2641",
+          "height": 1500,
+          "textColor1": "060504",
+          "textColor2": "010609",
+          "textColor3": "340b11",
+          "textColor4": "300c14",
+          "url": "https://is1-ssl.mzstatic.com/image/thumb/Music125/v4/0a/0b/31/0a0b31cc-077c-31bf-e7fe-612191774948/10UMGIM30072.rgb.jpg/{w}x{h}bb.jpg",
+          "width": 1500
+        },
+        "contentRating": "explicit",
+        "copyright": "℗ 2010 UMG Recordings, Inc.",
+        "editorialNotes": {
+          "short": "Opulent and ambitious, self-aggrandizing and confessional.",
+          "standard": "<b>100 Best Albums</b> The most expensive hip-hop recording ever made, Kanye West's fifth album was a 68-minute LP pulsing with the rapper's singular mix of the self-aggrandizing and the confessional. The album combined the art-rock ambitions of The Beatles, the opulence of Pink Floyd, and the pop-star grandeur of Michael Jackson—but had the personal gravity of a singer-songwriter statement. There's a nine-minute prog-rap opus (\"Runaway\") that came with a 35-minute short film. The album art is by contemporary artist and Warhol associate George Condo. \"All of the Lights\" features an orchestra and vocals from Rihanna, Alicia Keys, and Elton John.\n\nBut despite its ostentatious appearance, the heart of <i>My Beautiful Dark Twisted Fantasy</i> is that of raw honesty, with West's frayed ends of reflection, self-criticism, relationship woes, ruminations on fame, and moments of anger. <i>My Beautiful Dark Twisted Fantasy</i> would forever change the landscape of hip-hop, its genre-crossing boldness, limitless imagination, and sheer sumptuousness of presentation foreshadowing the genre's 2010s turn towards maximalist sounds and arthouse design.",
+          "tagline": "Featured in 100 Best Albums"
+        },
+        "genreNames": [
+          "Hip-Hop/Rap",
+          "Music",
+          "Rap",
+          "Hardcore Rap",
+          "Rock"
+        ],
+        "isCompilation": false,
+        "isComplete": true,
+        "isMasteredForItunes": false,
+        "isSingle": false,
+        "name": "My Beautiful Dark Twisted Fantasy",
+        "playParams": {
+          "id": "1440742903",
+          "kind": "album"
+        },
+        "recordLabel": "Roc-A-Fella",
+        "releaseDate": "2010-11-22",
+        "trackCount": 14,
+        "upc": "00602527572734",
+        "url": "https://music.apple.com/us/album/my-beautiful-dark-twisted-fantasy/1440742903"
+      }
+    }
+  ]
+}

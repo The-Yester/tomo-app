@@ -1,0 +1,1192 @@
+{
+  "results": {
+    "albums": {
+      "href": "/v1/catalog/us/search?limit=15&term=Jenny%2Bon%2BHoliday&types=albums",
+      "next": "/v1/catalog/us/search?offset=15&term=Jenny%2Bon%2BHoliday&types=albums",
+      "data": [
+        {
+          "id": "1383989073",
+          "type": "albums",
+          "href": "/v1/catalog/us/albums/1383989073",
+          "attributes": {
+            "artistName": "Dan + Shay",
+            "artwork": {
+              "bgColor": "dadcdb",
+              "height": 3000,
+              "textColor1": "0f0f0f",
+              "textColor2": "0f0f0f",
+              "textColor3": "373838",
+              "textColor4": "373838",
+              "url": "https://is1-ssl.mzstatic.com/image/thumb/Music125/v4/63/43/35/634335a8-2026-9587-bd78-8e29e3f80416/093624906407.jpg/{w}x{h}bb.jpg",
+              "width": 3000
+            },
+            "copyright": "℗ 2018 Warner Music Nashville LLC for the U.S. and WEA International Inc. for the world outside the U.S.",
+            "editorialNotes": {
+              "short": "Starry-eyed love songs about making a marriage work.",
+              "standard": "To set the tone for their romantic third album, Nashville’s Dan Smyers and Shay Mooney released “Speechless” to fans as an early single. A starry-eyed tribute to the feeling they each got upon seeing their wives at the end of the aisle (both men got married in 2017), it’s the sort of fairy-tale love song that’s destined to soundtrack wedding ceremonies and first dances. The country-pop singers explore their respective marriages throughout the rest of the album. \"What Keeps You Up at Night” has the soft sway of a John Mayer song, while the Kelly Clarkson-assisted “Keeping Score” makes a case for minding the big picture through a relationship's challenges."
+            },
+            "genreNames": [
+              "Country",
+              "Music",
+              "Contemporary Country",
+              "Honky Tonk"
+            ],
+            "isCompilation": false,
+            "isComplete": true,
+            "isMasteredForItunes": true,
+            "isSingle": false,
+            "name": "Dan + Shay",
+            "playParams": {
+              "id": "1383989073",
+              "kind": "album"
+            },
+            "recordLabel": "Warner Records",
+            "releaseDate": "2018-06-22",
+            "trackCount": 11,
+            "upc": "093624906407",
+            "url": "https://music.apple.com/us/album/dan-shay/1383989073"
+          }
+        },
+        {
+          "id": "1586069657",
+          "type": "albums",
+          "href": "/v1/catalog/us/albums/1586069657",
+          "attributes": {
+            "artistName": "for KING & COUNTRY",
+            "artwork": {
+              "bgColor": "080a11",
+              "height": 3581,
+              "textColor1": "8da7d0",
+              "textColor2": "1c9de6",
+              "textColor3": "7288aa",
+              "textColor4": "1880bb",
+              "url": "https://is1-ssl.mzstatic.com/image/thumb/Music116/v4/e5/6c/b3/e56cb3c4-e86d-12e2-8488-7c61e7e6773f/194646506764.png/{w}x{h}bb.jpg",
+              "width": 3581
+            },
+            "copyright": "℗ 2021 Curb | Word Entertainment",
+            "genreNames": [
+              "Holiday",
+              "Music"
+            ],
+            "isCompilation": false,
+            "isComplete": true,
+            "isMasteredForItunes": false,
+            "isSingle": false,
+            "name": "A Drummer Boy Christmas +",
+            "playParams": {
+              "id": "1586069657",
+              "kind": "album"
+            },
+            "recordLabel": "Curb  Word",
+            "releaseDate": "2021-10-29",
+            "trackCount": 14,
+            "upc": "194646506764",
+            "url": "https://music.apple.com/us/album/a-drummer-boy-christmas/1586069657"
+          }
+        },
+        {
+          "id": "1515424457",
+          "type": "albums",
+          "href": "/v1/catalog/us/albums/1515424457",
+          "attributes": {
+            "artistName": "Lady Gaga & BLACKPINK",
+            "artwork": {
+              "bgColor": "1d1917",
+              "height": 3600,
+              "textColor1": "c5bad0",
+              "textColor2": "e0979a",
+              "textColor3": "a399ab",
+              "textColor4": "b97e80",
+              "url": "https://is1-ssl.mzstatic.com/image/thumb/Music114/v4/d5/8f/a0/d58fa00b-461a-2321-cb46-70fbb1cf5058/20UMGIM15390.rgb.jpg/{w}x{h}bb.jpg",
+              "width": 3600
+            },
+            "copyright": "℗ 2020 Interscope Records",
+            "genreNames": [
+              "Pop",
+              "Music",
+              "Rock"
+            ],
+            "isCompilation": false,
+            "isComplete": false,
+            "isMasteredForItunes": false,
+            "isSingle": true,
+            "name": "Sour Candy - Single",
+            "playParams": {
+              "id": "1515424457",
+              "kind": "album"
+            },
+            "recordLabel": "Interscope Records",
+            "releaseDate": "2020-05-28",
+            "trackCount": 1,
+            "upc": "00602507296216",
+            "url": "https://music.apple.com/us/album/sour-candy-single/1515424457"
+          }
+        },
+        {
+          "id": "1596816224",
+          "type": "albums",
+          "href": "/v1/catalog/us/albums/1596816224",
+          "attributes": {
+            "artistName": "Maverick City Music",
+            "artwork": {
+              "bgColor": "6c4010",
+              "height": 3000,
+              "textColor1": "eee1cb",
+              "textColor2": "f2e0b9",
+              "textColor3": "d4c1a6",
+              "textColor4": "d7c097",
+              "url": "https://is1-ssl.mzstatic.com/image/thumb/Music116/v4/42/1c/cc/421ccc2b-1036-be60-dd56-7bbc6b71f50f/889845965824.jpg/{w}x{h}bb.jpg",
+              "width": 3000
+            },
+            "copyright": "℗ 2021 Tribl Records",
+            "genreNames": [
+              "Christian",
+              "Music"
+            ],
+            "isCompilation": false,
+            "isComplete": true,
+            "isMasteredForItunes": false,
+            "isSingle": false,
+            "name": "A Very Maverick Christmas (feat. Mav City Gospel Choir)",
+            "playParams": {
+              "id": "1596816224",
+              "kind": "album"
+            },
+            "recordLabel": "Tribl Records",
+            "releaseDate": "2021-11-30",
+            "trackCount": 16,
+            "upc": "889845965824",
+            "url": "https://music.apple.com/us/album/a-very-maverick-christmas-feat-mav-city-gospel-choir/1596816224"
+          }
+        },
+        {
+          "id": "577924267",
+          "type": "albums",
+          "href": "/v1/catalog/us/albums/577924267",
+          "attributes": {
+            "artistName": "Mannheim Steamroller",
+            "artwork": {
+              "bgColor": "3f54b2",
+              "height": 1400,
+              "textColor1": "f7f0c7",
+              "textColor2": "afddfa",
+              "textColor3": "d2d1c3",
+              "textColor4": "99c2ec",
+              "url": "https://is1-ssl.mzstatic.com/image/thumb/Features114/v4/d0/e7/4a/d0e74a22-b0fb-0b05-0166-8f2c4c04bc62/dj.yvtglpsq.jpg/{w}x{h}bb.jpg",
+              "width": 1400
+            },
+            "copyright": "℗ 1988 American Gramaphone LLC",
+            "genreNames": [
+              "Holiday",
+              "Music",
+              "New Age",
+              "Rock",
+              "Adult Alternative",
+              "Christmas"
+            ],
+            "isCompilation": false,
+            "isComplete": true,
+            "isMasteredForItunes": false,
+            "isSingle": false,
+            "name": "A Fresh Aire Christmas",
+            "playParams": {
+              "id": "577924267",
+              "kind": "album"
+            },
+            "recordLabel": "American Gramaphone",
+            "releaseDate": "1993-12-20",
+            "trackCount": 12,
+            "upc": "886443748934",
+            "url": "https://music.apple.com/us/album/a-fresh-aire-christmas/577924267"
+          }
+        },
+        {
+          "id": "1543508230",
+          "type": "albums",
+          "href": "/v1/catalog/us/albums/1543508230",
+          "attributes": {
+            "artistName": "Shawn Mendes",
+            "artwork": {
+              "bgColor": "e2e1e6",
+              "height": 3000,
+              "textColor1": "232b37",
+              "textColor2": "282c34",
+              "textColor3": "494f5a",
+              "textColor4": "4d5057",
+              "url": "https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/01/3e/21/013e21f6-6ee8-f111-7a9b-a5d0cdecf182/20UMGIM83351.rgb.jpg/{w}x{h}bb.jpg",
+              "width": 3000
+            },
+            "copyright": "℗ 2020 Island Records, a division of UMG Recordings, Inc.",
+            "editorialNotes": {
+              "short": "“A lot happens when you fall in love for the first time.”",
+              "standard": "Shortly after Shawn Mendes released his self-titled third album in 2018, the superstar hit a rough patch. “I was coming off the back of a couple really big songs and was just so driven by my ego,” he tells Apple Music, explaining that he’d become laser-focused on cranking out hit singles. “It’s addictive… It’s destructive. You miss out on the most beautiful part, which is the process.” Through meditation, journaling and self-care, Mendes reconnected with the joys of making music and wrote two of his most personal songs to date: the Justin Bieber collaboration “Monster” and “Song for No One”, both of which appear on his wide-eyed fourth album <i>Wonder</i>. The project portrays an older, more mature musician than the one we knew. On this album he’s spiritual, connected and blissed out, deep in love and lost in thought. “I’m still trying to know myself,” he says, “but that’s the beauty of it. This [album] is like an audio scrapbook. It shows the things I thought about—how fearless I was, but also how scared I was.”<br />\nWritten and recorded in California and eventually Miami, where he moved in with girlfriend Camila Cabello and her family during the pandemic, the album is as much about discovering love’s little delights as it is about seeing the big picture. “Quarantine has been really hard, but something beautiful came out of it: stillness,” he says. “When my head wasn’t so consumed with what people thought and how many likes or streams I was getting, I was able to think, like, ‘What is happening in this world? How do I feel about it? And what can I do?’”<br />\nAlthough the album wrestles with heavy themes—the dark side of celebrity (“Monster”), loneliness (“Call My Friends”) and the urge to settle down too soon (“24 Hours”)—they’re packaged in soaring, larger-than-life pop songs that feel light, bright and confident. Mendes hasn’t retreated from fame so much as finally seized it. On the title track, which he calls “the doorway to the album”, he takes us through some of what’s been weighing on his mind—truth, masculinity, authenticity, fear—but nothing can compete with the euphoria of first love. “A lot happens when you fall in love for the first time,” he says. “It makes you want to do things for the right reasons—to make sure you’re really enjoying it. Otherwise, I’d rather watch movies with her all day.” He wrote the song on a seaside cliff in Carmel, California, while pondering big questions: “I wonder if I’m being real, if I speak my truth or filter how I feel, what it’s like to be my friends.” These things didn’t just appear, he clarifies, but were born of rigorous, earnest introspection. “It takes work and time to figure out your truth. But in these moments of stillness and clarity, I was like, ‘Oh, this is what it means to be close to yourself.’”"
+            },
+            "genreNames": [
+              "Pop",
+              "Music"
+            ],
+            "isCompilation": false,
+            "isComplete": true,
+            "isMasteredForItunes": true,
+            "isSingle": false,
+            "name": "Wonder (Holiday Deluxe)",
+            "playParams": {
+              "id": "1543508230",
+              "kind": "album"
+            },
+            "recordLabel": "Shawn Mendes LP4-5 PS/ Island",
+            "releaseDate": "2020-12-05",
+            "trackCount": 16,
+            "upc": "00602435603186",
+            "url": "https://music.apple.com/us/album/wonder-holiday-deluxe/1543508230"
+          }
+        },
+        {
+          "id": "1475311061",
+          "type": "albums",
+          "href": "/v1/catalog/us/albums/1475311061",
+          "attributes": {
+            "artistName": "for KING & COUNTRY & Dolly Parton",
+            "artwork": {
+              "bgColor": "050f1b",
+              "height": 3000,
+              "textColor1": "d0d5db",
+              "textColor2": "bac3cc",
+              "textColor3": "a8aeb4",
+              "textColor4": "969fa8",
+              "url": "https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/19/21/6d/19216d88-07db-3329-d958-2d0d21e188ea/080688024260.png/{w}x{h}bb.jpg",
+              "width": 3000
+            },
+            "copyright": "℗ 2019 Curb | Word Entertainment. 25 Music Square West, Nashville, TN 37203.",
+            "genreNames": [
+              "Christian",
+              "Music",
+              "Country"
+            ],
+            "isCompilation": false,
+            "isComplete": true,
+            "isMasteredForItunes": false,
+            "isSingle": true,
+            "name": "God Only Knows - Single",
+            "playParams": {
+              "id": "1475311061",
+              "kind": "album"
+            },
+            "recordLabel": "Curb  Word",
+            "releaseDate": "2019-08-30",
+            "trackCount": 1,
+            "upc": "080688024260",
+            "url": "https://music.apple.com/us/album/god-only-knows-single/1475311061"
+          }
+        },
+        {
+          "id": "1545532108",
+          "type": "albums",
+          "href": "/v1/catalog/us/albums/1545532108",
+          "attributes": {
+            "artistName": "MercyMe",
+            "artwork": {
+              "bgColor": "c4122d",
+              "height": 3000,
+              "textColor1": "f9e7e9",
+              "textColor2": "fae9c7",
+              "textColor3": "eebcc4",
+              "textColor4": "efbea8",
+              "url": "https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/fd/4a/03/fd4a0320-a64f-9de6-a00e-7ce501af5cd3/827969641422.jpg/{w}x{h}bb.jpg",
+              "width": 3000
+            },
+            "copyright": "℗ 2005 Fair Trade Services, LLC",
+            "editorialNotes": {
+              "short": "Bart Millard & Co. deliver a rollicking rock 'n' roll take on the holidays.",
+              "standard": "MercyMe chose a Christmas release to return to their rock roots after striking gold with Christian and adult contemporary fans. Layered arrangements, retooled melodies, plenty of brass, and even a little Texas twang make for a multi-faceted holiday mix. The sentimental “Joseph’s Lullaby” is a welcome addition to the Christmas canon, and “Little Drummer Boy” allows the guys to let loose, while their cover of “God Rest Ye Merry Gentlemen” builds with a dramatic, cinematic intensity that elevates the carol to new heights."
+            },
+            "genreNames": [
+              "Christian",
+              "Music",
+              "New Age",
+              "Holiday",
+              "Christmas",
+              "Praise & Worship",
+              "Gospel",
+              "CCM",
+              "Classic Christian"
+            ],
+            "isCompilation": false,
+            "isComplete": true,
+            "isMasteredForItunes": false,
+            "isSingle": false,
+            "name": "The Christmas Sessions",
+            "playParams": {
+              "id": "1545532108",
+              "kind": "album"
+            },
+            "recordLabel": "Fair Trade/Columbia",
+            "releaseDate": "2005-09-27",
+            "trackCount": 12,
+            "upc": "827969641422",
+            "url": "https://music.apple.com/us/album/the-christmas-sessions/1545532108"
+          }
+        },
+        {
+          "id": "1313929044",
+          "type": "albums",
+          "href": "/v1/catalog/us/albums/1313929044",
+          "attributes": {
+            "artistName": "Pentatonix",
+            "artwork": {
+              "bgColor": "010101",
+              "height": 1500,
+              "textColor1": "d1d1d1",
+              "textColor2": "b4c578",
+              "textColor3": "a7a7a7",
+              "textColor4": "909e60",
+              "url": "https://is1-ssl.mzstatic.com/image/thumb/Music118/v4/a7/82/8f/a7828f31-b68e-a53c-874b-79d4ad097a0f/886446308371.jpg/{w}x{h}bb.jpg",
+              "width": 1500
+            },
+            "copyright": "℗ 2016 RCA Records, a division of Sony Music Entertainment",
+            "genreNames": [
+              "Christmas: Pop",
+              "Music",
+              "Holiday"
+            ],
+            "isCompilation": false,
+            "isComplete": true,
+            "isMasteredForItunes": false,
+            "isSingle": true,
+            "name": "Little Drummer Boy (Lema x Savi Remix) - Single",
+            "playParams": {
+              "id": "1313929044",
+              "kind": "album"
+            },
+            "recordLabel": "RCA Records Label",
+            "releaseDate": "2017-12-01",
+            "trackCount": 1,
+            "upc": "886446308371",
+            "url": "https://music.apple.com/us/album/little-drummer-boy-lema-x-savi-remix-single/1313929044"
+          }
+        },
+        {
+          "id": "1439733447",
+          "type": "albums",
+          "href": "/v1/catalog/us/albums/1439733447",
+          "attributes": {
+            "artistName": "for KING & COUNTRY",
+            "artwork": {
+              "bgColor": "ababab",
+              "height": 2100,
+              "textColor1": "000000",
+              "textColor2": "081011",
+              "textColor3": "222222",
+              "textColor4": "282f30",
+              "url": "https://is1-ssl.mzstatic.com/image/thumb/Music118/v4/de/97/dc/de97dcd2-945a-b819-29b5-8d886e43d447/080688014865.png/{w}x{h}bb.jpg",
+              "width": 2100
+            },
+            "copyright": "℗ 2018 Curb | Word Entertainment. 25 Music Square West, Nashville, TN 37203.",
+            "genreNames": [
+              "Christian",
+              "Music",
+              "Holiday"
+            ],
+            "isCompilation": false,
+            "isComplete": true,
+            "isMasteredForItunes": false,
+            "isSingle": true,
+            "name": "Little Drummer Boy (Rewrapped) - Single",
+            "playParams": {
+              "id": "1439733447",
+              "kind": "album"
+            },
+            "recordLabel": "Curb  Word",
+            "releaseDate": "2018-11-09",
+            "trackCount": 1,
+            "upc": "080688014865",
+            "url": "https://music.apple.com/us/album/little-drummer-boy-rewrapped-single/1439733447"
+          }
+        },
+        {
+          "id": "1460461551",
+          "type": "albums",
+          "href": "/v1/catalog/us/albums/1460461551",
+          "attributes": {
+            "artistName": "Florence + the Machine",
+            "artwork": {
+              "bgColor": "140e0a",
+              "height": 3000,
+              "textColor1": "f8ead8",
+              "textColor2": "d7c2bb",
+              "textColor3": "cabeaf",
+              "textColor4": "b09e97",
+              "url": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/ec/99/c4/ec99c464-87f0-b14f-1c05-785240dc2bd8/19UMGIM37468.rgb.jpg/{w}x{h}bb.jpg",
+              "width": 3000
+            },
+            "copyright": "℗ 2019 Home Box Office, Inc., under exclusive licence to Universal Music Operations Limited",
+            "genreNames": [
+              "Alternative",
+              "Music",
+              "Soundtrack"
+            ],
+            "isCompilation": false,
+            "isComplete": true,
+            "isMasteredForItunes": false,
+            "isSingle": true,
+            "name": "Jenny of Oldstones (Game of Thrones) - Single",
+            "playParams": {
+              "id": "1460461551",
+              "kind": "album"
+            },
+            "recordLabel": "EMI",
+            "releaseDate": "2019-04-22",
+            "trackCount": 1,
+            "upc": "00602577836954",
+            "url": "https://music.apple.com/us/album/jenny-of-oldstones-game-of-thrones-single/1460461551"
+          }
+        },
+        {
+          "id": "581243737",
+          "type": "albums",
+          "href": "/v1/catalog/us/albums/581243737",
+          "attributes": {
+            "artistName": "Tye Tribbett",
+            "artwork": {
+              "bgColor": "cacac9",
+              "height": 1500,
+              "textColor1": "1b2126",
+              "textColor2": "251f1f",
+              "textColor3": "3e4347",
+              "textColor4": "464141",
+              "url": "https://is1-ssl.mzstatic.com/image/thumb/Music/v4/de/38/2c/de382cbf-9444-c313-1c3c-9cbb245601cd/887396905191.jpg/{w}x{h}bb.jpg",
+              "width": 1500
+            },
+            "copyright": "℗ 2012 Holiday Love Music Group",
+            "genreNames": [
+              "Holiday",
+              "Music"
+            ],
+            "isCompilation": false,
+            "isComplete": true,
+            "isMasteredForItunes": false,
+            "isSingle": true,
+            "name": "Little Drummer Boy - Single",
+            "playParams": {
+              "id": "581243737",
+              "kind": "album"
+            },
+            "recordLabel": "Holiday Love Music Group",
+            "releaseDate": "2012-11-20",
+            "trackCount": 1,
+            "upc": "887396905191",
+            "url": "https://music.apple.com/us/album/little-drummer-boy-single/581243737"
+          }
+        },
+        {
+          "id": "1440755734",
+          "type": "albums",
+          "href": "/v1/catalog/us/albums/1440755734",
+          "attributes": {
+            "artistName": "Kim Burrell",
+            "artwork": {
+              "bgColor": "f1f4eb",
+              "height": 1448,
+              "textColor1": "39301c",
+              "textColor2": "402f0a",
+              "textColor3": "5e5746",
+              "textColor4": "635637",
+              "url": "https://is1-ssl.mzstatic.com/image/thumb/Music128/v4/73/0a/4f/730a4fa0-32a6-1fe4-cdb8-dc13d60e00b5/634164125325.jpg/{w}x{h}bb.jpg",
+              "width": 1448
+            },
+            "copyright": "℗ 2018 Kim Burrell, distributed by IndieBlu Music",
+            "genreNames": [
+              "Holiday",
+              "Music"
+            ],
+            "isCompilation": false,
+            "isComplete": true,
+            "isMasteredForItunes": true,
+            "isSingle": true,
+            "name": "Little Drummer Boy - Single",
+            "playParams": {
+              "id": "1440755734",
+              "kind": "album"
+            },
+            "recordLabel": "eOne Music",
+            "releaseDate": "2018-11-23",
+            "trackCount": 1,
+            "upc": "634164125325",
+            "url": "https://music.apple.com/us/album/little-drummer-boy-single/1440755734"
+          }
+        },
+        {
+          "id": "1657551203",
+          "type": "albums",
+          "href": "/v1/catalog/us/albums/1657551203",
+          "attributes": {
+            "artistName": "Alanis Morissette",
+            "artwork": {
+              "bgColor": "595721",
+              "height": 3000,
+              "textColor1": "fdddbb",
+              "textColor2": "e7d8bf",
+              "textColor3": "dcc39c",
+              "textColor4": "cbbe9f",
+              "url": "https://is1-ssl.mzstatic.com/image/thumb/Music122/v4/34/c1/b4/34c1b4e3-0f6c-6081-2539-d8186709764a/197187636761.jpg/{w}x{h}bb.jpg",
+              "width": 3000
+            },
+            "copyright": "℗ 2022 Epiphany Music marketed and distributed by Thirty Tigers",
+            "genreNames": [
+              "Christmas",
+              "Music",
+              "Holiday"
+            ],
+            "isCompilation": false,
+            "isComplete": true,
+            "isMasteredForItunes": false,
+            "isSingle": true,
+            "name": "Little Drummer Boy - Single",
+            "playParams": {
+              "id": "1657551203",
+              "kind": "album"
+            },
+            "recordLabel": "Epiphany Music",
+            "releaseDate": "2022-12-09",
+            "trackCount": 1,
+            "upc": "197187636761",
+            "url": "https://music.apple.com/us/album/little-drummer-boy-single/1657551203"
+          }
+        },
+        {
+          "id": "1846731085",
+          "type": "albums",
+          "href": "/v1/catalog/us/albums/1846731085",
+          "attributes": {
+            "artistName": "Tommee Profitt & Stephen Stanley",
+            "artwork": {
+              "bgColor": "1c1c1c",
+              "height": 3000,
+              "textColor1": "f2f2ef",
+              "textColor2": "d4d2d0",
+              "textColor3": "c7c7c5",
+              "textColor4": "afadac",
+              "url": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/84/26/d9/8426d9fd-9c56-9a18-871e-f2323ac9d81d/25SYMIM23221.rgb.jpg/{w}x{h}bb.jpg",
+              "width": 3000
+            },
+            "copyright": "℗ 2025 Tommee Profitt Studios, Inc.",
+            "genreNames": [
+              "Holiday",
+              "Music"
+            ],
+            "isCompilation": false,
+            "isComplete": true,
+            "isMasteredForItunes": true,
+            "isSingle": false,
+            "name": "Little Drummer Boy (What Can I Give) - Single",
+            "playParams": {
+              "id": "1846731085",
+              "kind": "album"
+            },
+            "recordLabel": "Tommee Profitt II",
+            "releaseDate": "2025-11-07",
+            "trackCount": 2,
+            "upc": "00840468811615",
+            "url": "https://music.apple.com/us/album/little-drummer-boy-what-can-i-give-single/1846731085"
+          }
+        }
+      ]
+    },
+    "artists": {
+      "href": "/v1/catalog/us/search?limit=15&term=Jenny%2Bon%2BHoliday&types=artists",
+      "data": [
+        {
+          "id": "2558079",
+          "type": "artists",
+          "href": "/v1/catalog/us/artists/2558079",
+          "attributes": {
+            "artwork": {
+              "bgColor": "ecedf2",
+              "height": 529,
+              "textColor1": "302a1a",
+              "textColor2": "383227",
+              "textColor3": "565145",
+              "textColor4": "5c584f",
+              "url": "https://is1-ssl.mzstatic.com/image/thumb/Features115/v4/53/23/e8/5323e889-6565-904d-3f14-76eeacc4791f/pr_source.png/{w}x{h}bb.jpg",
+              "width": 529
+            },
+            "genreNames": [
+              "Pop"
+            ],
+            "name": "Frankie Valli",
+            "url": "https://music.apple.com/us/artist/frankie-valli/2558079"
+          },
+          "relationships": {
+            "albums": {
+              "href": "/v1/catalog/us/artists/2558079/albums",
+              "data": [
+                {
+                  "id": "1440844625",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/1440844625"
+                },
+                {
+                  "id": "1444074766",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/1444074766"
+                },
+                {
+                  "id": "360749303",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/360749303"
+                },
+                {
+                  "id": "360750266",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/360750266"
+                },
+                {
+                  "id": "360749543",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/360749543"
+                },
+                {
+                  "id": "1152655487",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/1152655487"
+                },
+                {
+                  "id": "360749298",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/360749298"
+                },
+                {
+                  "id": "81715286",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/81715286"
+                },
+                {
+                  "id": "360749179",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/360749179"
+                },
+                {
+                  "id": "1568768341",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/1568768341"
+                },
+                {
+                  "id": "360748844",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/360748844"
+                },
+                {
+                  "id": "890233201",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/890233201"
+                },
+                {
+                  "id": "1459671931",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/1459671931"
+                },
+                {
+                  "id": "1565836530",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/1565836530"
+                },
+                {
+                  "id": "360749871",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/360749871"
+                },
+                {
+                  "id": "360749105",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/360749105"
+                },
+                {
+                  "id": "1538871942",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/1538871942"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "id": "457871289",
+          "type": "artists",
+          "href": "/v1/catalog/us/artists/457871289",
+          "attributes": {
+            "artwork": {
+              "bgColor": "cd7f3c",
+              "height": 1493,
+              "textColor1": "070301",
+              "textColor2": "090300",
+              "textColor3": "2f1c0c",
+              "textColor4": "301c0c",
+              "url": "https://is1-ssl.mzstatic.com/image/thumb/AMCArtistImages221/v4/90/ba/47/90ba4768-f2c7-5f13-9490-307c5fdb269d/ami-identity-36c67c6fcccee29cc61346e80a281eab-2025-10-09T21-28-10.317Z_cropped.png/{w}x{h}bb.jpg",
+              "width": 1493
+            },
+            "genreNames": [
+              "Christian"
+            ],
+            "name": "for KING & COUNTRY",
+            "url": "https://music.apple.com/us/artist/for-king-country/457871289"
+          },
+          "relationships": {
+            "albums": {
+              "href": "/v1/catalog/us/artists/457871289/albums",
+              "next": "/v1/catalog/us/artists/457871289/albums?offset=25",
+              "data": [
+                {
+                  "id": "1398353335",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/1398353335"
+                },
+                {
+                  "id": "1219039811",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/1219039811"
+                },
+                {
+                  "id": "1509758720",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/1509758720"
+                },
+                {
+                  "id": "1475311061",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/1475311061"
+                },
+                {
+                  "id": "1586069657",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/1586069657"
+                },
+                {
+                  "id": "1466415444",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/1466415444"
+                },
+                {
+                  "id": "1602835204",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/1602835204"
+                },
+                {
+                  "id": "1531230210",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/1531230210"
+                },
+                {
+                  "id": "1640673724",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/1640673724"
+                },
+                {
+                  "id": "1582937192",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/1582937192"
+                },
+                {
+                  "id": "1731226603",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/1731226603"
+                },
+                {
+                  "id": "1290314113",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/1290314113"
+                },
+                {
+                  "id": "1442821776",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/1442821776"
+                },
+                {
+                  "id": "1163435935",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/1163435935"
+                },
+                {
+                  "id": "1834586712",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/1834586712"
+                },
+                {
+                  "id": "1731870850",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/1731870850"
+                },
+                {
+                  "id": "1685994195",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/1685994195"
+                },
+                {
+                  "id": "1722354465",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/1722354465"
+                },
+                {
+                  "id": "1174541314",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/1174541314"
+                },
+                {
+                  "id": "1478039571",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/1478039571"
+                },
+                {
+                  "id": "1163089776",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/1163089776"
+                },
+                {
+                  "id": "1549766730",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/1549766730"
+                },
+                {
+                  "id": "1696630298",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/1696630298"
+                },
+                {
+                  "id": "1631458417",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/1631458417"
+                },
+                {
+                  "id": "1553308273",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/1553308273"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "id": "200498",
+          "type": "artists",
+          "href": "/v1/catalog/us/artists/200498",
+          "attributes": {
+            "artwork": {
+              "bgColor": "3f3e3a",
+              "height": 2400,
+              "textColor1": "e9e6de",
+              "textColor2": "dfdcd3",
+              "textColor3": "c7c4bd",
+              "textColor4": "bfbcb5",
+              "url": "https://is1-ssl.mzstatic.com/image/thumb/Features115/v4/4b/37/b2/4b37b28f-7780-ad6e-9d98-f9cfeebf95f1/mzl.faedfpir.jpg/{w}x{h}bb.jpg",
+              "width": 2400
+            },
+            "genreNames": [
+              "Country"
+            ],
+            "name": "Kenny Rogers",
+            "url": "https://music.apple.com/us/artist/kenny-rogers/200498"
+          },
+          "relationships": {
+            "albums": {
+              "href": "/v1/catalog/us/artists/200498/albums",
+              "next": "/v1/catalog/us/artists/200498/albums?offset=25",
+              "data": [
+                {
+                  "id": "258611459",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/258611459"
+                },
+                {
+                  "id": "1435550033",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/1435550033"
+                },
+                {
+                  "id": "1440840359",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/1440840359"
+                },
+                {
+                  "id": "724414578",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/724414578"
+                },
+                {
+                  "id": "1435547978",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/1435547978"
+                },
+                {
+                  "id": "1504992446",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/1504992446"
+                },
+                {
+                  "id": "714959902",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/714959902"
+                },
+                {
+                  "id": "199090095",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/199090095"
+                },
+                {
+                  "id": "153556774",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/153556774"
+                },
+                {
+                  "id": "1599768742",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/1599768742"
+                },
+                {
+                  "id": "1747363871",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/1747363871"
+                },
+                {
+                  "id": "1443292623",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/1443292623"
+                },
+                {
+                  "id": "298889180",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/298889180"
+                },
+                {
+                  "id": "1675074212",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/1675074212"
+                },
+                {
+                  "id": "1714688758",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/1714688758"
+                },
+                {
+                  "id": "358018171",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/358018171"
+                },
+                {
+                  "id": "1496051826",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/1496051826"
+                },
+                {
+                  "id": "1847686532",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/1847686532"
+                },
+                {
+                  "id": "1797863425",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/1797863425"
+                },
+                {
+                  "id": "1677825997",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/1677825997"
+                },
+                {
+                  "id": "723998776",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/723998776"
+                },
+                {
+                  "id": "696298311",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/696298311"
+                },
+                {
+                  "id": "1376820697",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/1376820697"
+                },
+                {
+                  "id": "560201771",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/560201771"
+                },
+                {
+                  "id": "1443098366",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/1443098366"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "id": "249646",
+          "type": "artists",
+          "href": "/v1/catalog/us/artists/249646",
+          "attributes": {
+            "artwork": {
+              "bgColor": "2a1611",
+              "height": 2400,
+              "textColor1": "d8c2b0",
+              "textColor2": "d9ae90",
+              "textColor3": "b5a090",
+              "textColor4": "b68f77",
+              "url": "https://is1-ssl.mzstatic.com/image/thumb/Features115/v4/f6/29/90/f62990d3-2c03-91ff-90a8-13c2dfc409aa/mzl.aophguvm.jpg/{w}x{h}bb.jpg",
+              "width": 2400
+            },
+            "genreNames": [
+              "Vocal"
+            ],
+            "name": "Barbra Streisand",
+            "url": "https://music.apple.com/us/artist/barbra-streisand/249646"
+          },
+          "relationships": {
+            "albums": {
+              "href": "/v1/catalog/us/artists/249646/albums",
+              "next": "/v1/catalog/us/artists/249646/albums?offset=25",
+              "data": [
+                {
+                  "id": "185861003",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/185861003"
+                },
+                {
+                  "id": "193943441",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/193943441"
+                },
+                {
+                  "id": "190622008",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/190622008"
+                },
+                {
+                  "id": "201290919",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/201290919"
+                },
+                {
+                  "id": "192884366",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/192884366"
+                },
+                {
+                  "id": "201257638",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/201257638"
+                },
+                {
+                  "id": "1120809907",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/1120809907"
+                },
+                {
+                  "id": "904333385",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/904333385"
+                },
+                {
+                  "id": "190624052",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/190624052"
+                },
+                {
+                  "id": "568402441",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/568402441"
+                },
+                {
+                  "id": "1436895674",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/1436895674"
+                },
+                {
+                  "id": "170424368",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/170424368"
+                },
+                {
+                  "id": "1809810593",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/1809810593"
+                },
+                {
+                  "id": "186067843",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/186067843"
+                },
+                {
+                  "id": "185859699",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/185859699"
+                },
+                {
+                  "id": "1443225608",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/1443225608"
+                },
+                {
+                  "id": "1570285951",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/1570285951"
+                },
+                {
+                  "id": "1644193183",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/1644193183"
+                },
+                {
+                  "id": "187301611",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/187301611"
+                },
+                {
+                  "id": "193021926",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/193021926"
+                },
+                {
+                  "id": "198516314",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/198516314"
+                },
+                {
+                  "id": "178056886",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/178056886"
+                },
+                {
+                  "id": "157324718",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/157324718"
+                },
+                {
+                  "id": "329069668",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/329069668"
+                },
+                {
+                  "id": "170950558",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/170950558"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    }
+  },
+  "meta": {
+    "results": {
+      "order": [
+        "albums",
+        "artists"
+      ],
+      "rawOrder": [
+        "albums",
+        "artists"
+      ]
+    }
+  }
+}

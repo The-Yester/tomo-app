@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { View, Text, TouchableOpacity, StyleSheet, PanResponder, Dimensions, Animated } from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet, PanResponder, Dimensions, Animated, Image } from 'react-native';
 import Svg, { Path, Circle, G, Defs, LinearGradient, Stop, Text as SvgText } from 'react-native-svg';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 // Configuration
 const MAX_RATING = 100;
@@ -16,17 +17,19 @@ const thumbRadius = strokeWidth * 0.6;
 const svgSize = (circleRadius + strokeWidth) * 2;
 const center = svgSize / 2;
 
-// Colors (Dark Theme Match)
-const COLOR_BACKGROUND_CARD = '#1a1a2e';
-const COLOR_TITLE_TEXT = '#FFFFFF';
-const COLOR_SUBTITLE_TEXT = '#ccc';
-const COLOR_CIRCLE_TRACK = '#333';
-const COLOR_CIRCLE_PROGRESS_START = '#ff8c00'; // TOPO Orange
-const COLOR_CIRCLE_PROGRESS_END = '#ffda79';   // Lighter Orange/Yellow
+// Colors (Light/Gold Theme Match)
+const COLOR_BACKGROUND_CARD = '#FFFFFF';
+const COLOR_TITLE_TEXT = '#333333';
+const COLOR_SUBTITLE_TEXT = '#666666';
+const COLOR_CIRCLE_TRACK = '#E0E0E0';
+const COLOR_CIRCLE_PROGRESS_START = '#d4a03e'; // TOPO Gold
+const COLOR_CIRCLE_PROGRESS_END = '#e6c88f';
 const COLOR_THUMB = '#FFFFFF';
-const COLOR_PERCENTAGE_TEXT = '#ff8c00';
-const COLOR_DESCRIPTION_TEXT = '#cccccc';
-const COLOR_SUBMIT_BUTTON_BG = '#ff8c00';
+const COLOR_PERCENTAGE_TEXT = '#d4a03e';
+const COLOR_DESCRIPTION_TEXT = '#666666';
+const COLOR_CANCEL_BUTTON_BG = '#E0E0E0';
+const COLOR_CANCEL_BUTTON_TEXT = '#333333';
+const COLOR_SUBMIT_BUTTON_BG = '#d4a03e';
 const COLOR_SUBMIT_BUTTON_TEXT = '#FFFFFF';
 
 const RATING_DESCRIPTIONS = [
@@ -105,7 +108,7 @@ const describeArc = (x, y, radius, startAngleDeg, endAngleDeg) => {
 
 let currentAngleRef = { current: 0 };
 
-const PercentageRating = ({ value = 50, onChange = () => { } }) => {
+const PercentageRating = ({ value = 50, onChange = () => { }, onCancel, artistName, albumArtwork, isPlayed, onTogglePlayed }) => {
     // Note: The parent component passes `onChange` which is effectively `onSubmit` in current usage for some reason?
     // Wait, in MovieDetailScreen: 
     // onChange={(newPercentage) => handleRatingSubmit(newPercentage)}
@@ -167,8 +170,10 @@ const PercentageRating = ({ value = 50, onChange = () => { } }) => {
 
     return (
         <View style={styles.card}>
-            <Text style={styles.title}>Percentage Rating</Text>
-            <Text style={styles.subtitle}>Drag to rate from 1% to 100%</Text>
+            <Text style={styles.title}>Rate {artistName || 'Artist'}</Text>
+            {albumArtwork && (
+                <Image source={{ uri: albumArtwork }} style={styles.coverArt} resizeMode="contain" />
+            )}
 
             <View style={styles.circleContainer} {...panResponder.panHandlers}>
                 <Svg width={svgSize} height={svgSize} viewBox={`0 0 ${svgSize} ${svgSize}`}>
@@ -242,39 +247,50 @@ const PercentageRating = ({ value = 50, onChange = () => { } }) => {
                 </Svg>
             </View>
 
-            <TouchableOpacity style={styles.submitButton} onPress={handleSubmit}>
-                <Text style={styles.submitButtonText}>Submit Rating</Text>
+            <TouchableOpacity
+                style={[styles.playedToggle, isPlayed && styles.playedToggleActive]}
+                onPress={onTogglePlayed}
+            >
+                <MaterialCommunityIcons
+                    name={isPlayed ? "check-circle" : "circle-outline"}
+                    size={20}
+                    color={isPlayed ? "#FFFFFF" : COLOR_CANCEL_BUTTON_TEXT}
+                />
+                <Text style={[styles.playedToggleText, isPlayed && styles.playedToggleTextActive]}>
+                    Press to Add to Recently played
+                </Text>
             </TouchableOpacity>
+
+            <View style={styles.buttonsRow}>
+                {onCancel && (
+                    <TouchableOpacity style={styles.cancelButton} onPress={onCancel}>
+                        <Text style={styles.cancelButtonText}>Cancel</Text>
+                    </TouchableOpacity>
+                )}
+                <TouchableOpacity style={styles.submitButton} onPress={handleSubmit}>
+                    <Text style={styles.submitButtonText}>Submit Rating</Text>
+                </TouchableOpacity>
+            </View>
         </View>
     );
 };
 
 const styles = StyleSheet.create({
     card: {
-        backgroundColor: COLOR_BACKGROUND_CARD,
-        borderRadius: 20,
-        padding: componentWidth * 0.06,
-        marginVertical: 20,
         alignItems: 'center',
-        width: componentWidth,
-        alignSelf: 'center',
-        shadowColor: '#000',
-        shadowOffset: { width: 0, height: 2 },
-        shadowOpacity: 0.1,
-        shadowRadius: 8,
-        elevation: 5,
+        width: '100%',
     },
     title: {
         fontSize: componentWidth * 0.065,
         fontWeight: 'bold',
         color: COLOR_TITLE_TEXT,
-        marginBottom: 5,
+        marginBottom: 10,
     },
-    subtitle: {
-        fontSize: componentWidth * 0.04,
-        color: COLOR_SUBTITLE_TEXT,
-        marginBottom: 25,
-        textAlign: 'center',
+    coverArt: {
+        width: screenWidth * 0.3,
+        height: screenWidth * 0.3,
+        borderRadius: 10,
+        marginBottom: 15,
     },
     circleContainer: {
         width: svgSize,
@@ -283,20 +299,59 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         marginBottom: 30,
     },
+    buttonsRow: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        width: '100%',
+        gap: 10,
+    },
+    cancelButton: {
+        backgroundColor: COLOR_CANCEL_BUTTON_BG,
+        paddingVertical: 12,
+        borderRadius: 25,
+        flex: 1,
+        alignItems: 'center',
+    },
+    cancelButtonText: {
+        color: COLOR_CANCEL_BUTTON_TEXT,
+        fontSize: componentWidth * 0.04,
+        fontWeight: 'bold',
+    },
     submitButton: {
         backgroundColor: COLOR_SUBMIT_BUTTON_BG,
-        paddingVertical: 15,
-        paddingHorizontal: 40,
+        paddingVertical: 12,
         borderRadius: 25,
-        width: '80%',
+        flex: 1,
         alignItems: 'center',
-        marginBottom: 10,
     },
     submitButtonText: {
         color: COLOR_SUBMIT_BUTTON_TEXT,
-        fontSize: componentWidth * 0.045,
+        fontSize: componentWidth * 0.04,
         fontWeight: 'bold',
     },
+    playedToggle: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'center',
+        backgroundColor: COLOR_CANCEL_BUTTON_BG,
+        paddingVertical: 12,
+        paddingHorizontal: 20,
+        borderRadius: 25,
+        width: '100%',
+        marginBottom: 15,
+    },
+    playedToggleActive: {
+        backgroundColor: COLOR_SUBMIT_BUTTON_BG,
+    },
+    playedToggleText: {
+        color: COLOR_CANCEL_BUTTON_TEXT,
+        fontSize: componentWidth * 0.035,
+        fontWeight: 'bold',
+        marginLeft: 8,
+    },
+    playedToggleTextActive: {
+        color: '#FFFFFF',
+    }
 });
 
 export default PercentageRating;

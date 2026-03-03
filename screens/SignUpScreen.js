@@ -130,7 +130,7 @@ const SignUpScreen = () => {
                 location: location,
                 email: email,
                 createdAt: new Date(),
-                bio: 'Cinema lover joining the chat!',
+                bio: 'Music lover joining the chat!',
                 ratingSystem: 'awards',
                 // Searchable fields (lowercase for case-insensitive search)
                 username_lowercase: username.toLowerCase(),
@@ -166,8 +166,8 @@ const SignUpScreen = () => {
                         <Icon name="arrow-left" size={24} color="#ff8c00" />
                     </TouchableOpacity>
 
-                    <Text style={styles.title}>Join TOPO</Text>
-                    <Text style={styles.subtitle}>Start your cinema journey.</Text>
+                    <Text style={styles.title}>Join TOMO</Text>
+                    <Text style={styles.subtitle}>Start your musical journey.</Text>
 
                     <View style={styles.formContainer}>
                         <TextInput
@@ -259,6 +259,12 @@ const SignUpScreen = () => {
                         >
                             <Text style={styles.signupButtonText}>{loading ? 'Creating Account...' : 'Sign Up'}</Text>
                         </TouchableOpacity>
+
+                        <TouchableOpacity onPress={() => navigation.navigate('Login')} style={styles.loginLink}>
+                            <Text style={styles.loginText}>
+                                Already have an account? <Text style={styles.loginTextBold}>Login</Text>
+                            </Text>
+                        </TouchableOpacity>
                     </View>
                 </ScrollView>
             </KeyboardAvoidingView>
@@ -269,7 +275,7 @@ const SignUpScreen = () => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#0a0a1a',
+        backgroundColor: '#F2F2F2', // Light Gray
     },
     scrollContent: {
         padding: 20,
@@ -282,13 +288,13 @@ const styles = StyleSheet.create({
     title: {
         fontSize: 32,
         fontWeight: 'bold',
-        color: '#ff8c00',
+        color: '#e9af45',
         textAlign: 'center',
         fontFamily: 'Trebuchet MS',
     },
     subtitle: {
         fontSize: 16,
-        color: '#ccc',
+        color: '#666', // Darker gray for light theme
         textAlign: 'center',
         marginBottom: 30,
         fontFamily: 'Trebuchet MS',
@@ -297,15 +303,15 @@ const styles = StyleSheet.create({
         width: '100%',
     },
     input: {
-        backgroundColor: '#1a1a2e',
-        color: '#fff',
+        backgroundColor: '#fff', // White input
+        color: '#000', // Black text
         borderRadius: 12,
         paddingHorizontal: 15,
         paddingVertical: 12,
         fontSize: 16,
         marginBottom: 15,
         borderWidth: 1,
-        borderColor: '#333',
+        borderColor: '#ccc', // Lighter border
     },
     inputGroup: {
         marginBottom: 15,
@@ -329,7 +335,7 @@ const styles = StyleSheet.create({
         marginBottom: 5,
     },
     suggestionLabel: {
-        color: '#ccc',
+        color: '#666',
         fontSize: 12,
         marginBottom: 5,
     },
@@ -338,7 +344,7 @@ const styles = StyleSheet.create({
         flexWrap: 'wrap',
     },
     suggestionChip: {
-        backgroundColor: '#333',
+        backgroundColor: '#ddd', // Lighter chip
         paddingHorizontal: 12,
         paddingVertical: 6,
         borderRadius: 15,
@@ -346,47 +352,59 @@ const styles = StyleSheet.create({
         marginBottom: 5,
     },
     suggestionText: {
-        color: '#ff8c00',
+        color: '#e9af45',
         fontSize: 12,
         fontWeight: 'bold',
     },
     label: {
-        color: '#ccc',
+        color: '#333', // Dark label
         marginBottom: 5,
         marginLeft: 5,
         fontSize: 14,
         fontWeight: 'bold',
     },
     pickerContainer: {
-        backgroundColor: '#1a1a2e',
+        backgroundColor: '#fff', // White picker bg
         borderRadius: 12,
         borderWidth: 1,
-        borderColor: '#333',
+        borderColor: '#ccc',
         marginBottom: 25,
         overflow: 'hidden',
     },
     picker: {
-        color: '#fff',
-        // On Android, this colors the selected text.
+        color: '#000', // Black picker text
     },
     signupButton: {
-        backgroundColor: '#ff8c00',
+        backgroundColor: '#e9af45',
         borderRadius: 12,
         paddingVertical: 15,
         alignItems: 'center',
-        shadowColor: '#ff8c00',
+        shadowColor: '#e9af45',
         shadowOffset: { width: 0, height: 4 },
         shadowOpacity: 0.3,
         shadowRadius: 5,
         elevation: 5,
     },
     disabledButton: {
-        backgroundColor: '#663c00',
+        backgroundColor: '#d4a03e',
     },
     signupButtonText: {
         color: '#fff',
         fontSize: 18,
         fontWeight: 'bold'
+    },
+    loginLink: {
+        marginTop: 20,
+        alignItems: 'center',
+        marginBottom: 20
+    },
+    loginText: {
+        color: '#666',
+        fontSize: 14,
+    },
+    loginTextBold: {
+        color: '#e9af45',
+        fontWeight: 'bold',
     },
 });
 

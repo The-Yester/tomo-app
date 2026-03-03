@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { View, Text, TouchableOpacity, StyleSheet, Dimensions } from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet, Dimensions, Image } from 'react-native';
 import Slider from '@react-native-community/slider';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 // Configuration
 const MAX_RATING = 10;
@@ -9,28 +10,30 @@ const RATING_INCREMENT = 0.1;
 
 const screenWidth = Dimensions.get('window').width;
 
-// Colors
-const COLOR_BACKGROUND_CARD = '#1a1a2e'; // App Dark Theme Background
-const COLOR_BACKGROUND_DISPLAY = '#0a0a1a'; // Darker contrast
-const COLOR_TEXT_PRIMARY = '#FFFFFF';
-const COLOR_TEXT_SECONDARY = '#ccc';
-const COLOR_TEXT_RATING_VALUE = '#ff8c00'; // App Orange Accent
-const COLOR_SLIDER_TRACK_MIN = '#ff8c00'; // App Orange Accent
-const COLOR_SLIDER_TRACK_MAX = '#4A4A4A';
-const COLOR_SLIDER_THUMB = '#ff8c00'; // App Orange Accent
-const COLOR_BUTTON_GRID_BG = '#252535'; // Slightly lighter than card
-const COLOR_BUTTON_GRID_BG_ACTIVE = '#ff8c00'; // App Orange Accent
-const COLOR_BUTTON_GRID_TEXT = '#E0E0E0';
+// Colors (Light/Gold Theme)
+const COLOR_BACKGROUND_CARD = '#FFFFFF';
+const COLOR_BACKGROUND_DISPLAY = '#F2F2F2';
+const COLOR_TEXT_PRIMARY = '#333333';
+const COLOR_TEXT_SECONDARY = '#666666';
+const COLOR_TEXT_RATING_VALUE = '#d4a03e'; // TOPO Gold
+const COLOR_SLIDER_TRACK_MIN = '#d4a03e';
+const COLOR_SLIDER_TRACK_MAX = '#E0E0E0';
+const COLOR_SLIDER_THUMB = '#d4a03e';
+const COLOR_BUTTON_GRID_BG = '#F0F0F0';
+const COLOR_BUTTON_GRID_BG_ACTIVE = '#d4a03e';
+const COLOR_BUTTON_GRID_TEXT = '#333333';
 const COLOR_BUTTON_GRID_TEXT_ACTIVE = '#FFFFFF';
-const COLOR_SUBMIT_BUTTON_BG = '#ff8c00'; // App Orange Accent
+const COLOR_SUBMIT_BUTTON_BG = '#d4a03e';
 const COLOR_SUBMIT_BUTTON_TEXT = '#FFFFFF';
+const COLOR_CANCEL_BUTTON_BG = '#E0E0E0';
+const COLOR_CANCEL_BUTTON_TEXT = '#333333';
 
 const RATING_DESCRIPTIONS = [
-    { value: 0, label: "Do Not Watch", short: "DNW" },
+    { value: 0, label: "Do Not Listen", short: "DNL" },
     { value: 1, label: "Awful", short: "Awful" },
     { value: 2, label: "Bad", short: "Bad" },
     { value: 3, label: "Poor", short: "Poor" },
-    { value: 4, label: "Watchable", short: "Watchable" },
+    { value: 4, label: "Listenable", short: "Listenable" },
     { value: 5, label: "Fair", short: "Fair" },
     { value: 6, label: "Good", short: "Good" },
     { value: 7, label: "More Than Good", short: "MTG" },
@@ -39,7 +42,7 @@ const RATING_DESCRIPTIONS = [
     { value: 10, label: "Perfect", short: "Perfect" },
 ];
 
-const ClassicRating = ({ initialRating = 0, onSubmitRating = () => { } }) => {
+const ClassicRating = ({ initialRating = 0, onSubmitRating = () => { }, onCancel, artistName, albumArtwork, isPlayed, onTogglePlayed }) => {
     const [rating, setRating] = useState(parseFloat(initialRating.toFixed(1)));
 
     const getRatingLabel = (currentRating) => {
@@ -58,8 +61,10 @@ const ClassicRating = ({ initialRating = 0, onSubmitRating = () => { } }) => {
 
     return (
         <View style={styles.card}>
-            <Text style={styles.title}>Movie Rating System</Text>
-            <Text style={styles.subtitle}>Rate from 0 to 10 in 0.1 increments</Text>
+            <Text style={styles.title}>Rate {artistName || 'Artist'}</Text>
+            {albumArtwork && (
+                <Image source={{ uri: albumArtwork }} style={styles.coverArt} resizeMode="contain" />
+            )}
 
             <View style={styles.ratingDisplayArea}>
                 <Text style={styles.ratingValueText}>{rating.toFixed(1)}</Text>
@@ -104,33 +109,50 @@ const ClassicRating = ({ initialRating = 0, onSubmitRating = () => { } }) => {
                 ))}
             </View>
 
-            <TouchableOpacity style={styles.submitButton} onPress={handleSubmit}>
-                <Text style={styles.submitButtonText}>Submit Rating</Text>
+            <TouchableOpacity
+                style={[styles.playedToggle, isPlayed && styles.playedToggleActive]}
+                onPress={onTogglePlayed}
+            >
+                <MaterialCommunityIcons
+                    name={isPlayed ? "check-circle" : "circle-outline"}
+                    size={20}
+                    color={isPlayed ? "#FFFFFF" : COLOR_CANCEL_BUTTON_TEXT}
+                />
+                <Text style={[styles.playedToggleText, isPlayed && styles.playedToggleTextActive]}>
+                    Press to Add to Recently played
+                </Text>
             </TouchableOpacity>
+
+            <View style={styles.buttonsRow}>
+                {onCancel && (
+                    <TouchableOpacity style={styles.cancelButton} onPress={onCancel}>
+                        <Text style={styles.cancelButtonText}>Cancel</Text>
+                    </TouchableOpacity>
+                )}
+                <TouchableOpacity style={styles.submitButton} onPress={handleSubmit}>
+                    <Text style={styles.submitButtonText}>Submit Rating</Text>
+                </TouchableOpacity>
+            </View>
         </View>
     );
 };
 
 const styles = StyleSheet.create({
     card: {
-        backgroundColor: COLOR_BACKGROUND_CARD,
-        borderRadius: 15,
-        padding: screenWidth * 0.05,
-        margin: screenWidth * 0.04,
         alignItems: 'center',
-        width: screenWidth * 0.92,
-        alignSelf: 'center',
+        width: '100%',
     },
     title: {
         fontSize: screenWidth * 0.06,
         fontWeight: 'bold',
         color: COLOR_TEXT_PRIMARY,
-        marginBottom: 5,
+        marginBottom: 10,
     },
-    subtitle: {
-        fontSize: screenWidth * 0.035,
-        color: COLOR_TEXT_SECONDARY,
-        marginBottom: 20,
+    coverArt: {
+        width: screenWidth * 0.3,
+        height: screenWidth * 0.3,
+        borderRadius: 10,
+        marginBottom: 15,
     },
     ratingDisplayArea: {
         backgroundColor: COLOR_BACKGROUND_DISPLAY,
@@ -203,17 +225,34 @@ const styles = StyleSheet.create({
     gridButtonTextActive: {
         color: COLOR_BUTTON_GRID_TEXT_ACTIVE,
     },
+    buttonsRow: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        width: '100%',
+        gap: 10,
+    },
+    cancelButton: {
+        backgroundColor: COLOR_CANCEL_BUTTON_BG,
+        paddingVertical: 12,
+        borderRadius: 25,
+        flex: 1,
+        alignItems: 'center',
+    },
+    cancelButtonText: {
+        color: COLOR_CANCEL_BUTTON_TEXT,
+        fontSize: screenWidth * 0.04,
+        fontWeight: 'bold',
+    },
     submitButton: {
         backgroundColor: COLOR_SUBMIT_BUTTON_BG,
-        paddingVertical: 15,
-        paddingHorizontal: 40,
+        paddingVertical: 12,
         borderRadius: 25,
-        width: '80%',
+        flex: 1,
         alignItems: 'center',
     },
     submitButtonText: {
         color: COLOR_SUBMIT_BUTTON_TEXT,
-        fontSize: screenWidth * 0.045,
+        fontSize: screenWidth * 0.04,
         fontWeight: 'bold',
     },
 });

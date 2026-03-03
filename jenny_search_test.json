@@ -1,0 +1,2849 @@
+{
+  "results": {
+    "albums": {
+      "href": "/v1/catalog/us/search?limit=15&term=Jenny+on+Holiday&types=albums",
+      "next": "/v1/catalog/us/search?offset=15&term=Jenny+on+Holiday&types=albums",
+      "data": [
+        {
+          "id": "1834924750",
+          "type": "albums",
+          "href": "/v1/catalog/us/albums/1834924750",
+          "attributes": {
+            "artistName": "Jenny on Holiday",
+            "artwork": {
+              "bgColor": "e3f1f3",
+              "height": 3000,
+              "textColor1": "000210",
+              "textColor2": "072042",
+              "textColor3": "2e323d",
+              "textColor4": "334a65",
+              "url": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/09/5e/5e/095e5ef5-c4c9-68d6-0620-9eacc993b078/8721416081309.png/{w}x{h}bb.jpg",
+              "width": 3000
+            },
+            "contentRating": "explicit",
+            "copyright": "℗ 2025 Jenny Hollingworth under exclusive licence to Transgressive Records Ltd.",
+            "editorialNotes": {
+              "short": "Soaring melodies and striking vocals from one half of Let’s Eat Grandma.",
+              "tagline": "New Album"
+            },
+            "genreNames": [
+              "Pop",
+              "Music",
+              "Alternative"
+            ],
+            "isCompilation": false,
+            "isComplete": true,
+            "isMasteredForItunes": false,
+            "isSingle": false,
+            "name": "Quicksand Heart",
+            "playParams": {
+              "id": "1834924750",
+              "kind": "album"
+            },
+            "recordLabel": "Transgressive Records",
+            "releaseDate": "2026-01-09",
+            "trackCount": 10,
+            "upc": "8721416081309",
+            "url": "https://music.apple.com/us/album/quicksand-heart/1834924750"
+          }
+        },
+        {
+          "id": "1836881731",
+          "type": "albums",
+          "href": "/v1/catalog/us/albums/1836881731",
+          "attributes": {
+            "artistName": "Jenny on Holiday",
+            "artwork": {
+              "bgColor": "430c00",
+              "height": 3000,
+              "textColor1": "ef722b",
+              "textColor2": "ee7146",
+              "textColor3": "cd5e22",
+              "textColor4": "cc5d38",
+              "url": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/fc/e6/57/fce657e8-c296-f8ec-bf8f-2b9f85e4d2c2/8721416108549.png/{w}x{h}bb.jpg",
+              "width": 3000
+            },
+            "copyright": "℗ 2025 Jenny Hollingworth under exclusive licence to Transgressive Records Ltd.",
+            "genreNames": [
+              "Pop",
+              "Music",
+              "Alternative"
+            ],
+            "isCompilation": false,
+            "isComplete": true,
+            "isMasteredForItunes": false,
+            "isSingle": true,
+            "name": "Every Ounce of Me - Single",
+            "playParams": {
+              "id": "1836881731",
+              "kind": "album"
+            },
+            "recordLabel": "Transgressive Records",
+            "releaseDate": "2025-09-18",
+            "trackCount": 1,
+            "upc": "8721416108549",
+            "url": "https://music.apple.com/us/album/every-ounce-of-me-single/1836881731"
+          }
+        },
+        {
+          "id": "402046254",
+          "type": "albums",
+          "href": "/v1/catalog/us/albums/402046254",
+          "attributes": {
+            "artistName": "Kenny G",
+            "artwork": {
+              "bgColor": "564442",
+              "height": 600,
+              "textColor1": "f7d59c",
+              "textColor2": "ddba92",
+              "textColor3": "d7b88a",
+              "textColor4": "c2a282",
+              "url": "https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/a0/bd/ff/a0bdff4d-a57f-ab16-986e-4191b7b1b830/mzi.hvikmhfq.jpg/{w}x{h}bb.jpg",
+              "width": 604
+            },
+            "copyright": "℗ 1994 Arista Records, Inc.",
+            "genreNames": [
+              "Christmas: Jazz",
+              "Music",
+              "Holiday",
+              "Christmas",
+              "Jazz",
+              "Crossover Jazz",
+              "Rock",
+              "Pop",
+              "Adult Contemporary",
+              "Easy Listening",
+              "Smooth Jazz"
+            ],
+            "isCompilation": false,
+            "isComplete": true,
+            "isMasteredForItunes": false,
+            "isSingle": false,
+            "name": "Miracles: The Holiday Album",
+            "playParams": {
+              "id": "402046254",
+              "kind": "album"
+            },
+            "recordLabel": "Arista",
+            "releaseDate": "1994-11-01",
+            "trackCount": 11,
+            "upc": "884977774214",
+            "url": "https://music.apple.com/us/album/miracles-the-holiday-album/402046254"
+          }
+        },
+        {
+          "id": "1484130985",
+          "type": "albums",
+          "href": "/v1/catalog/us/albums/1484130985",
+          "attributes": {
+            "artistName": "Pentatonix",
+            "artwork": {
+              "bgColor": "edebee",
+              "height": 3000,
+              "textColor1": "231210",
+              "textColor2": "3c1618",
+              "textColor3": "4c3e3c",
+              "textColor4": "5f4143",
+              "url": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/b8/46/7d/b8467deb-c828-1ce9-6573-2e1303608a26/886447949801.jpg/{w}x{h}bb.jpg",
+              "width": 3000
+            },
+            "copyright": "℗ 2019 RCA Records, a division of Sony Music Entertainment",
+            "editorialNotes": {
+              "short": "The cream of the holiday crop from the soaring a cappella crew."
+            },
+            "genreNames": [
+              "Christmas: Pop",
+              "Music",
+              "Holiday",
+              "Rock"
+            ],
+            "isCompilation": true,
+            "isComplete": true,
+            "isMasteredForItunes": true,
+            "isSingle": false,
+            "name": "The Best Of Pentatonix Christmas",
+            "playParams": {
+              "id": "1484130985",
+              "kind": "album"
+            },
+            "recordLabel": "RCA Records Label",
+            "releaseDate": "2019-11-20",
+            "trackCount": 19,
+            "upc": "886447949801",
+            "url": "https://music.apple.com/us/album/the-best-of-pentatonix-christmas/1484130985"
+          }
+        },
+        {
+          "id": "1532788351",
+          "type": "albums",
+          "href": "/v1/catalog/us/albums/1532788351",
+          "attributes": {
+            "artistName": "Dua Lipa",
+            "artwork": {
+              "bgColor": "000000",
+              "height": 4000,
+              "textColor1": "e6eaea",
+              "textColor2": "bfc5db",
+              "textColor3": "b8bbbb",
+              "textColor4": "999eaf",
+              "url": "https://is1-ssl.mzstatic.com/image/thumb/Music116/v4/16/9c/e6/169ce699-5506-0e08-f514-81f08a9ed7f5/190295132651.jpg/{w}x{h}bb.jpg",
+              "width": 4000
+            },
+            "copyright": "under exclusive license to Warner Records UK, a division of Warner Music UK Limited, ℗ 2020 Dua Lipa Limited",
+            "editorialNotes": {
+              "short": "Flashes of disco-boogie ignite this DaBaby collab.",
+              "standard": "Flashes of disco-boogie ignite this DaBaby collab."
+            },
+            "genreNames": [
+              "Pop",
+              "Music"
+            ],
+            "isCompilation": false,
+            "isComplete": true,
+            "isMasteredForItunes": true,
+            "isSingle": true,
+            "name": "Levitating (feat. DaBaby) - Single",
+            "playParams": {
+              "id": "1532788351",
+              "kind": "album"
+            },
+            "recordLabel": "Warner Records",
+            "releaseDate": "2020-10-01",
+            "trackCount": 1,
+            "upc": "190295132651",
+            "url": "https://music.apple.com/us/album/levitating-feat-dababy-single/1532788351"
+          }
+        },
+        {
+          "id": "1296454740",
+          "type": "albums",
+          "href": "/v1/catalog/us/albums/1296454740",
+          "attributes": {
+            "artistName": "Pentatonix",
+            "artwork": {
+              "bgColor": "dedbd4",
+              "height": 1500,
+              "textColor1": "2a1f14",
+              "textColor2": "312a20",
+              "textColor3": "4e443a",
+              "textColor4": "534d44",
+              "url": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/20/9c/87/209c87ba-7992-8062-0576-758c8550564a/886446670744.jpg/{w}x{h}bb.jpg",
+              "width": 1500
+            },
+            "copyright": "℗ 2017 RCA Records, a division of Sony Music Entertainment",
+            "editorialNotes": {
+              "short": "The a cappella crew breathes new life into seasonal classics.",
+              "standard": "The a cappella crew breathes new life into seasonal classics."
+            },
+            "genreNames": [
+              "Christmas: Pop",
+              "Music",
+              "Holiday",
+              "Vocal",
+              "Christmas"
+            ],
+            "isCompilation": false,
+            "isComplete": true,
+            "isMasteredForItunes": true,
+            "isSingle": false,
+            "name": "A Pentatonix Christmas (Deluxe)",
+            "playParams": {
+              "id": "1296454740",
+              "kind": "album"
+            },
+            "recordLabel": "RCA Records Label",
+            "releaseDate": "2017-10-20",
+            "trackCount": 16,
+            "upc": "886446670744",
+            "url": "https://music.apple.com/us/album/a-pentatonix-christmas-deluxe/1296454740"
+          }
+        },
+        {
+          "id": "1447203905",
+          "type": "albums",
+          "href": "/v1/catalog/us/albums/1447203905",
+          "attributes": {
+            "artistName": "Post Malone",
+            "artwork": {
+              "bgColor": "dbdcdb",
+              "height": 3000,
+              "textColor1": "080a0d",
+              "textColor2": "232932",
+              "textColor3": "323436",
+              "textColor4": "474d54",
+              "url": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/5b/e0/f9/5be0f960-3df4-5b28-18d0-250749c28fdf/18UMGIM86382.rgb.jpg/{w}x{h}bb.jpg",
+              "width": 3000
+            },
+            "contentRating": "explicit",
+            "copyright": "℗ 2018 Republic Records, a division of UMG Recordings, Inc.",
+            "editorialNotes": {
+              "short": "The boy with the “Always Tired” tattoo stops to count his blessings.",
+              "standard": "Post Malone appreciates a good brand. Over the course of “Wow.,” an almost-at-the-venue warm-up song about the way his life has changed since his career took off, he name-checks a few of his favorite things, including Texas rapper Lil’ Troy, LaCroix sparkling water, Mercedes-Benz and McLaren automobiles, Fall Out Boy, former NBA center Dikembe Mutombo, Lamborghini, and Dallas Cowboys quarterback Dak Prescott. In the context of “Wow.,” these are either examples of top-tier performers or the spoils of top-tier performance. Their uniting factor is that they’ve left a mark on Posty, an artist in the midst of a charting streak so hot that he’s summed up his inspiration to record “Wow.” thusly: “Made another hit ’cause I got bored now.”"
+            },
+            "genreNames": [
+              "Hip-Hop/Rap",
+              "Music"
+            ],
+            "isCompilation": false,
+            "isComplete": true,
+            "isMasteredForItunes": true,
+            "isSingle": true,
+            "name": "Wow. - Single",
+            "playParams": {
+              "id": "1447203905",
+              "kind": "album"
+            },
+            "recordLabel": "Republic Records",
+            "releaseDate": "2018-12-24",
+            "trackCount": 1,
+            "upc": "00602577412790",
+            "url": "https://music.apple.com/us/album/wow-single/1447203905"
+          }
+        },
+        {
+          "id": "1396710872",
+          "type": "albums",
+          "href": "/v1/catalog/us/albums/1396710872",
+          "attributes": {
+            "artistName": "KIDS SEE GHOSTS, Kanye West & Kid Cudi",
+            "artwork": {
+              "bgColor": "f46b78",
+              "height": 3000,
+              "textColor1": "0b0408",
+              "textColor2": "06070a",
+              "textColor3": "39181e",
+              "textColor4": "351b20",
+              "url": "https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/2c/bc/1c/2cbc1cca-7881-2605-875c-536f553cc79a/00602567803881.rgb.jpg/{w}x{h}bb.jpg",
+              "width": 3000
+            },
+            "contentRating": "explicit",
+            "copyright": "℗ 2018 Getting Out Our Dreams II, LLC Distributed By Def Jam,  A Division of UMG Recordings, Inc.",
+            "editorialNotes": {
+              "short": "Two rap innovators unite for their first full-length collaboration.",
+              "standard": "If <i>ye</i>, Kanye West’s solo album released one week prior, was him proudly shouting about his superpower—bipolar disorder—from the peak of a snowcapped mountain, <i>KIDS SEE GHOSTS</i> is the fireside therapy session occurring at its base. Both Kid Cudi and West have dealt with controversy and mental illness throughout their intertwined careers. It’s all addressed here, on their long-awaited first joint album, with honesty and innate chemistry. Kanye’s production pulsates and rumbles beneath his signature confessional bars and religious affirmations, but, centered by Cudi’s gift for melodic depth and understated humility, his contributions, and the project overall, feel cathartic rather than bombastic and headline-grabbing. On “Freeee (Ghost Town, Pt. 2),” the sequel to <i>ye</i> highlight “Ghost Town,” both men bellow, “Nothing hurts me anymore…I feel free” with such tangible, full-bodied energy, it feels as though this very recording was, in itself, a moment of great healing."
+            },
+            "genreNames": [
+              "Hip-Hop/Rap",
+              "Music",
+              "Rap"
+            ],
+            "isCompilation": false,
+            "isComplete": true,
+            "isMasteredForItunes": true,
+            "isSingle": false,
+            "name": "KIDS SEE GHOSTS",
+            "playParams": {
+              "id": "1396710872",
+              "kind": "album"
+            },
+            "recordLabel": "Getting Out Our Dreams, Inc./Def Jam Recordings",
+            "releaseDate": "2018-06-08",
+            "trackCount": 7,
+            "upc": "00602567803881",
+            "url": "https://music.apple.com/us/album/kids-see-ghosts/1396710872"
+          }
+        },
+        {
+          "id": "1228739599",
+          "type": "albums",
+          "href": "/v1/catalog/us/albums/1228739599",
+          "attributes": {
+            "artistName": "Dua Lipa",
+            "artwork": {
+              "bgColor": "998a91",
+              "height": 4000,
+              "textColor1": "0d0b0c",
+              "textColor2": "151117",
+              "textColor3": "292426",
+              "textColor4": "2f2930",
+              "url": "https://is1-ssl.mzstatic.com/image/thumb/Music126/v4/c1/54/2d/c1542d45-c6c2-12ca-7308-6eacd762c562/190295807870.jpg/{w}x{h}bb.jpg",
+              "width": 4000
+            },
+            "contentRating": "explicit",
+            "copyright": "℗ 2017 Dua Lipa Limited under exclusive license to Warner Music UK Limited. Tracks 3, 6, 7, 8, 9, 13, 14 (P) 2016 Warner Music UK Limited. Tracks 4, 15, 17 (P) 2015 Warner Music UK Limited.",
+            "editorialNotes": {
+              "short": "Dua Lipa declared her “New Rules”—and entered pop’s upper echelons.",
+              "standard": "With hindsight, it’s hard to imagine that Dua Lipa’s globe-conquering success was ever anything other than a foregone conclusion. But her breakout smash, “New Rules,” was preceded by <i>seven singles</i> and her debut album was twice delayed, arriving several months after originally planned. Even then, <i>Dua Lipa</i> was something of a sleeper hit, reaching its UK chart peak 38 weeks after release. \n\nWhile her debut LP’s rollout may have been shaky, Lipa herself has never appeared anything less than assured, with a vocal style so cool it borders on aloof. Her rich, sultry stylings here anchor a collection that isn’t afraid to genre-hop, brooding over the tropical pop of “Hotter than Hell” as it boils to its euphoric climax. “Be the One” is similarly summery, with a persistent chorus that drips yearning over a Europop beat—evoking all the wistfulness of a holiday romance—and even “Thinking ’Bout You” morphs from a laidback acoustic jam into something more full-throated. The pace only slows on the closing track “Homesick,” a piano ballad co-written with Chris Martin about those you leave behind when your pop-star dreams come true. \n\nMNEK co-write “IDGAF” lambasts a good-for-nothing-ex over a military drum line (“You say you’re sorry/But it’s too late now/So save it, get gone, shut up”) and definitively establishes that Dua knows her way around an anthemic chorus. In that regard, it’s a perfect companion track to the album’s centerpiece “New Rules.” Over a shimmering tropical beat, Dua dispenses breakup wisdom with the firm hand of a no-nonsense agony aunt (“One: Don’t pick up the phone/You know he’s only callin’ ’cause he’s drunk and alone”). It effortlessly marks the precise moment of her rise to the upper echelons of the pop stratosphere. Indeed, if anything is to be gleaned from the album’s staccato ascent, it’s that good things come to those who wait. ",
+              "tagline": "Essential Album"
+            },
+            "genreNames": [
+              "Pop",
+              "Music",
+              "Rock",
+              "Dance"
+            ],
+            "isCompilation": false,
+            "isComplete": true,
+            "isMasteredForItunes": false,
+            "isSingle": false,
+            "name": "Dua Lipa (Deluxe)",
+            "playParams": {
+              "id": "1228739599",
+              "kind": "album"
+            },
+            "recordLabel": "Warner Records",
+            "releaseDate": "2017-06-02",
+            "trackCount": 17,
+            "upc": "190295807870",
+            "url": "https://music.apple.com/us/album/dua-lipa-deluxe/1228739599"
+          }
+        },
+        {
+          "id": "1437333655",
+          "type": "albums",
+          "href": "/v1/catalog/us/albums/1437333655",
+          "attributes": {
+            "artistName": "Phil Collins & Mark Mancina",
+            "artwork": {
+              "bgColor": "f4eccf",
+              "height": 3000,
+              "textColor1": "3c2a17",
+              "textColor2": "472c16",
+              "textColor3": "61513c",
+              "textColor4": "6a533b",
+              "url": "https://is1-ssl.mzstatic.com/image/thumb/Music126/v4/09/ff/d4/09ffd48c-f525-ae2b-be96-b12696d83a49/18UMGIM62087.rgb.jpg/{w}x{h}bb.jpg",
+              "width": 3000
+            },
+            "copyright": "℗ 1999 Edgar Rice Burroughs, Inc. and Walt Disney Records",
+            "editorialNotes": {
+              "short": "Rediscover Phil Collins’ Oscar-winning show tunes—now in Spatial Audio.",
+              "tagline": "Now in Spatial Audio"
+            },
+            "genreNames": [
+              "Soundtrack",
+              "Music",
+              "Original Score",
+              "Children's Music"
+            ],
+            "isCompilation": false,
+            "isComplete": true,
+            "isMasteredForItunes": false,
+            "isSingle": false,
+            "name": "Tarzan (Original Motion Picture Soundtrack)",
+            "playParams": {
+              "id": "1437333655",
+              "kind": "album"
+            },
+            "recordLabel": "Walt Disney Records",
+            "releaseDate": "1999-05-18",
+            "trackCount": 14,
+            "upc": "00050087404765",
+            "url": "https://music.apple.com/us/album/tarzan-original-motion-picture-soundtrack/1437333655"
+          }
+        },
+        {
+          "id": "1440825367",
+          "type": "albums",
+          "href": "/v1/catalog/us/albums/1440825367",
+          "attributes": {
+            "artistName": "Tom Petty",
+            "artwork": {
+              "bgColor": "f7f4f4",
+              "height": 1500,
+              "textColor1": "18090e",
+              "textColor2": "29131a",
+              "textColor3": "45383c",
+              "textColor4": "524046",
+              "url": "https://is1-ssl.mzstatic.com/image/thumb/Music112/v4/f3/71/47/f37147d5-d029-880b-bdc1-5929c907909a/06UMGIM04214.rgb.jpg/{w}x{h}bb.jpg",
+              "width": 1500
+            },
+            "copyright": "℗ 2014 Geffen Records",
+            "editorialNotes": {
+              "short": "Petty refuses to back down—and winds up with a career-defining hit.",
+              "standard": "Whether he was explicit about it or not, you got the sense that Tom Petty always wanted to carry the mantle of the classic-rock artists of the 1960s. So when Bob Dylan adopted the Heartbreakers as his opening act and backing band on a 1986 world tour, the sense wasn’t just of personal and professional validation, but of a historical continuum ensured: Here was one legend giving the nod to the next, seeing to it that rock should—and would—live another season. A year later, on tour in London, Petty got a birthday visit from Dylan, George Harrison, Jeff Lynne, and others just as hurricane-force winds settled onto the coast: A cataclysm, yes, but for Petty, who had lost his home to arson earlier in the year, the biblical signs of a new beginning.\n\nA solo album mostly in name and spirit (the Heartbreakers’ Mike Campbell can be heard throughout, and there are also contributions from Benmont Tench and Howie Epstein), 1989’s <i>Full Moon Fever</i> reestablished Petty as an inescapable presence on radio and MTV, thanks to back-to-back-to-back hits “I Won’t Back Down,” “Runnin’ Down a Dream,” and “Free Fallin’.” But it also gave new angles and fresh paint to a now-familiar sound. When it came to the studio, the Heartbreakers had always been realists, a live band who treated recording equipment as tools to capture, not conjure. <i>Full Moon Fever</i> producer Jeff Lynne—who’d crafted FM magic with Electric Light Orchestra, and who’d help fine-tune Harrison’s sounds for the 1980s—was, by contrast, a stylist: The playing mattered to Lynne, of course, but it was always second to the sound, texture, and character of the recording.\n\nNowadays, <i>Full Moon Fever</i> sounds unmistakably like a late-1980s album. But as slick as the record gets at times, its creation (and subsequent multi-platinum success) prevented Petty from treading too close to the rusticism of neo-traditionalism, at a time when it would have been easy for him. Pair it with <i>The Traveling Wilburys, Vol. 1</i>—his collaborative album with Dylan, Harrison, Lynne, and Roy Orbison, and arguably the most enjoyable big-ticket goof in rock history—and you can almost feel the wind of a great hand as it takes the chip off Petty’s shoulder."
+            },
+            "genreNames": [
+              "Rock",
+              "Music",
+              "American Trad Rock",
+              "Arena Rock",
+              "Pop",
+              "Pop/Rock",
+              "Rock & Roll"
+            ],
+            "isCompilation": false,
+            "isComplete": true,
+            "isMasteredForItunes": true,
+            "isSingle": false,
+            "name": "Full Moon Fever",
+            "playParams": {
+              "id": "1440825367",
+              "kind": "album"
+            },
+            "recordLabel": "Tom Petty P&D",
+            "releaseDate": "1989-04-24",
+            "trackCount": 12,
+            "upc": "00602537924608",
+            "url": "https://music.apple.com/us/album/full-moon-fever/1440825367"
+          }
+        },
+        {
+          "id": "560358570",
+          "type": "albums",
+          "href": "/v1/catalog/us/albums/560358570",
+          "attributes": {
+            "artistName": "Kenny G",
+            "artwork": {
+              "bgColor": "d2a481",
+              "height": 1413,
+              "textColor1": "1b110c",
+              "textColor2": "2c1e0f",
+              "textColor3": "3f2e23",
+              "textColor4": "4d3826",
+              "url": "https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/3d/12/20/3d122025-c0dd-e618-552a-957b8a887aa6/886443468900.jpg/{w}x{h}bb.jpg",
+              "width": 1425
+            },
+            "copyright": "℗ This compilation (P) 2012 Sony Music Entertainment. All rights reserved.",
+            "genreNames": [
+              "Christmas: Jazz",
+              "Music",
+              "Holiday",
+              "Jazz",
+              "Pop",
+              "Adult Contemporary",
+              "Smooth Jazz",
+              "Christian",
+              "Gospel",
+              "Crossover Jazz",
+              "Rock",
+              "Christmas"
+            ],
+            "isCompilation": true,
+            "isComplete": true,
+            "isMasteredForItunes": false,
+            "isSingle": false,
+            "name": "The Classic Christmas Album",
+            "playParams": {
+              "id": "560358570",
+              "kind": "album"
+            },
+            "recordLabel": "Arista/Legacy",
+            "releaseDate": "2012-09-21",
+            "trackCount": 16,
+            "upc": "886443468900",
+            "url": "https://music.apple.com/us/album/the-classic-christmas-album/560358570"
+          }
+        },
+        {
+          "id": "1035387084",
+          "type": "albums",
+          "href": "/v1/catalog/us/albums/1035387084",
+          "attributes": {
+            "artistName": "Pentatonix",
+            "artwork": {
+              "bgColor": "e3e3e3",
+              "height": 1500,
+              "textColor1": "2c2125",
+              "textColor2": "42172c",
+              "textColor3": "50484b",
+              "textColor4": "624051",
+              "url": "https://is1-ssl.mzstatic.com/image/thumb/Music125/v4/84/a8/f7/84a8f7df-3a27-d21e-aac0-d2a421bc2acd/dj.zoqzmtto.jpg/{w}x{h}bb.jpg",
+              "width": 1500
+            },
+            "copyright": "℗ 2015 RCA Records, a division of Sony Music Entertainment",
+            "editorialNotes": {
+              "short": "The a cappella stars slip effortlessly into the pop mainstream.",
+              "standard": "Their sharpness and soul made PTX one of the most popular and well-known <i>a cappella</i> groups outside of The Barden Bellas. The vocal quintet takes a creative leap forward here—crafting originals with the same energy, detail, and richness that made their cover songs so beloved. “Sing” and “Na Na Na” show that PTX are pop maestros, creating magic with just voice, handclaps, and beatbox. They float effortlessly between styles—“Misbehavin’” takes its cues from doo-wop, “Ref” can fit in with any EDM set, and “First Things First” feels like a lost Timbaland track. To close the album, PTX include their takes on pop hits “Where Are Ü Now,” “Cheerleader,” and “Lean On.”"
+            },
+            "genreNames": [
+              "Pop",
+              "Music",
+              "Holiday",
+              "Christmas",
+              "Rock",
+              "Electronic",
+              "Dance",
+              "Vocal"
+            ],
+            "isCompilation": false,
+            "isComplete": true,
+            "isMasteredForItunes": true,
+            "isSingle": false,
+            "name": "Pentatonix (Deluxe Version)",
+            "playParams": {
+              "id": "1035387084",
+              "kind": "album"
+            },
+            "recordLabel": "RCA Records Label",
+            "releaseDate": "2015-10-16",
+            "trackCount": 17,
+            "upc": "886445445015",
+            "url": "https://music.apple.com/us/album/pentatonix-deluxe-version/1035387084"
+          }
+        },
+        {
+          "id": "1528240902",
+          "type": "albums",
+          "href": "/v1/catalog/us/albums/1528240902",
+          "attributes": {
+            "artistName": "Carrie Underwood",
+            "artwork": {
+              "bgColor": "90959b",
+              "height": 3000,
+              "textColor1": "240002",
+              "textColor2": "121415",
+              "textColor3": "3a1d20",
+              "textColor4": "2b2d2f",
+              "url": "https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/92/86/2c/92862c58-571b-98b7-9ec8-0901aeb1c7dc/20UMGIM69450.rgb.jpg/{w}x{h}bb.jpg",
+              "width": 3000
+            },
+            "copyright": "A Capitol Records Nashville Release; ℗ 2020 UMG Recordings, Inc.",
+            "editorialNotes": {
+              "short": "Christmas classics and more, bathed in the star’s country glow.",
+              "standard": "Christmas classics and more, bathed in the star’s country glow."
+            },
+            "genreNames": [
+              "Christmas: Country",
+              "Music",
+              "Holiday",
+              "Christmas"
+            ],
+            "isCompilation": false,
+            "isComplete": true,
+            "isMasteredForItunes": true,
+            "isSingle": false,
+            "name": "My Gift",
+            "playParams": {
+              "id": "1528240902",
+              "kind": "album"
+            },
+            "recordLabel": "Capitol Nashville",
+            "releaseDate": "2020-09-25",
+            "trackCount": 11,
+            "upc": "00602435098180",
+            "url": "https://music.apple.com/us/album/my-gift/1528240902"
+          }
+        },
+        {
+          "id": "724738896",
+          "type": "albums",
+          "href": "/v1/catalog/us/albums/724738896",
+          "attributes": {
+            "artistName": "Bing Crosby",
+            "artwork": {
+              "bgColor": "2f3847",
+              "height": 1500,
+              "textColor1": "f3e8c4",
+              "textColor2": "ea7f4d",
+              "textColor3": "ccc4ab",
+              "textColor4": "c5714b",
+              "url": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/ba/72/61/ba72617a-5004-85dd-9543-e5b0d27f1a3a/13UABIM59310.rgb.jpg/{w}x{h}bb.jpg",
+              "width": 1500
+            },
+            "copyright": "This Compilation ℗ 2006 Capitol Records Inc.",
+            "genreNames": [
+              "Holiday",
+              "Music",
+              "Christmas",
+              "Vocal",
+              "Standards",
+              "Jazz",
+              "Vocal Jazz",
+              "Traditional Pop",
+              "Vocal Pop"
+            ],
+            "isCompilation": true,
+            "isComplete": false,
+            "isMasteredForItunes": false,
+            "isSingle": false,
+            "name": "Christmas Classics (Remastered)",
+            "playParams": {
+              "id": "724738896",
+              "kind": "album"
+            },
+            "recordLabel": "Capitol Records",
+            "releaseDate": "2006-09-26",
+            "trackCount": 16,
+            "upc": "00094636392851",
+            "url": "https://music.apple.com/us/album/christmas-classics-remastered/724738896"
+          }
+        }
+      ]
+    },
+    "artists": {
+      "href": "/v1/catalog/us/search?limit=15&term=Jenny+on+Holiday&types=artists",
+      "next": "/v1/catalog/us/search?offset=15&term=Jenny+on+Holiday&types=artists",
+      "data": [
+        {
+          "id": "1834924013",
+          "type": "artists",
+          "href": "/v1/catalog/us/artists/1834924013",
+          "attributes": {
+            "artwork": {
+              "bgColor": "23172d",
+              "height": 1067,
+              "textColor1": "6c96ee",
+              "textColor2": "7d80e7",
+              "textColor3": "5d7dc7",
+              "textColor4": "6b6bc1",
+              "url": "https://is1-ssl.mzstatic.com/image/thumb/AMCArtistImages211/v4/4e/da/cb/4edacb80-0ddc-cf79-52ca-bd245b5b9153/ami-identity-81ee0e6fadd7086fcd491151a35a8088-2025-09-12T13-34-28.837Z_cropped.png/{w}x{h}bb.jpg",
+              "width": 1067
+            },
+            "genreNames": [
+              "Pop"
+            ],
+            "name": "Jenny on Holiday",
+            "url": "https://music.apple.com/us/artist/jenny-on-holiday/1834924013"
+          },
+          "relationships": {
+            "albums": {
+              "href": "/v1/catalog/us/artists/1834924013/albums",
+              "data": [
+                {
+                  "id": "1834924750",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/1834924750"
+                },
+                {
+                  "id": "1836881731",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/1836881731"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "id": "17026",
+          "type": "artists",
+          "href": "/v1/catalog/us/artists/17026",
+          "attributes": {
+            "artwork": {
+              "bgColor": "1e1e1e",
+              "height": 1400,
+              "textColor1": "ffffff",
+              "textColor2": "c1c1c1",
+              "textColor3": "d1d1d1",
+              "textColor4": "a1a1a1",
+              "url": "https://is1-ssl.mzstatic.com/image/thumb/Features115/v4/b2/7e/04/b27e045c-4ca3-d583-eb3d-b30744df0a50/mzl.eijqbtvf.png/{w}x{h}bb.jpg",
+              "width": 1400
+            },
+            "genreNames": [
+              "Jazz"
+            ],
+            "name": "Kenny G",
+            "url": "https://music.apple.com/us/artist/kenny-g/17026"
+          },
+          "relationships": {
+            "albums": {
+              "href": "/v1/catalog/us/artists/17026/albums",
+              "next": "/v1/catalog/us/artists/17026/albums?offset=25",
+              "data": [
+                {
+                  "id": "300967066",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/300967066"
+                },
+                {
+                  "id": "560358570",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/560358570"
+                },
+                {
+                  "id": "258622449",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/258622449"
+                },
+                {
+                  "id": "1535125594",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/1535125594"
+                },
+                {
+                  "id": "402046254",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/402046254"
+                },
+                {
+                  "id": "282802902",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/282802902"
+                },
+                {
+                  "id": "1587394461",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/1587394461"
+                },
+                {
+                  "id": "307739243",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/307739243"
+                },
+                {
+                  "id": "299723498",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/299723498"
+                },
+                {
+                  "id": "204657834",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/204657834"
+                },
+                {
+                  "id": "1589008580",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/1589008580"
+                },
+                {
+                  "id": "258621353",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/258621353"
+                },
+                {
+                  "id": "298426458",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/298426458"
+                },
+                {
+                  "id": "1701721598",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/1701721598"
+                },
+                {
+                  "id": "391710633",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/391710633"
+                },
+                {
+                  "id": "258594303",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/258594303"
+                },
+                {
+                  "id": "1440926108",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/1440926108"
+                },
+                {
+                  "id": "1440938593",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/1440938593"
+                },
+                {
+                  "id": "258622459",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/258622459"
+                },
+                {
+                  "id": "533018583",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/533018583"
+                },
+                {
+                  "id": "1440938452",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/1440938452"
+                },
+                {
+                  "id": "298316209",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/298316209"
+                },
+                {
+                  "id": "255404461",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/255404461"
+                },
+                {
+                  "id": "254948487",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/254948487"
+                },
+                {
+                  "id": "255404459",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/255404459"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "id": "463009",
+          "type": "artists",
+          "href": "/v1/catalog/us/artists/463009",
+          "attributes": {
+            "artwork": {
+              "bgColor": "dfe0dd",
+              "height": 783,
+              "textColor1": "110e0a",
+              "textColor2": "211a12",
+              "textColor3": "3a3834",
+              "textColor4": "47423b",
+              "url": "https://is1-ssl.mzstatic.com/image/thumb/AMCArtistImages211/v4/5a/16/4d/5a164d30-cab1-9512-dc95-979e107274aa/ami-identity-7247b217fef58be6ce99bc31e0eb7df3-2026-01-16T03-08-43.322Z_cropped.png/{w}x{h}bb.jpg",
+              "width": 783
+            },
+            "genreNames": [
+              "Pop"
+            ],
+            "name": "Jennifer Lopez",
+            "url": "https://music.apple.com/us/artist/jennifer-lopez/463009"
+          },
+          "relationships": {
+            "albums": {
+              "href": "/v1/catalog/us/artists/463009/albums",
+              "next": "/v1/catalog/us/artists/463009/albums?offset=25",
+              "data": [
+                {
+                  "id": "1385127337",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/1385127337"
+                },
+                {
+                  "id": "1100570214",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/1100570214"
+                },
+                {
+                  "id": "1441612575",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/1441612575"
+                },
+                {
+                  "id": "1375099472",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/1375099472"
+                },
+                {
+                  "id": "265143164",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/265143164"
+                },
+                {
+                  "id": "1446743225",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/1446743225"
+                },
+                {
+                  "id": "1627392961",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/1627392961"
+                },
+                {
+                  "id": "1712877314",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/1712877314"
+                },
+                {
+                  "id": "1574375495",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/1574375495"
+                },
+                {
+                  "id": "1253667824",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/1253667824"
+                },
+                {
+                  "id": "1592577592",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/1592577592"
+                },
+                {
+                  "id": "863447149",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/863447149"
+                },
+                {
+                  "id": "1446602507",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/1446602507"
+                },
+                {
+                  "id": "190849068",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/190849068"
+                },
+                {
+                  "id": "1482984271",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/1482984271"
+                },
+                {
+                  "id": "1308505337",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/1308505337"
+                },
+                {
+                  "id": "1176344679",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/1176344679"
+                },
+                {
+                  "id": "193030491",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/193030491"
+                },
+                {
+                  "id": "1712187957",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/1712187957"
+                },
+                {
+                  "id": "1440622252",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/1440622252"
+                },
+                {
+                  "id": "1532937476",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/1532937476"
+                },
+                {
+                  "id": "1442871700",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/1442871700"
+                },
+                {
+                  "id": "1723921297",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/1723921297"
+                },
+                {
+                  "id": "1410473059",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/1410473059"
+                },
+                {
+                  "id": "1754196915",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/1754196915"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "id": "254431",
+          "type": "artists",
+          "href": "/v1/catalog/us/artists/254431",
+          "attributes": {
+            "artwork": {
+              "bgColor": "b9b3b7",
+              "height": 3840,
+              "textColor1": "1c1a1a",
+              "textColor2": "2e2723",
+              "textColor3": "3b3939",
+              "textColor4": "4a4341",
+              "url": "https://is1-ssl.mzstatic.com/image/thumb/Features125/v4/d9/74/3b/d9743bbc-5c87-db6a-55ee-c3c64fc2fab6/mza_121471367418723049.png/{w}x{h}bb.jpg",
+              "width": 3840
+            },
+            "genreNames": [
+              "Vocal"
+            ],
+            "name": "Julie Andrews",
+            "url": "https://music.apple.com/us/artist/julie-andrews/254431"
+          },
+          "relationships": {
+            "albums": {
+              "href": "/v1/catalog/us/artists/254431/albums",
+              "next": "/v1/catalog/us/artists/254431/albums?offset=25",
+              "data": [
+                {
+                  "id": "1550173102",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/1550173102"
+                },
+                {
+                  "id": "1440796512",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/1440796512"
+                },
+                {
+                  "id": "1550187908",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/1550187908"
+                },
+                {
+                  "id": "158476378",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/158476378"
+                },
+                {
+                  "id": "1715961558",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/1715961558"
+                },
+                {
+                  "id": "285116400",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/285116400"
+                },
+                {
+                  "id": "158592639",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/158592639"
+                },
+                {
+                  "id": "1377468570",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/1377468570"
+                },
+                {
+                  "id": "158862806",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/158862806"
+                },
+                {
+                  "id": "1443298913",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/1443298913"
+                },
+                {
+                  "id": "1443533820",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/1443533820"
+                },
+                {
+                  "id": "304732783",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/304732783"
+                },
+                {
+                  "id": "1452526471",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/1452526471"
+                },
+                {
+                  "id": "158482341",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/158482341"
+                },
+                {
+                  "id": "394319441",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/394319441"
+                },
+                {
+                  "id": "193651872",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/193651872"
+                },
+                {
+                  "id": "1702797688",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/1702797688"
+                },
+                {
+                  "id": "1443803598",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/1443803598"
+                },
+                {
+                  "id": "1452864673",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/1452864673"
+                },
+                {
+                  "id": "522513417",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/522513417"
+                },
+                {
+                  "id": "1628383983",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/1628383983"
+                },
+                {
+                  "id": "1793413215",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/1793413215"
+                },
+                {
+                  "id": "1793413211",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/1793413211"
+                },
+                {
+                  "id": "1842835473",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/1842835473"
+                },
+                {
+                  "id": "1697038137",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/1697038137"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "id": "15773735",
+          "type": "artists",
+          "href": "/v1/catalog/us/artists/15773735",
+          "attributes": {
+            "artwork": {
+              "bgColor": "0f161d",
+              "height": 1117,
+              "textColor1": "dea281",
+              "textColor2": "cd9b81",
+              "textColor3": "b4866d",
+              "textColor4": "a7806d",
+              "url": "https://is1-ssl.mzstatic.com/image/thumb/Features115/v4/a9/f9/9d/a9f99dd6-5444-250f-3c23-fcd13c50e015/pr_source.png/{w}x{h}bb.jpg",
+              "width": 1117
+            },
+            "genreNames": [
+              "R&B/Soul"
+            ],
+            "name": "Fantasia",
+            "url": "https://music.apple.com/us/artist/fantasia/15773735"
+          },
+          "relationships": {
+            "albums": {
+              "href": "/v1/catalog/us/artists/15773735/albums",
+              "next": "/v1/catalog/us/artists/15773735/albums?offset=25",
+              "data": [
+                {
+                  "id": "275765355",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/275765355"
+                },
+                {
+                  "id": "382631365",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/382631365"
+                },
+                {
+                  "id": "1459893083",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/1459893083"
+                },
+                {
+                  "id": "207246267",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/207246267"
+                },
+                {
+                  "id": "1477675535",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/1477675535"
+                },
+                {
+                  "id": "193601613",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/193601613"
+                },
+                {
+                  "id": "615685399",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/615685399"
+                },
+                {
+                  "id": "1105739288",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/1105739288"
+                },
+                {
+                  "id": "1484561164",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/1484561164"
+                },
+                {
+                  "id": "1810930359",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/1810930359"
+                },
+                {
+                  "id": "1440945197",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/1440945197"
+                },
+                {
+                  "id": "1072833433",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/1072833433"
+                },
+                {
+                  "id": "1689249354",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/1689249354"
+                },
+                {
+                  "id": "616727817",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/616727817"
+                },
+                {
+                  "id": "370276901",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/370276901"
+                },
+                {
+                  "id": "1721028742",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/1721028742"
+                },
+                {
+                  "id": "1747358372",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/1747358372"
+                },
+                {
+                  "id": "1098327195",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/1098327195"
+                },
+                {
+                  "id": "353075822",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/353075822"
+                },
+                {
+                  "id": "1765231186",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/1765231186"
+                },
+                {
+                  "id": "303186157",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/303186157"
+                },
+                {
+                  "id": "251455752",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/251455752"
+                },
+                {
+                  "id": "722356241",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/722356241"
+                },
+                {
+                  "id": "1475310989",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/1475310989"
+                },
+                {
+                  "id": "1801506954",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/1801506954"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "id": "61232",
+          "type": "artists",
+          "href": "/v1/catalog/us/artists/61232",
+          "attributes": {
+            "artwork": {
+              "bgColor": "b1ab93",
+              "height": 500,
+              "textColor1": "230d05",
+              "textColor2": "3a1810",
+              "textColor3": "402d21",
+              "textColor4": "52352a",
+              "url": "https://is1-ssl.mzstatic.com/image/thumb/Features115/v4/83/07/fd/8307fdda-d77d-a360-d06a-da0f80b233b4/pr_source.png/{w}x{h}bb.jpg",
+              "width": 500
+            },
+            "genreNames": [
+              "Rock"
+            ],
+            "name": "Jimmy Buffett",
+            "url": "https://music.apple.com/us/artist/jimmy-buffett/61232"
+          },
+          "relationships": {
+            "albums": {
+              "href": "/v1/catalog/us/artists/61232/albums",
+              "next": "/v1/catalog/us/artists/61232/albums?offset=25",
+              "data": [
+                {
+                  "id": "1440673653",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/1440673653"
+                },
+                {
+                  "id": "1440846619",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/1440846619"
+                },
+                {
+                  "id": "1751417478",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/1751417478"
+                },
+                {
+                  "id": "1440767919",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/1440767919"
+                },
+                {
+                  "id": "1505908908",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/1505908908"
+                },
+                {
+                  "id": "1702082874",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/1702082874"
+                },
+                {
+                  "id": "1440801130",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/1440801130"
+                },
+                {
+                  "id": "1527626912",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/1527626912"
+                },
+                {
+                  "id": "1734298026",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/1734298026"
+                },
+                {
+                  "id": "4284960",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/4284960"
+                },
+                {
+                  "id": "1440774323",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/1440774323"
+                },
+                {
+                  "id": "1751417883",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/1751417883"
+                },
+                {
+                  "id": "1751417849",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/1751417849"
+                },
+                {
+                  "id": "551486190",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/551486190"
+                },
+                {
+                  "id": "1440744357",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/1440744357"
+                },
+                {
+                  "id": "192127158",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/192127158"
+                },
+                {
+                  "id": "1739685134",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/1739685134"
+                },
+                {
+                  "id": "1734312569",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/1734312569"
+                },
+                {
+                  "id": "1536934985",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/1536934985"
+                },
+                {
+                  "id": "1440759246",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/1440759246"
+                },
+                {
+                  "id": "675308359",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/675308359"
+                },
+                {
+                  "id": "1739685636",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/1739685636"
+                },
+                {
+                  "id": "371606585",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/371606585"
+                },
+                {
+                  "id": "91794059",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/91794059"
+                },
+                {
+                  "id": "1739685891",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/1739685891"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "id": "147559",
+          "type": "artists",
+          "href": "/v1/catalog/us/artists/147559",
+          "attributes": {
+            "artwork": {
+              "bgColor": "999999",
+              "height": 4123,
+              "textColor1": "080808",
+              "textColor2": "111111",
+              "textColor3": "252525",
+              "textColor4": "2d2d2d",
+              "url": "https://is1-ssl.mzstatic.com/image/thumb/AMCArtistImages211/v4/aa/e3/2c/aae32ca2-baa3-0975-fc6a-99d8161710ea/ami-identity-ad30b1038459e9b90e3987b32156e99d-2025-01-06T22-37-58.182Z_cropped.png/{w}x{h}bb.jpg",
+              "width": 4123
+            },
+            "genreNames": [
+              "Rock"
+            ],
+            "name": "The Goo Goo Dolls",
+            "url": "https://music.apple.com/us/artist/the-goo-goo-dolls/147559"
+          },
+          "relationships": {
+            "albums": {
+              "href": "/v1/catalog/us/artists/147559/albums",
+              "next": "/v1/catalog/us/artists/147559/albums?offset=25",
+              "data": [
+                {
+                  "id": "267536485",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/267536485"
+                },
+                {
+                  "id": "1109658139",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/1109658139"
+                },
+                {
+                  "id": "1094892099",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/1094892099"
+                },
+                {
+                  "id": "1109657586",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/1109657586"
+                },
+                {
+                  "id": "1109656527",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/1109656527"
+                },
+                {
+                  "id": "1109654679",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/1109654679"
+                },
+                {
+                  "id": "1035094184",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/1035094184"
+                },
+                {
+                  "id": "1470922018",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/1470922018"
+                },
+                {
+                  "id": "1109656825",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/1109656825"
+                },
+                {
+                  "id": "1631237774",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/1631237774"
+                },
+                {
+                  "id": "603231374",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/603231374"
+                },
+                {
+                  "id": "603230941",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/603230941"
+                },
+                {
+                  "id": "1690882727",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/1690882727"
+                },
+                {
+                  "id": "1695220587",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/1695220587"
+                },
+                {
+                  "id": "1231994135",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/1231994135"
+                },
+                {
+                  "id": "1831385709",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/1831385709"
+                },
+                {
+                  "id": "1684434065",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/1684434065"
+                },
+                {
+                  "id": "1518248227",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/1518248227"
+                },
+                {
+                  "id": "1821327445",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/1821327445"
+                },
+                {
+                  "id": "1109657656",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/1109657656"
+                },
+                {
+                  "id": "1828409537",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/1828409537"
+                },
+                {
+                  "id": "387670605",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/387670605"
+                },
+                {
+                  "id": "1531721439",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/1531721439"
+                },
+                {
+                  "id": "1425875728",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/1425875728"
+                },
+                {
+                  "id": "1566419015",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/1566419015"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "id": "457871289",
+          "type": "artists",
+          "href": "/v1/catalog/us/artists/457871289",
+          "attributes": {
+            "artwork": {
+              "bgColor": "cd7f3c",
+              "height": 1493,
+              "textColor1": "070301",
+              "textColor2": "090300",
+              "textColor3": "2f1c0c",
+              "textColor4": "301c0c",
+              "url": "https://is1-ssl.mzstatic.com/image/thumb/AMCArtistImages221/v4/90/ba/47/90ba4768-f2c7-5f13-9490-307c5fdb269d/ami-identity-36c67c6fcccee29cc61346e80a281eab-2025-10-09T21-28-10.317Z_cropped.png/{w}x{h}bb.jpg",
+              "width": 1493
+            },
+            "genreNames": [
+              "Christian"
+            ],
+            "name": "for KING & COUNTRY",
+            "url": "https://music.apple.com/us/artist/for-king-country/457871289"
+          },
+          "relationships": {
+            "albums": {
+              "href": "/v1/catalog/us/artists/457871289/albums",
+              "next": "/v1/catalog/us/artists/457871289/albums?offset=25",
+              "data": [
+                {
+                  "id": "1398353335",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/1398353335"
+                },
+                {
+                  "id": "1219039811",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/1219039811"
+                },
+                {
+                  "id": "1509758720",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/1509758720"
+                },
+                {
+                  "id": "1475311061",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/1475311061"
+                },
+                {
+                  "id": "1586069657",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/1586069657"
+                },
+                {
+                  "id": "1466415444",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/1466415444"
+                },
+                {
+                  "id": "1602835204",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/1602835204"
+                },
+                {
+                  "id": "1531230210",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/1531230210"
+                },
+                {
+                  "id": "1640673724",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/1640673724"
+                },
+                {
+                  "id": "1582937192",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/1582937192"
+                },
+                {
+                  "id": "1731226603",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/1731226603"
+                },
+                {
+                  "id": "1290314113",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/1290314113"
+                },
+                {
+                  "id": "1442821776",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/1442821776"
+                },
+                {
+                  "id": "1163435935",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/1163435935"
+                },
+                {
+                  "id": "1834586712",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/1834586712"
+                },
+                {
+                  "id": "1731870850",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/1731870850"
+                },
+                {
+                  "id": "1685994195",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/1685994195"
+                },
+                {
+                  "id": "1722354465",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/1722354465"
+                },
+                {
+                  "id": "1174541314",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/1174541314"
+                },
+                {
+                  "id": "1478039571",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/1478039571"
+                },
+                {
+                  "id": "1163089776",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/1163089776"
+                },
+                {
+                  "id": "1549766730",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/1549766730"
+                },
+                {
+                  "id": "1696630298",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/1696630298"
+                },
+                {
+                  "id": "1631458417",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/1631458417"
+                },
+                {
+                  "id": "1553308273",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/1553308273"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "id": "59300023",
+          "type": "artists",
+          "href": "/v1/catalog/us/artists/59300023",
+          "attributes": {
+            "artwork": {
+              "bgColor": "090813",
+              "height": 1350,
+              "textColor1": "fee5cd",
+              "textColor2": "e8bfa3",
+              "textColor3": "cdb9a8",
+              "textColor4": "bb9a86",
+              "url": "https://is1-ssl.mzstatic.com/image/thumb/Features125/v4/73/5a/f7/735af7c3-1464-42b6-8c6f-10ae012003d4/mzl.dixrjcns.jpg/{w}x{h}bb.jpg",
+              "width": 1350
+            },
+            "genreNames": [
+              "Rock"
+            ],
+            "name": "Kenny Loggins",
+            "url": "https://music.apple.com/us/artist/kenny-loggins/59300023"
+          },
+          "relationships": {
+            "albums": {
+              "href": "/v1/catalog/us/artists/59300023/albums",
+              "next": "/v1/catalog/us/artists/59300023/albums?offset=25",
+              "data": [
+                {
+                  "id": "387193895",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/387193895"
+                },
+                {
+                  "id": "1164757097",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/1164757097"
+                },
+                {
+                  "id": "306597347",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/306597347"
+                },
+                {
+                  "id": "1058077856",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/1058077856"
+                },
+                {
+                  "id": "209743140",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/209743140"
+                },
+                {
+                  "id": "405600175",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/405600175"
+                },
+                {
+                  "id": "307311148",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/307311148"
+                },
+                {
+                  "id": "186228793",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/186228793"
+                },
+                {
+                  "id": "158407801",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/158407801"
+                },
+                {
+                  "id": "197881828",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/197881828"
+                },
+                {
+                  "id": "202777595",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/202777595"
+                },
+                {
+                  "id": "192661723",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/192661723"
+                },
+                {
+                  "id": "170311806",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/170311806"
+                },
+                {
+                  "id": "356893389",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/356893389"
+                },
+                {
+                  "id": "192665882",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/192665882"
+                },
+                {
+                  "id": "191002248",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/191002248"
+                },
+                {
+                  "id": "192660327",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/192660327"
+                },
+                {
+                  "id": "1847686532",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/1847686532"
+                },
+                {
+                  "id": "1847686532",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/1847686532"
+                },
+                {
+                  "id": "200005070",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/200005070"
+                },
+                {
+                  "id": "900209048",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/900209048"
+                },
+                {
+                  "id": "185797482",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/185797482"
+                },
+                {
+                  "id": "379309476",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/379309476"
+                },
+                {
+                  "id": "198278390",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/198278390"
+                },
+                {
+                  "id": "1549932186",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/1549932186"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "id": "170987",
+          "type": "artists",
+          "href": "/v1/catalog/us/artists/170987",
+          "attributes": {
+            "artwork": {
+              "bgColor": "120d06",
+              "height": 3840,
+              "textColor1": "dce2e2",
+              "textColor2": "efb67f",
+              "textColor3": "b4b7b6",
+              "textColor4": "c29467",
+              "url": "https://is1-ssl.mzstatic.com/image/thumb/Features115/v4/29/6e/a6/296ea6ed-b778-7cfb-8459-e1026a6d95de/mza_1978798653985745647.png/{w}x{h}bb.jpg",
+              "width": 3840
+            },
+            "genreNames": [
+              "Country"
+            ],
+            "name": "Merle Haggard",
+            "url": "https://music.apple.com/us/artist/merle-haggard/170987"
+          },
+          "relationships": {
+            "albums": {
+              "href": "/v1/catalog/us/artists/170987/albums",
+              "next": "/v1/catalog/us/artists/170987/albums?offset=25",
+              "data": [
+                {
+                  "id": "1005186046",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/1005186046"
+                },
+                {
+                  "id": "724522308",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/724522308"
+                },
+                {
+                  "id": "193539196",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/193539196"
+                },
+                {
+                  "id": "984049173",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/984049173"
+                },
+                {
+                  "id": "1004069802",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/1004069802"
+                },
+                {
+                  "id": "192785523",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/192785523"
+                },
+                {
+                  "id": "1443800456",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/1443800456"
+                },
+                {
+                  "id": "1440727953",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/1440727953"
+                },
+                {
+                  "id": "1007492428",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/1007492428"
+                },
+                {
+                  "id": "716720126",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/716720126"
+                },
+                {
+                  "id": "1443394675",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/1443394675"
+                },
+                {
+                  "id": "277641030",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/277641030"
+                },
+                {
+                  "id": "1423341937",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/1423341937"
+                },
+                {
+                  "id": "278939726",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/278939726"
+                },
+                {
+                  "id": "1440945838",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/1440945838"
+                },
+                {
+                  "id": "1471441151",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/1471441151"
+                },
+                {
+                  "id": "1444014519",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/1444014519"
+                },
+                {
+                  "id": "724314841",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/724314841"
+                },
+                {
+                  "id": "1444115313",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/1444115313"
+                },
+                {
+                  "id": "1740858960",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/1740858960"
+                },
+                {
+                  "id": "713711570",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/713711570"
+                },
+                {
+                  "id": "1013734646",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/1013734646"
+                },
+                {
+                  "id": "723901434",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/723901434"
+                },
+                {
+                  "id": "192744059",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/192744059"
+                },
+                {
+                  "id": "279714669",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/279714669"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "id": "200498",
+          "type": "artists",
+          "href": "/v1/catalog/us/artists/200498",
+          "attributes": {
+            "artwork": {
+              "bgColor": "3f3e3a",
+              "height": 2400,
+              "textColor1": "e9e6de",
+              "textColor2": "dfdcd3",
+              "textColor3": "c7c4bd",
+              "textColor4": "bfbcb5",
+              "url": "https://is1-ssl.mzstatic.com/image/thumb/Features115/v4/4b/37/b2/4b37b28f-7780-ad6e-9d98-f9cfeebf95f1/mzl.faedfpir.jpg/{w}x{h}bb.jpg",
+              "width": 2400
+            },
+            "genreNames": [
+              "Country"
+            ],
+            "name": "Kenny Rogers",
+            "url": "https://music.apple.com/us/artist/kenny-rogers/200498"
+          },
+          "relationships": {
+            "albums": {
+              "href": "/v1/catalog/us/artists/200498/albums",
+              "next": "/v1/catalog/us/artists/200498/albums?offset=25",
+              "data": [
+                {
+                  "id": "258611459",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/258611459"
+                },
+                {
+                  "id": "1435550033",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/1435550033"
+                },
+                {
+                  "id": "1440840359",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/1440840359"
+                },
+                {
+                  "id": "724414578",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/724414578"
+                },
+                {
+                  "id": "1435547978",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/1435547978"
+                },
+                {
+                  "id": "1504992446",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/1504992446"
+                },
+                {
+                  "id": "714959902",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/714959902"
+                },
+                {
+                  "id": "199090095",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/199090095"
+                },
+                {
+                  "id": "153556774",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/153556774"
+                },
+                {
+                  "id": "1599768742",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/1599768742"
+                },
+                {
+                  "id": "1747363871",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/1747363871"
+                },
+                {
+                  "id": "1443292623",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/1443292623"
+                },
+                {
+                  "id": "298889180",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/298889180"
+                },
+                {
+                  "id": "1675074212",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/1675074212"
+                },
+                {
+                  "id": "1714688758",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/1714688758"
+                },
+                {
+                  "id": "358018171",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/358018171"
+                },
+                {
+                  "id": "1496051826",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/1496051826"
+                },
+                {
+                  "id": "1847686532",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/1847686532"
+                },
+                {
+                  "id": "1847686532",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/1847686532"
+                },
+                {
+                  "id": "1797863425",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/1797863425"
+                },
+                {
+                  "id": "1677825997",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/1677825997"
+                },
+                {
+                  "id": "723998776",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/723998776"
+                },
+                {
+                  "id": "696298311",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/696298311"
+                },
+                {
+                  "id": "1376820697",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/1376820697"
+                },
+                {
+                  "id": "560201771",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/560201771"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "id": "38884",
+          "type": "artists",
+          "href": "/v1/catalog/us/artists/38884",
+          "attributes": {
+            "artwork": {
+              "bgColor": "ebebeb",
+              "height": 1400,
+              "textColor1": "121315",
+              "textColor2": "28282a",
+              "textColor3": "3d3e3f",
+              "textColor4": "4f4f51",
+              "url": "https://is1-ssl.mzstatic.com/image/thumb/Features125/v4/44/d7/a1/44d7a1f8-7566-81f8-f1ed-1b82f12da4c0/mzl.foocxuek.jpg/{w}x{h}bb.jpg",
+              "width": 1400
+            },
+            "genreNames": [
+              "R&B/Soul"
+            ],
+            "name": "New Edition",
+            "url": "https://music.apple.com/us/artist/new-edition/38884"
+          },
+          "relationships": {
+            "albums": {
+              "href": "/v1/catalog/us/artists/38884/albums",
+              "data": [
+                {
+                  "id": "1440651289",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/1440651289"
+                },
+                {
+                  "id": "1505374809",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/1505374809"
+                },
+                {
+                  "id": "1440796944",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/1440796944"
+                },
+                {
+                  "id": "1440769815",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/1440769815"
+                },
+                {
+                  "id": "1440776082",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/1440776082"
+                },
+                {
+                  "id": "3242317",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/3242317"
+                },
+                {
+                  "id": "1453157561",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/1453157561"
+                },
+                {
+                  "id": "80971316",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/80971316"
+                },
+                {
+                  "id": "1425190863",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/1425190863"
+                },
+                {
+                  "id": "1443914473",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/1443914473"
+                },
+                {
+                  "id": "1555613582",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/1555613582"
+                },
+                {
+                  "id": "1440829616",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/1440829616"
+                },
+                {
+                  "id": "1792683364",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/1792683364"
+                },
+                {
+                  "id": "1444138060",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/1444138060"
+                },
+                {
+                  "id": "1434911994",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/1434911994"
+                },
+                {
+                  "id": "1777486596",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/1777486596"
+                },
+                {
+                  "id": "1544016224",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/1544016224"
+                },
+                {
+                  "id": "267770521",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/267770521"
+                },
+                {
+                  "id": "160945836",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/160945836"
+                },
+                {
+                  "id": "1445292633",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/1445292633"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "id": "259459",
+          "type": "artists",
+          "href": "/v1/catalog/us/artists/259459",
+          "attributes": {
+            "artwork": {
+              "bgColor": "fffeff",
+              "height": 874,
+              "textColor1": "050405",
+              "textColor2": "111011",
+              "textColor3": "373637",
+              "textColor4": "414041",
+              "url": "https://is1-ssl.mzstatic.com/image/thumb/Features125/v4/e2/58/16/e25816b4-3d28-81b7-5e31-307378f075da/pr_source.png/{w}x{h}bb.jpg",
+              "width": 874
+            },
+            "genreNames": [
+              "R&B/Soul"
+            ],
+            "name": "Donny Hathaway",
+            "url": "https://music.apple.com/us/artist/donny-hathaway/259459"
+          },
+          "relationships": {
+            "albums": {
+              "href": "/v1/catalog/us/artists/259459/albums",
+              "data": [
+                {
+                  "id": "217502933",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/217502933"
+                },
+                {
+                  "id": "281714087",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/281714087"
+                },
+                {
+                  "id": "537033638",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/537033638"
+                },
+                {
+                  "id": "120156856",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/120156856"
+                },
+                {
+                  "id": "1488689027",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/1488689027"
+                },
+                {
+                  "id": "252137482",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/252137482"
+                },
+                {
+                  "id": "731746642",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/731746642"
+                },
+                {
+                  "id": "1018383581",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/1018383581"
+                },
+                {
+                  "id": "486399800",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/486399800"
+                },
+                {
+                  "id": "120157519",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/120157519"
+                },
+                {
+                  "id": "537035374",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/537035374"
+                },
+                {
+                  "id": "1647163929",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/1647163929"
+                },
+                {
+                  "id": "1186724865",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/1186724865"
+                },
+                {
+                  "id": "1552481333",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/1552481333"
+                },
+                {
+                  "id": "894522523",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/894522523"
+                },
+                {
+                  "id": "739865116",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/739865116"
+                },
+                {
+                  "id": "1594205203",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/1594205203"
+                },
+                {
+                  "id": "1715378904",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/1715378904"
+                },
+                {
+                  "id": "1748216561",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/1748216561"
+                },
+                {
+                  "id": "360728289",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/360728289"
+                },
+                {
+                  "id": "1875205382",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/1875205382"
+                },
+                {
+                  "id": "1872203631",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/1872203631"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "id": "487883",
+          "type": "artists",
+          "href": "/v1/catalog/us/artists/487883",
+          "attributes": {
+            "artwork": {
+              "bgColor": "f7f8f8",
+              "height": 3840,
+              "textColor1": "000013",
+              "textColor2": "291e2d",
+              "textColor3": "323141",
+              "textColor4": "524a56",
+              "url": "https://is1-ssl.mzstatic.com/image/thumb/Features125/v4/39/51/0c/39510cd0-3fab-a0fe-462c-58ac92214fde/mza_3666921924894062655.png/{w}x{h}bb.jpg",
+              "width": 3840
+            },
+            "genreNames": [
+              "Rock"
+            ],
+            "name": "Heart",
+            "url": "https://music.apple.com/us/artist/heart/487883"
+          },
+          "relationships": {
+            "albums": {
+              "href": "/v1/catalog/us/artists/487883/albums",
+              "next": "/v1/catalog/us/artists/487883/albums?offset=25",
+              "data": [
+                {
+                  "id": "725786124",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/725786124"
+                },
+                {
+                  "id": "1440830899",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/1440830899"
+                },
+                {
+                  "id": "592650950",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/592650950"
+                },
+                {
+                  "id": "1441162196",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/1441162196"
+                },
+                {
+                  "id": "193520066",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/193520066"
+                },
+                {
+                  "id": "724077331",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/724077331"
+                },
+                {
+                  "id": "192690716",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/192690716"
+                },
+                {
+                  "id": "157276053",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/157276053"
+                },
+                {
+                  "id": "724659415",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/724659415"
+                },
+                {
+                  "id": "192483988",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/192483988"
+                },
+                {
+                  "id": "1437919839",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/1437919839"
+                },
+                {
+                  "id": "715599366",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/715599366"
+                },
+                {
+                  "id": "724316494",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/724316494"
+                },
+                {
+                  "id": "724937115",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/724937115"
+                },
+                {
+                  "id": "1440938700",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/1440938700"
+                },
+                {
+                  "id": "775756961",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/775756961"
+                },
+                {
+                  "id": "743409852",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/743409852"
+                },
+                {
+                  "id": "192664307",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/192664307"
+                },
+                {
+                  "id": "1443532662",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/1443532662"
+                },
+                {
+                  "id": "743208796",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/743208796"
+                },
+                {
+                  "id": "217353849",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/217353849"
+                },
+                {
+                  "id": "526394865",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/526394865"
+                },
+                {
+                  "id": "731834030",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/731834030"
+                },
+                {
+                  "id": "925711015",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/925711015"
+                },
+                {
+                  "id": "1852407113",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/1852407113"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "id": "1130621",
+          "type": "artists",
+          "href": "/v1/catalog/us/artists/1130621",
+          "attributes": {
+            "artwork": {
+              "bgColor": "111111",
+              "height": 578,
+              "textColor1": "cdbaaa",
+              "textColor2": "e7b197",
+              "textColor3": "a7988c",
+              "textColor4": "bc917c",
+              "url": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/c7/ed/20/c7ed2018-b792-1c72-ea1f-c11fd81a66ff/pr_source.png/{w}x{h}bb.jpg",
+              "width": 578
+            },
+            "genreNames": [
+              "Pop"
+            ],
+            "name": "Anne Murray",
+            "url": "https://music.apple.com/us/artist/anne-murray/1130621"
+          },
+          "relationships": {
+            "albums": {
+              "href": "/v1/catalog/us/artists/1130621/albums",
+              "next": "/v1/catalog/us/artists/1130621/albums?offset=25",
+              "data": [
+                {
+                  "id": "714768229",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/714768229"
+                },
+                {
+                  "id": "1440877760",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/1440877760"
+                },
+                {
+                  "id": "716436338",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/716436338"
+                },
+                {
+                  "id": "714707831",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/714707831"
+                },
+                {
+                  "id": "724539930",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/724539930"
+                },
+                {
+                  "id": "1440837563",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/1440837563"
+                },
+                {
+                  "id": "721251241",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/721251241"
+                },
+                {
+                  "id": "1517615518",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/1517615518"
+                },
+                {
+                  "id": "714494753",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/714494753"
+                },
+                {
+                  "id": "714694346",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/714694346"
+                },
+                {
+                  "id": "1535241601",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/1535241601"
+                },
+                {
+                  "id": "1443490705",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/1443490705"
+                },
+                {
+                  "id": "714342235",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/714342235"
+                },
+                {
+                  "id": "714953958",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/714953958"
+                },
+                {
+                  "id": "714370395",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/714370395"
+                },
+                {
+                  "id": "1816218430",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/1816218430"
+                },
+                {
+                  "id": "714192777",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/714192777"
+                },
+                {
+                  "id": "714907976",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/714907976"
+                },
+                {
+                  "id": "714484553",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/714484553"
+                },
+                {
+                  "id": "714733610",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/714733610"
+                },
+                {
+                  "id": "714928988",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/714928988"
+                },
+                {
+                  "id": "714764408",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/714764408"
+                },
+                {
+                  "id": "726172712",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/726172712"
+                },
+                {
+                  "id": "714771716",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/714771716"
+                },
+                {
+                  "id": "714968637",
+                  "type": "albums",
+                  "href": "/v1/catalog/us/albums/714968637"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    }
+  },
+  "meta": {
+    "results": {
+      "order": [
+        "albums",
+        "artists"
+      ],
+      "rawOrder": [
+        "albums",
+        "artists"
+      ]
+    }
+  }
+}

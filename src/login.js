@@ -71,7 +71,7 @@ const LoginScreen = () => {
         return (
             <View style={[styles.container, { justifyContent: 'center', alignItems: 'center' }]}>
                 <Animated.Image
-                    source={require('../assets/TOPO_logo_Full.jpg')}
+                    source={require('../assets/fixed-icon.png')}
                     style={{
                         width: '60%',
                         height: '30%',
@@ -111,16 +111,15 @@ const LoginScreen = () => {
                     {/* 1. Top Logo Section */}
                     <View style={styles.logoContainer}>
                         <Image
-                            source={require('../assets/TOPO_logo_Full.jpg')}
+                            source={require('../assets/fixed-icon.png')}
                             style={styles.logoImage}
                         />
                     </View>
 
                     {/* 2. Form Section */}
                     <View style={styles.formContainer}>
-                        <Text style={styles.mainSlogan}>The Only Picture Opinion</Text>
-                        <Text style={styles.tagline}>Rate | Share | Match</Text>
-                        <Text style={styles.subTagline}>& Eat Pizza! 🍕</Text>
+                        <Text style={styles.tagline}>Rate | Share | Jam</Text>
+                        <Text style={styles.subTagline}>& Eat Pizza! 🎧</Text>
 
                         <TextInput
                             style={styles.input}
@@ -159,18 +158,19 @@ const LoginScreen = () => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#21232f', // Deep dark blue/black essentially
+        backgroundColor: '#0f0f11',
     },
     logoContainer: {
-        height: '40%', // Increased size
+        height: '40%',
         justifyContent: 'center',
         alignItems: 'center',
-        paddingTop: 20,
+        // Removed paddingTop to allow true centering
     },
     logoImage: {
-        width: '100%', // Maximize width
-        height: '100%', // Maximize height
+        width: '60%',
+        height: '100%',
         resizeMode: 'contain',
+        marginLeft: 20, // Visual correction to center the logo
     },
     formContainer: {
         flex: 1,
@@ -191,7 +191,7 @@ const styles = StyleSheet.create({
     tagline: {
         fontSize: 22,
         fontWeight: 'bold',
-        color: '#ff8c00', // Orange brand color
+        color: '#e9af45', // Gold brand color
         textAlign: 'center',
         fontFamily: 'Trebuchet MS',
         marginBottom: 5,
@@ -215,12 +215,12 @@ const styles = StyleSheet.create({
         borderColor: '#333',
     },
     loginButton: {
-        backgroundColor: '#ff8c00',
+        backgroundColor: '#e9af45',
         borderRadius: 12,
         paddingVertical: 15,
         alignItems: 'center',
         marginTop: 10,
-        shadowColor: '#ff8c00',
+        shadowColor: '#e9af45',
         shadowOffset: { width: 0, height: 4 },
         shadowOpacity: 0.3,
         shadowRadius: 5,
@@ -240,7 +240,7 @@ const styles = StyleSheet.create({
         fontSize: 14,
     },
     signupTextBold: {
-        color: '#ff8c00',
+        color: '#e9af45',
         fontWeight: 'bold',
     },
 });

@@ -16,40 +16,56 @@ service cloud.firestore {
     }
 
     // --- USERS COLLECTION ---
-    // Anyone authenticated can read user profiles (for social features)
-    // Only the owner can write/update their own profile
     match /users/{userId} {
       allow read: if isAuthenticated();
-      allow write: if isOwner(userId);
+      // Allow update for following/unfollowing (modifies 'followers' on target)
+      // For stricter security in future: validate only 'followers' field changes or use Cloud Functions.
+      allow update: if isAuthenticated();
+      allow create: if isAuthenticated(); // For first login user creation
 
       // Subcollection: Awards Ballots
-      // Only the user can read/write their own ballots
       match /awards_ballots/{eventId} {
         allow read, write: if isOwner(userId);
       }
+
+      // Subcollection: Album Ratings (Private User Data)
+      match /album_ratings/{ratingId} {
+        allow read: if isAuthenticated();
+        allow write: if isOwner(userId);
+      }
     }
 
-    // --- POSTS COLLECTION (Message Board) ---
-    // Anyone authenticated can read posts
-    // Anyone authenticated can create a post
-    // Only the author can update (e.g. likes/comments count often updated by others in NoSQL, but let's secure standard fields) or delete
-    // OR: We allow update if user ID matches OR if it's a 'like' operation (relaxed for MVP)
-    match /posts/{postId} {
+    // --- CURATIONS (The Corner) ---
+    match /curations/{curationId} {
       allow read: if isAuthenticated();
       allow create: if isAuthenticated() && request.resource.data.userId == request.auth.uid;
-      
-      // Allow update if author OR if partial update (likes) - Simplified for MVP:
-      // In a strict app, we'd validate 'likes' field increments specifically.
-      // For now, allow authenticated updates to support likes/comments from others.
-      allow update: if isAuthenticated(); 
-      
+      // Allow update for 'likes' and 'likedBy' by others
+      allow update: if isAuthenticated();
       allow delete: if isAuthenticated() && resource.data.userId == request.auth.uid;
     }
 
-    // --- CONNECTIONS COLLECTION (Matched Movie Game) ---
-    // Read: If user is in the participants list
-    // Create: Authenticated users can create
-    // Update: If user is in participants list (voting, matching status)
+    // --- ALBUMS (Global Ratings & Stats) ---
+    match /albums/{albumId} {
+      allow read: if isAuthenticated();
+      // Allow write to update global stats
+      allow write: if isAuthenticated();
+      
+      // Subcollection: Public User Ratings (for aggregation)
+      match /user_ratings/{ratingId} {
+         allow read: if isAuthenticated();
+         allow write: if isAuthenticated() && request.auth.uid == ratingId;
+      }
+    }
+
+    // --- POSTS COLLECTION (Legacy / General) ---
+    match /posts/{postId} {
+      allow read: if isAuthenticated();
+      allow create: if isAuthenticated() && request.resource.data.userId == request.auth.uid;
+      allow update: if isAuthenticated(); 
+      allow delete: if isAuthenticated() && resource.data.userId == request.auth.uid;
+    }
+
+    // --- CONNECTIONS COLLECTION (Matched Movie/Music Game) ---
     match /connections/{connectionId} {
       allow create: if isAuthenticated();
       allow read, update: if isAuthenticated() && 
@@ -57,9 +73,6 @@ service cloud.firestore {
     }
 
     // --- AWARD EVENTS COLLECTION ---
-    // Read: Authenticated users (Awards Hub)
-    // Write: Authenticated users (Admin features currently client-side active). 
-    // TODO: In production, switch to Admin SDK or Custom Claims for 'admin' role.
     match /award_events/{eventId} {
       allow read, write: if isAuthenticated();
     }

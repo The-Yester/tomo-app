@@ -1,30 +1,33 @@
-import React, { useContext, useState, useEffect, useRef } from 'react';
-import { View, Text, TextInput, Button, FlatList, StyleSheet, TouchableOpacity, SafeAreaView, Platform, StatusBar, KeyboardAvoidingView } from 'react-native';
-import { MoviesContext, OVERALL_RATINGS_LIST_ID, OVERALL_RATINGS_LIST_NAME } from '../context/MoviesContext';
+import React, { useContext, useState, useEffect, useMemo } from 'react';
+import { View, Text, TextInput, Button, FlatList, StyleSheet, TouchableOpacity, SafeAreaView, Platform, StatusBar, KeyboardAvoidingView, Modal } from 'react-native';
+import { MusicContext, OVERALL_RATINGS_LIST_ID, OVERALL_RATINGS_LIST_NAME } from '../context/MusicContext';
 import { v4 as uuidv4 } from 'uuid';
 import Swipeable from 'react-native-gesture-handler/Swipeable';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
-// Locked lists that exist in user's movieLists
-const USER_LOCKED_LISTS = ["Favorites", "Watch Later"];
+// Locked lists that exist in user's musicLists
+const USER_LOCKED_LISTS = ["Favorites", "Listen Later"];
 
 const ListScreen = ({ navigation }) => {
-    const { movieLists, addList, deleteList, addMovieToList, overallRatedMovies } = useContext(MoviesContext);
+    const { musicLists, addList, deleteList, overallRatedAlbums } = useContext(MusicContext);
     const [newListName, setNewListName] = useState('');
+    const [sortBy, setSortBy] = useState('A-Z'); // 'A-Z' or 'Z-A'
+    const [isSortModalVisible, setSortModalVisible] = useState(false);
 
     useEffect(() => {
-        // Ensure user locked lists exist (Favorites, Watch Later)
+        // Ensure user locked lists exist (Favorites, Listen Later)
         USER_LOCKED_LISTS.forEach(listName => {
-            const exists = movieLists.some(list => list.name === listName);
+            const exists = musicLists.some(list => list.name === listName);
             if (!exists) {
                 const newList = {
                     id: uuidv4(),
                     name: listName,
-                    movies: [],
+                    albums: [],
                 };
                 addList(newList);
             }
         });
-    }, [movieLists, addList]);
+    }, [musicLists, addList]);
 
     const handleAddList = () => {
         const trimmedName = newListName.trim();
@@ -33,7 +36,7 @@ const ListScreen = ({ navigation }) => {
             const newList = {
                 id: uuidv4(),
                 name: trimmedName,
-                movies: [],
+                albums: [],
             };
             addList(newList);
             setNewListName('');
@@ -48,7 +51,7 @@ const ListScreen = ({ navigation }) => {
     };
 
     const rightSwipeActions = (item) => {
-        // Prevent deletion of Favorites, Watch Later, and Overall Ratings
+        // Prevent deletion of Favorites, Listen Later, and Overall Ratings
         if (!USER_LOCKED_LISTS.includes(item.name) && item.name !== OVERALL_RATINGS_LIST_NAME) {
             return (
                 <TouchableOpacity style={styles.deleteButton} onPress={() => deleteList(item.id)}>
@@ -59,23 +62,60 @@ const ListScreen = ({ navigation }) => {
         return null;
     };
 
-    // Construct the full list to display
-    const allLists = [
-        // 1. Special "Overall Ratings" list (Always first or specifically placed)
-        {
-            id: OVERALL_RATINGS_LIST_ID,
-            name: OVERALL_RATINGS_LIST_NAME,
-            movies: overallRatedMovies || []
-        },
-        // 2. User's lists (Favorites, Watch Later, Custom Lists)
-        ...movieLists.filter(
-            (list, index, self) => index === self.findIndex(l => l.name === list.name) && list.name !== OVERALL_RATINGS_LIST_NAME // Filter out any accidental "Overall Ratings" dups in user lists
-        )
-    ];
+    // Construct the full list to display with Sorting
+    const allLists = useMemo(() => {
+        // 1. Pinned Lists
+        const pinned = [
+            {
+                id: OVERALL_RATINGS_LIST_ID,
+                name: OVERALL_RATINGS_LIST_NAME,
+                albums: overallRatedAlbums || []
+            },
+            ...musicLists.filter(list => USER_LOCKED_LISTS.includes(list.name))
+        ];
+
+        // 2. Custom Lists (everything else)
+        let custom = musicLists.filter(
+            list => !USER_LOCKED_LISTS.includes(list.name) && list.name !== OVERALL_RATINGS_LIST_NAME
+        );
+
+        // Sort Custom Lists
+        custom.sort((a, b) => {
+            if (sortBy === 'A-Z') {
+                return a.name.localeCompare(b.name);
+            } else if (sortBy === 'Z-A') {
+                return b.name.localeCompare(a.name);
+            } else if (sortBy === '0-100') {
+                // Try to extract first number
+                const numA = parseInt(a.name.match(/\d+/) || 0, 10);
+                const numB = parseInt(b.name.match(/\d+/) || 0, 10);
+                if (numA !== numB) return numA - numB;
+                return a.name.localeCompare(b.name, undefined, { numeric: true });
+            } else if (sortBy === '100-0') {
+                const numA = parseInt(a.name.match(/\d+/) || 0, 10);
+                const numB = parseInt(b.name.match(/\d+/) || 0, 10);
+                if (numA !== numB) return numB - numA;
+                return b.name.localeCompare(a.name, undefined, { numeric: true });
+            }
+            return 0;
+        });
+
+        return [...pinned, ...custom];
+    }, [musicLists, overallRatedAlbums, sortBy]);
 
     return (
         <SafeAreaView style={styles.container}>
-            <Text style={styles.title}>Your Movie Lists</Text>
+            <View style={styles.header}>
+                <Text style={styles.title}>Your Music Lists</Text>
+                <TouchableOpacity style={styles.sortButton} onPress={() => setSortModalVisible(true)}>
+                    <Icon name="sort" size={24} color="#000" />
+                </TouchableOpacity>
+            </View>
+
+            <View style={styles.subHeader}>
+                <Text style={styles.sortLabel}>Custom Lists: {sortBy}</Text>
+            </View>
+
             <KeyboardAvoidingView
                 behavior={Platform.OS === "ios" ? "padding" : "height"}
                 style={{ flex: 1 }}
@@ -83,7 +123,7 @@ const ListScreen = ({ navigation }) => {
             >
                 <FlatList
                     data={allLists}
-                    keyExtractor={(item) => item.id}
+                    keyExtractor={(item) => item.id.toString()}
                     renderItem={({ item }) => (
                         <Swipeable renderRightActions={() => rightSwipeActions(item)}>
                             <TouchableOpacity
@@ -91,7 +131,7 @@ const ListScreen = ({ navigation }) => {
                                 onPress={() => navigateToListDetails(item)}
                             >
                                 <Text style={styles.listName}>{item.name}</Text>
-                                <Text style={styles.listCount}>{item.movies ? item.movies.length : 0} movies</Text>
+                                <Text style={styles.listCount}>{item.albums ? item.albums.length : 0} albums</Text>
                             </TouchableOpacity>
                         </Swipeable>
                     )}
@@ -105,9 +145,38 @@ const ListScreen = ({ navigation }) => {
                         value={newListName}
                         onChangeText={setNewListName}
                     />
-                    <Button title="Add List" onPress={handleAddList} color="#ff8c00" />
+                    <Button title="Add List" onPress={handleAddList} color="#d4a03e" />
                 </View>
             </KeyboardAvoidingView>
+
+            <Modal
+                animationType="slide"
+                transparent={true}
+                visible={isSortModalVisible}
+                onRequestClose={() => setSortModalVisible(false)}
+            >
+                <View style={styles.modalContainer}>
+                    <View style={styles.modalContent}>
+                        <Text style={styles.modalTitle}>Sort Custom Lists</Text>
+                        {['A-Z', 'Z-A', '0-100', '100-0'].map((option) => (
+                            <TouchableOpacity
+                                key={option}
+                                style={[styles.modalOption, sortBy === option && styles.selectedOption]}
+                                onPress={() => {
+                                    setSortBy(option);
+                                    setSortModalVisible(false);
+                                }}
+                            >
+                                <Text style={[styles.modalOptionText, sortBy === option && styles.selectedOptionText]}>{option}</Text>
+                                {sortBy === option && <Icon name="check" size={16} color="#d4a03e" />}
+                            </TouchableOpacity>
+                        ))}
+                        <TouchableOpacity style={styles.closeButton} onPress={() => setSortModalVisible(false)}>
+                            <Text style={styles.closeButtonText}>Cancel</Text>
+                        </TouchableOpacity>
+                    </View>
+                </View>
+            </Modal>
         </SafeAreaView>
     );
 };
@@ -116,29 +185,51 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         padding: 16,
-        backgroundColor: '#0a0a1a',
-        paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight + 16 : 16 // Add extra 16 for standard padding
+        backgroundColor: '#F2F2F2', // Light Gray
+        paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight + 16 : 16
     },
-    title: { fontSize: 24, fontWeight: 'bold', marginBottom: 20, color: '#fff' },
+    header: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        marginBottom: 10
+    },
+    title: { fontSize: 24, fontWeight: 'bold', color: '#000', fontFamily: 'Trebuchet MS' },
+    sortButton: { padding: 5 },
+    subHeader: {
+        flexDirection: 'row',
+        justifyContent: 'flex-end',
+        marginBottom: 10
+    },
+    sortLabel: {
+        color: '#666',
+        fontSize: 12,
+        fontStyle: 'italic'
+    },
     listItem: {
         padding: 15,
-        backgroundColor: '#1a1a2e',
+        backgroundColor: '#d4a03e', // Gold Card
         marginBottom: 10,
-        borderRadius: 8,
+        borderRadius: 12,
         borderWidth: 1,
-        borderColor: '#333'
+        borderColor: '#C6A87C',
+        shadowColor: "#000",
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.1,
+        shadowRadius: 3,
+        elevation: 3,
     },
-    listName: { fontSize: 18, fontWeight: 'bold', color: '#fff' },
-    listCount: { color: '#888', marginTop: 4 },
+    listName: { fontSize: 18, fontWeight: 'bold', color: '#000' },
+    listCount: { color: '#333', marginTop: 4 },
     inputContainer: { marginTop: 20 },
     input: {
         borderWidth: 1,
-        borderColor: '#333',
+        borderColor: '#ddd',
         padding: 12,
         marginBottom: 10,
         borderRadius: 8,
-        backgroundColor: '#1a1a2e',
-        color: '#fff'
+        backgroundColor: '#FFFFFF',
+        color: '#000'
     },
     empty: { textAlign: 'center', marginTop: 20, fontStyle: 'italic', color: '#666' },
     deleteButton: {
@@ -146,16 +237,64 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         width: 80,
-        height: '84%', // Adjusted to match vertical spacing logic roughly or use borderRadius
+        height: '88%',
         marginTop: 0,
         marginBottom: 10,
-        borderRadius: 8,
+        borderRadius: 12,
         marginLeft: 10
     },
     deleteButtonText: {
         color: 'white',
         fontWeight: 'bold',
     },
+    // Modal Styles
+    modalContainer: {
+        flex: 1,
+        justifyContent: 'flex-end',
+        backgroundColor: 'rgba(0,0,0,0.5)',
+    },
+    modalContent: {
+        backgroundColor: '#FFFFFF',
+        borderTopLeftRadius: 20,
+        borderTopRightRadius: 20,
+        padding: 20,
+    },
+    modalTitle: {
+        fontSize: 20,
+        fontWeight: 'bold',
+        color: '#000',
+        marginBottom: 20,
+        textAlign: 'center'
+    },
+    modalOption: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        paddingVertical: 15,
+        borderBottomWidth: 1,
+        borderBottomColor: '#eee'
+    },
+    selectedOption: {
+        backgroundColor: '#F2F2F2',
+        borderRadius: 8,
+        paddingHorizontal: 10
+    },
+    modalOptionText: {
+        fontSize: 16,
+        color: '#333'
+    },
+    selectedOptionText: {
+        color: '#d4a03e',
+        fontWeight: 'bold'
+    },
+    closeButton: {
+        marginTop: 20,
+        alignItems: 'center',
+        padding: 15
+    },
+    closeButtonText: {
+        color: '#ff4444',
+        fontSize: 16
+    }
 });
 
 export default ListScreen;
