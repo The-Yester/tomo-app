@@ -27,7 +27,7 @@ const AwardsHubScreen = () => {
         if (event && auth.currentUser) {
             loadBallot(event.id);
             // Only calculate percentile if there are results
-            if (event.categories.some(c => c.winnerTmdbId)) {
+            if (event.categories.some(c => c.winnerMusicId)) {
                 loadPeerPerformance(event);
             } else {
                 setPercentile(null);
@@ -89,7 +89,7 @@ const AwardsHubScreen = () => {
                     const ballotData = doc.data();
                     let score = 0;
                     currentEvent.categories.forEach(cat => {
-                        if (cat.winnerTmdbId && ballotData[cat.id] === cat.winnerTmdbId) {
+                        if (cat.winnerMusicId && ballotData[cat.id] === cat.winnerMusicId) {
                             score++;
                         }
                     });
@@ -105,7 +105,7 @@ const AwardsHubScreen = () => {
             // 3. Calculate My Score
             let myScore = 0;
             currentEvent.categories.forEach(cat => {
-                if (cat.winnerTmdbId && userBallot[cat.id] === cat.winnerTmdbId) {
+                if (cat.winnerMusicId && userBallot[cat.id] === cat.winnerMusicId) {
                     myScore++;
                 }
             });
@@ -131,9 +131,9 @@ const AwardsHubScreen = () => {
         let correct = 0;
         let decided = 0;
         event.categories.forEach(cat => {
-            if (cat.winnerTmdbId) {
+            if (cat.winnerMusicId) {
                 decided++;
-                if (userBallot[cat.id] === cat.winnerTmdbId) correct++;
+                if (userBallot[cat.id] === cat.winnerMusicId) correct++;
             }
         });
 
@@ -145,7 +145,7 @@ const AwardsHubScreen = () => {
         let highestScore = -1;
 
         category.nominees.forEach(nominee => {
-            const ratingStrings = userRatings[nominee.tmdbId.toString()];
+            const ratingStrings = userRatings[nominee.musicId.toString()];
             if (ratingStrings && ratingStrings.breakdown && ratingStrings.breakdown[category.awardsRatingKey]) {
                 const score = parseFloat(ratingStrings.breakdown[category.awardsRatingKey]);
                 if (score > highestScore) {
@@ -209,11 +209,11 @@ const AwardsHubScreen = () => {
         }
 
         // Optimistic UI update
-        const newBallot = { ...userBallot, [category.id]: nominee.tmdbId };
+        const newBallot = { ...userBallot, [category.id]: nominee.musicId };
         setUserBallot(newBallot);
 
         try {
-            await saveUserPick(auth.currentUser.uid, event.id, category.id, nominee.tmdbId);
+            await saveUserPick(auth.currentUser.uid, event.id, category.id, nominee.musicId);
         } catch (e) {
             Alert.alert("Error", "Failed to save pick");
         }
@@ -229,12 +229,12 @@ const AwardsHubScreen = () => {
 
     const navigateToMovie = (nominee) => {
         const movieObj = {
-            id: nominee.tmdbId,
+            id: nominee.musicId,
             title: nominee.title || nominee.name, // Use title if available, otherwise name (risky but better than nothing)
             poster_path: nominee.poster_path,
             release_date: "" // Awards Hub might not have release date handy, but that's ok
         };
-        navigation.push('MovieDetails', { movieId: nominee.tmdbId, movie: movieObj });
+        navigation.push('MovieDetails', { movieId: nominee.musicId, movie: movieObj });
     };
 
     if (loading) {
@@ -344,7 +344,7 @@ const AwardsHubScreen = () => {
                     const myPickId = userBallot[category.id];
 
                     // Does Actual Winner exist?
-                    const actualWinnerId = category.winnerTmdbId;
+                    const actualWinnerId = category.winnerMusicId;
                     const hasWinner = !!actualWinnerId;
 
                     return (
@@ -362,15 +362,15 @@ const AwardsHubScreen = () => {
                             {/* Horizontal Scroll of Nominees */}
                             <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.nomineeScroll}>
                                 {category.nominees.map((nominee) => {
-                                    const rating = userRatings[nominee.tmdbId.toString()];
+                                    const rating = userRatings[nominee.musicId.toString()];
                                     const specificScore = rating?.breakdown?.[category.awardsRatingKey];
 
-                                    const isAnalyticalPick = analyticalPick && analyticalPick.tmdbId === nominee.tmdbId;
-                                    const isMyLockedPick = myPickId === nominee.tmdbId;
-                                    const isActualWinner = actualWinnerId === nominee.tmdbId; // Winner stored as TMDB ID or Unique? We switched to WinnerID. Check below.
+                                    const isAnalyticalPick = analyticalPick && analyticalPick.musicId === nominee.musicId;
+                                    const isMyLockedPick = myPickId === nominee.musicId;
+                                    const isActualWinner = actualWinnerId === nominee.musicId; // Winner stored as TMDB ID or Unique? We switched to WinnerID. Check below.
 
                                     // Identifier
-                                    const identifier = nominee.id || nominee.tmdbId;
+                                    const identifier = nominee.id || nominee.musicId;
 
                                     return (
                                         <TouchableOpacity
@@ -385,7 +385,7 @@ const AwardsHubScreen = () => {
                                             onLongPress={() => navigateToMovie(nominee)} // Long press to see details/rate
                                         >
                                             <Image
-                                                source={{ uri: nominee.poster_path ? `https://image.tmdb.org/t/p/w200${nominee.poster_path}` : 'https://via.placeholder.com/100' }}
+                                                source={{ uri: nominee.artworkUrl || 'https://via.placeholder.com/100' }}
                                                 style={styles.poster}
                                             />
                                             <View style={styles.nomineeInfo}>
@@ -466,7 +466,7 @@ const AwardsHubScreen = () => {
                 <View style={styles.attributionContainer}>
                     <Text style={styles.attributionText}>This feature is a fan-made prediction game.</Text>
                     <Text style={[styles.attributionText, { marginTop: 5 }]}>
-                        TOPO Movies is not affiliated with, endorsed by, or associated with the Academy of Motion Picture Arts and Sciences or any other awards organization, studio, or individual.
+                        TOMO Movies is not affiliated with, endorsed by, or associated with the Recording Academy or any other awards organization, studio, or individual.
                     </Text>
                 </View>
 

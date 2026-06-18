@@ -1,7 +1,7 @@
 {
-    "name": "topo-server",
+    "name": "tomo-server",
     "version": "1.0.0",
-    "description": "Backend proxy for TOPO app",
+    "description": "Backend API for TOMO app",
     "main": "index.js",
     "scripts": {
         "start": "node index.js",

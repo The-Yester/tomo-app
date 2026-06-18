@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { View, Text, TouchableOpacity, StyleSheet, Dimensions, Image } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { View, Text, TouchableOpacity, StyleSheet, Dimensions, Image, ScrollView } from 'react-native';
 import Slider from '@react-native-community/slider';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
@@ -15,7 +15,7 @@ const COLOR_BACKGROUND_CARD = '#FFFFFF';
 const COLOR_BACKGROUND_DISPLAY = '#F2F2F2';
 const COLOR_TEXT_PRIMARY = '#333333';
 const COLOR_TEXT_SECONDARY = '#666666';
-const COLOR_TEXT_RATING_VALUE = '#d4a03e'; // TOPO Gold
+const COLOR_TEXT_RATING_VALUE = '#d4a03e'; // TOMO Gold
 const COLOR_SLIDER_TRACK_MIN = '#d4a03e';
 const COLOR_SLIDER_TRACK_MAX = '#E0E0E0';
 const COLOR_SLIDER_THUMB = '#d4a03e';
@@ -42,8 +42,12 @@ const RATING_DESCRIPTIONS = [
     { value: 10, label: "Perfect", short: "Perfect" },
 ];
 
-const ClassicRating = ({ initialRating = 0, onSubmitRating = () => { }, onCancel, artistName, albumArtwork, isPlayed, onTogglePlayed }) => {
+const ClassicRating = ({ initialRating = 0, onSubmitRating = () => { }, onDeleteRating, onCancel, artistName, albumArtwork, isPlayed, onTogglePlayed }) => {
     const [rating, setRating] = useState(parseFloat(initialRating.toFixed(1)));
+
+    useEffect(() => {
+        setRating(parseFloat(initialRating.toFixed(1)));
+    }, [initialRating]);
 
     const getRatingLabel = (currentRating) => {
         const roundedRating = Math.floor(currentRating);
@@ -107,6 +111,8 @@ const ClassicRating = ({ initialRating = 0, onSubmitRating = () => { }, onCancel
                         <Text style={[styles.gridButtonLabel, Math.floor(rating) === desc.value && styles.gridButtonTextActive]}>{desc.label}</Text>
                     </TouchableOpacity>
                 ))}
+                {/* Invisible spacer to maintain 4-column alignment for the last row */}
+                <View style={{ width: '23%' }} />
             </View>
 
             <TouchableOpacity
@@ -115,11 +121,11 @@ const ClassicRating = ({ initialRating = 0, onSubmitRating = () => { }, onCancel
             >
                 <MaterialCommunityIcons
                     name={isPlayed ? "check-circle" : "circle-outline"}
-                    size={20}
+                    size={18}
                     color={isPlayed ? "#FFFFFF" : COLOR_CANCEL_BUTTON_TEXT}
                 />
                 <Text style={[styles.playedToggleText, isPlayed && styles.playedToggleTextActive]}>
-                    Press to Add to Recently played
+                    Press to Add to Recently Played
                 </Text>
             </TouchableOpacity>
 
@@ -133,6 +139,13 @@ const ClassicRating = ({ initialRating = 0, onSubmitRating = () => { }, onCancel
                     <Text style={styles.submitButtonText}>Submit Rating</Text>
                 </TouchableOpacity>
             </View>
+
+            {onDeleteRating && (
+                <TouchableOpacity style={styles.deleteButton} onPress={onDeleteRating}>
+                    <MaterialCommunityIcons name="trash-can-outline" size={18} color="#FF3B30" />
+                    <Text style={styles.deleteButtonText}>Remove Rating</Text>
+                </TouchableOpacity>
+            )}
         </View>
     );
 };
@@ -146,25 +159,25 @@ const styles = StyleSheet.create({
         fontSize: screenWidth * 0.06,
         fontWeight: 'bold',
         color: COLOR_TEXT_PRIMARY,
-        marginBottom: 10,
+        marginBottom: 5,
     },
     coverArt: {
-        width: screenWidth * 0.3,
-        height: screenWidth * 0.3,
+        width: screenWidth * 0.22,
+        height: screenWidth * 0.22,
         borderRadius: 10,
-        marginBottom: 15,
+        marginBottom: 8,
     },
     ratingDisplayArea: {
         backgroundColor: COLOR_BACKGROUND_DISPLAY,
-        paddingVertical: 15,
+        paddingVertical: 5,
         paddingHorizontal: 20,
         borderRadius: 10,
         alignItems: 'center',
-        marginBottom: 25,
+        marginBottom: 10,
         width: '100%',
     },
     ratingValueText: {
-        fontSize: screenWidth * 0.12,
+        fontSize: screenWidth * 0.10,
         fontWeight: 'bold',
         color: COLOR_TEXT_RATING_VALUE,
     },
@@ -177,7 +190,7 @@ const styles = StyleSheet.create({
     },
     sliderContainer: {
         width: '100%',
-        marginBottom: 25,
+        marginBottom: 10,
         alignItems: 'center',
     },
     sliderLabelsContainer: {
@@ -196,17 +209,17 @@ const styles = StyleSheet.create({
         flexWrap: 'wrap',
         justifyContent: 'space-between',
         width: '100%',
-        marginBottom: 30,
+        marginBottom: 35,
     },
     gridButton: {
         backgroundColor: COLOR_BUTTON_GRID_BG,
         width: '23%',
-        aspectRatio: 1.2,
+        aspectRatio: 1.4,
         borderRadius: 8,
         alignItems: 'center',
         justifyContent: 'center',
         padding: 5,
-        marginBottom: screenWidth * 0.02,
+        marginBottom: screenWidth * 0.015,
     },
     gridButtonActive: {
         backgroundColor: COLOR_BUTTON_GRID_BG_ACTIVE,
@@ -225,6 +238,29 @@ const styles = StyleSheet.create({
     gridButtonTextActive: {
         color: COLOR_BUTTON_GRID_TEXT_ACTIVE,
     },
+    playedToggle: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'center',
+        backgroundColor: COLOR_CANCEL_BUTTON_BG,
+        paddingVertical: 6,
+        paddingHorizontal: 15,
+        borderRadius: 25,
+        width: '100%',
+        marginBottom: 10,
+    },
+    playedToggleActive: {
+        backgroundColor: COLOR_SUBMIT_BUTTON_BG,
+    },
+    playedToggleText: {
+        color: COLOR_CANCEL_BUTTON_TEXT,
+        fontSize: screenWidth * 0.03,
+        fontWeight: 'bold',
+        marginLeft: 8,
+    },
+    playedToggleTextActive: {
+        color: '#FFFFFF',
+    },
     buttonsRow: {
         flexDirection: 'row',
         justifyContent: 'space-between',
@@ -233,27 +269,43 @@ const styles = StyleSheet.create({
     },
     cancelButton: {
         backgroundColor: COLOR_CANCEL_BUTTON_BG,
-        paddingVertical: 12,
+        paddingVertical: 8,
         borderRadius: 25,
         flex: 1,
         alignItems: 'center',
     },
     cancelButtonText: {
         color: COLOR_CANCEL_BUTTON_TEXT,
-        fontSize: screenWidth * 0.04,
+        fontSize: screenWidth * 0.035,
         fontWeight: 'bold',
     },
     submitButton: {
         backgroundColor: COLOR_SUBMIT_BUTTON_BG,
-        paddingVertical: 12,
+        paddingVertical: 8,
         borderRadius: 25,
         flex: 1,
         alignItems: 'center',
     },
     submitButtonText: {
         color: COLOR_SUBMIT_BUTTON_TEXT,
-        fontSize: screenWidth * 0.04,
+        fontSize: screenWidth * 0.035,
         fontWeight: 'bold',
+    },
+    deleteButton: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'center',
+        backgroundColor: '#FFE5E5',
+        paddingVertical: 8,
+        borderRadius: 25,
+        width: '100%',
+        marginTop: 10,
+    },
+    deleteButtonText: {
+        color: '#FF3B30',
+        fontSize: screenWidth * 0.035,
+        fontWeight: 'bold',
+        marginLeft: 8,
     },
 });
 

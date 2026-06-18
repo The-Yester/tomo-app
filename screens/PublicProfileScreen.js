@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect, useContext, useMemo } from 'react';
 import { View, Text, StyleSheet, Image, ScrollView, TouchableOpacity, FlatList, ActivityIndicator, Alert, Modal } from 'react-native';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import { doc, getDoc, updateDoc, collection, getDocs } from 'firebase/firestore';
@@ -27,6 +27,33 @@ const PublicProfileScreen = () => {
     const [likersModalVisible, setLikersModalVisible] = useState(false);
     const [likersList, setLikersList] = useState([]);
     const [loadingLikers, setLoadingLikers] = useState(false);
+
+    // Hydrated Lists to dynamically display ratings
+    const hydratedRecentlyPlayed = useMemo(() => {
+        const list = userData?.recentlyPlayed || [];
+        const ratedAlbums = userData?.overallRatedAlbums || [];
+        return list.map(album => {
+            const ratedVersion = ratedAlbums.find(ra => String(ra.id) === String(album.id));
+            return {
+                ...album,
+                userRating: ratedVersion ? ratedVersion.userOverallRating : undefined,
+                ratingMethod: userData?.ratingMethod || '1-10'
+            };
+        });
+    }, [userData]);
+
+    const hydratedRecentActivity = useMemo(() => {
+        const list = userData?.recentActivity || [];
+        const ratedAlbums = userData?.overallRatedAlbums || [];
+        return list.map(album => {
+            const ratedVersion = ratedAlbums.find(ra => String(ra.id) === String(album.id));
+            return {
+                ...album,
+                userRating: ratedVersion ? ratedVersion.userOverallRating : undefined,
+                ratingMethod: userData?.ratingMethod || '1-10'
+            };
+        });
+    }, [userData]);
 
     useEffect(() => {
         fetchProfile();
@@ -236,10 +263,7 @@ const PublicProfileScreen = () => {
         else try { top8 = JSON.parse(userData.topAlbums); } catch (e) { }
     }
 
-    // Recently Listened (was recentlyPlayed in MusicContext, but let's check userData field name)
-    // ProfileHelpers usually saves to 'recentlyPlayed' or 'recentActivity'.
-    // MusicContext saves to 'recentlyPlayed'.
-    const recentlyListened = userData.recentlyPlayed || [];
+
 
     // Listen Later (Find list 2 or Name "Listen Later")
     let listenLaterAlbums = [];
@@ -346,7 +370,7 @@ const PublicProfileScreen = () => {
         let Component = null;
 
         if (method === 'Percentage' || method === 'percentage') {
-            displayValue = `${rating.toFixed(0)}%`;
+            displayValue = rating % 1 === 0 ? `${rating}%` : `${rating.toFixed(1)}%`;
             iconName = "percent";
             iconColor = "#4CAF50";
             Component = Icon;
@@ -603,7 +627,7 @@ const PublicProfileScreen = () => {
                                     ? formatArtworkUrl(item.attributes.artwork.url, 200, 200)
                                     : item.artwork?.url
                                         ? formatArtworkUrl(item.artwork.url, 200, 200)
-                                        : item.poster_path ? `https://image.tmdb.org/t/p/w500${item.poster_path}` : null;
+                                        : null;
                                 // Alias the rating so badge renderer works
                                 const itemForBadge = { ...item, userRating: item.userOverallRating, ratingMethod: userData.ratingMethod || '1-10' };
 
@@ -637,10 +661,10 @@ const PublicProfileScreen = () => {
                 {/* Recent Activity Section */}
                 <View style={styles.section}>
                     <Text style={styles.sectionTitle}>Recently Rated</Text>
-                    {(userData.recentActivity && userData.recentActivity.length > 0) ? (
+                    {(hydratedRecentActivity && hydratedRecentActivity.length > 0) ? (
                         <FlatList
                             horizontal
-                            data={userData.recentActivity}
+                            data={hydratedRecentActivity}
                             keyExtractor={(item, index) => `activity-${item.id}-${index}`}
                             showsHorizontalScrollIndicator={false}
                             renderItem={({ item }) => {
@@ -648,7 +672,7 @@ const PublicProfileScreen = () => {
                                     ? formatArtworkUrl(item.attributes.artwork.url, 200, 200)
                                     : item.artwork?.url
                                         ? formatArtworkUrl(item.artwork.url, 200, 200)
-                                        : item.poster_path ? `https://image.tmdb.org/t/p/w500${item.poster_path}` : null;
+                                        : null;
                                 return (
                                     <TouchableOpacity
                                         style={styles.posterItem}
@@ -677,10 +701,10 @@ const PublicProfileScreen = () => {
                 {/* Recently Listened */}
                 <View style={styles.section}>
                     <Text style={styles.sectionTitle}>Recently Listened</Text>
-                    {recentlyListened.length > 0 ? (
+                    {hydratedRecentlyPlayed.length > 0 ? (
                         <FlatList
                             horizontal
-                            data={recentlyListened}
+                            data={hydratedRecentlyPlayed}
                             keyExtractor={(item, index) => `recent-${item.id}-${index}`}
                             showsHorizontalScrollIndicator={false}
                             renderItem={({ item }) => {
@@ -688,7 +712,7 @@ const PublicProfileScreen = () => {
                                     ? formatArtworkUrl(item.attributes.artwork.url, 200, 200)
                                     : item.artwork?.url
                                         ? formatArtworkUrl(item.artwork.url, 200, 200)
-                                        : item.poster_path ? `https://image.tmdb.org/t/p/w500${item.poster_path}` : null;
+                                        : null;
                                 return (
                                     <TouchableOpacity
                                         style={styles.posterItem}
@@ -730,7 +754,7 @@ const PublicProfileScreen = () => {
                                     ? formatArtworkUrl(item.attributes.artwork.url, 200, 200)
                                     : item.artwork?.url
                                         ? formatArtworkUrl(item.artwork.url, 200, 200)
-                                        : item.poster_path ? `https://image.tmdb.org/t/p/w500${item.poster_path}` : null;
+                                        : null;
                                 return (
                                     <TouchableOpacity
                                         style={styles.posterItem}

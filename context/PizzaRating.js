@@ -48,7 +48,7 @@ const describeArc = (x, y, radius, startAngleDeg, endAngleDeg) => {
     ].join(' ');
 };
 
-const PizzaRating = ({ initialRating = 0, onSubmitRating, readonly = false, size, onCancel, artistName, albumArtwork, isPlayed, onTogglePlayed }) => {
+const PizzaRating = ({ initialRating = 0, onSubmitRating, onDeleteRating, readonly = false, size, onCancel, artistName, albumArtwork, isPlayed, onTogglePlayed }) => {
     const [rating, setRating] = useState(parseFloat(initialRating));
 
     useEffect(() => {
@@ -56,7 +56,7 @@ const PizzaRating = ({ initialRating = 0, onSubmitRating, readonly = false, size
     }, [initialRating]);
 
     // Calculate dimensions based on `size` prop or default responsive size
-    const PIE_OUTER_RADIUS = size ? size / 2 : screenWidth * 0.35;
+    const PIE_OUTER_RADIUS = size ? size / 2 : screenWidth * 0.28;
     const PIE_BORDER_WIDTH = size ? size * 0.08 : 10;
     const PIE_SLICE_RADIUS = PIE_OUTER_RADIUS - PIE_BORDER_WIDTH / 2;
     const PEPPERONI_RADIUS = PIE_OUTER_RADIUS * 0.06;
@@ -225,11 +225,11 @@ const PizzaRating = ({ initialRating = 0, onSubmitRating, readonly = false, size
             >
                 <MaterialCommunityIcons
                     name={isPlayed ? "check-circle" : "circle-outline"}
-                    size={20}
+                    size={18}
                     color={isPlayed ? "#FFFFFF" : BUTTON_TEXT_COLOR_CANCEL}
                 />
                 <Text style={[styles.playedToggleText, isPlayed && styles.playedToggleTextActive]}>
-                    Press to Add to Recently played
+                    Press to Add to Recently Played
                 </Text>
             </TouchableOpacity>
 
@@ -243,7 +243,14 @@ const PizzaRating = ({ initialRating = 0, onSubmitRating, readonly = false, size
                     <Text style={styles.submitButtonText}>Submit Rating</Text>
                 </TouchableOpacity>
             </View>
-            <Text style={styles.hintText}>Slide finger customized pizza slices!</Text>
+
+            {onDeleteRating && !readonly && (
+                <TouchableOpacity style={styles.deleteButton} onPress={onDeleteRating}>
+                    <MaterialCommunityIcons name="trash-can-outline" size={18} color="#FF3B30" />
+                    <Text style={styles.deleteButtonText}>Remove Rating</Text>
+                </TouchableOpacity>
+            )}
+            <Text style={styles.hintText}>Slide finger on crust to customized pizza slices!</Text>
         </View>
     );
 };
@@ -254,30 +261,30 @@ const styles = StyleSheet.create({
         width: '100%',
     },
     title: {
-        fontSize: screenWidth * 0.06,
+        fontSize: screenWidth * 0.05,
         fontWeight: 'bold',
         color: TEXT_COLOR_PRIMARY,
-        marginBottom: 10,
-    },
-    coverArt: {
-        width: screenWidth * 0.3,
-        height: screenWidth * 0.3,
-        borderRadius: 10,
-        marginBottom: 15,
-    },
-    pieContainer: {
-        marginBottom: 20,
-    },
-    ratingValueText: {
-        fontSize: 28,
-        fontWeight: 'bold',
-        color: COLOR_SELECTED_FULL,
         marginBottom: 5,
     },
+    coverArt: {
+        width: screenWidth * 0.22,
+        height: screenWidth * 0.22,
+        borderRadius: 10,
+        marginBottom: 8,
+    },
+    pieContainer: {
+        marginBottom: 15,
+    },
+    ratingValueText: {
+        fontSize: 24,
+        fontWeight: 'bold',
+        color: COLOR_SELECTED_FULL,
+        marginBottom: 2,
+    },
     ratingDescriptionText: {
-        fontSize: 16,
+        fontSize: 14,
         color: TEXT_COLOR_SECONDARY,
-        marginBottom: 20,
+        marginBottom: 35,
         textAlign: 'center',
     },
     buttonsContainer: {
@@ -288,7 +295,7 @@ const styles = StyleSheet.create({
     },
     cancelButton: {
         backgroundColor: BUTTON_COLOR_CANCEL,
-        paddingVertical: 12,
+        paddingVertical: 8,
         borderRadius: 25,
         flex: 1,
         marginRight: 10,
@@ -296,19 +303,19 @@ const styles = StyleSheet.create({
     },
     cancelButtonText: {
         color: BUTTON_TEXT_COLOR_CANCEL,
-        fontSize: screenWidth * 0.04,
+        fontSize: screenWidth * 0.035,
         fontWeight: 'bold',
     },
     submitButton: {
         backgroundColor: BUTTON_COLOR_SUBMIT,
-        paddingVertical: 12,
+        paddingVertical: 8,
         borderRadius: 25,
         flex: 1,
         alignItems: 'center',
     },
     submitButtonText: {
         color: BUTTON_TEXT_COLOR_SUBMIT,
-        fontSize: screenWidth * 0.04,
+        fontSize: screenWidth * 0.035,
         fontWeight: 'bold',
     },
     hintText: {
@@ -320,23 +327,40 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         backgroundColor: BUTTON_COLOR_CANCEL,
-        paddingVertical: 12,
-        paddingHorizontal: 20,
+        paddingVertical: 6,
+        paddingHorizontal: 15,
         borderRadius: 25,
         width: '100%',
-        marginBottom: 15,
+        marginBottom: 10,
     },
     playedToggleActive: {
         backgroundColor: BUTTON_COLOR_SUBMIT,
     },
     playedToggleText: {
         color: BUTTON_TEXT_COLOR_CANCEL,
-        fontSize: screenWidth * 0.035,
+        fontSize: screenWidth * 0.03,
         fontWeight: 'bold',
         marginLeft: 8,
     },
     playedToggleTextActive: {
         color: '#FFFFFF',
+    },
+    deleteButton: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'center',
+        backgroundColor: '#FFE5E5',
+        paddingVertical: 8,
+        borderRadius: 25,
+        width: '100%',
+        marginTop: 10,
+        marginBottom: 10,
+    },
+    deleteButtonText: {
+        color: '#FF3B30',
+        fontSize: screenWidth * 0.035,
+        fontWeight: 'bold',
+        marginLeft: 8,
     }
 });
 

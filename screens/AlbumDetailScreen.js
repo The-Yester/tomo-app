@@ -33,13 +33,17 @@ import ClassicRating from '../context/ClassicRating';
 
 const AlbumDetailScreen = ({ route }) => {
     const navigation = useNavigation();
-    const { ratingMethod, addAlbumToList, addToRecentlyPlayed, addToRecentActivity, submitRating, musicLists } = useContext(MusicContext);
+    const {
+        ratingMethod, addAlbumToList, addToRecentlyPlayed, addToRecentActivity, submitRating, deleteRating, musicLists,
+        physicalCollection, addToPhysicalCollection, removeFromPhysicalCollection
+    } = useContext(MusicContext);
     const [userRating, setUserRating] = useState(0);
     const [awardsDetails, setAwardsDetails] = useState(null);
     const { albumId, album: initialAlbum } = route.params;
     const [album, setAlbum] = useState(initialAlbum || null);
     const [ratingModalVisible, setRatingModalVisible] = useState(false);
     const [addToListModalVisible, setAddToListModalVisible] = useState(false);
+    const [physicalModalVisible, setPhysicalModalVisible] = useState(false);
     const [reviewModalVisible, setReviewModalVisible] = useState(false);
     const [isPlayed, setIsPlayed] = useState(false); // Default to FALSE
 
@@ -103,6 +107,28 @@ const AlbumDetailScreen = ({ route }) => {
         return () => sub();
     }, [albumId]);
 
+    // Fetch Logged-in User's Individual Rating for This Album
+    useEffect(() => {
+        const fetchUserRating = async () => {
+            if (!albumId || !auth.currentUser) return;
+            try {
+                const userRatingRef = doc(db, "users", auth.currentUser.uid, "album_ratings", albumId.toString());
+                const userRatingSnap = await getDoc(userRatingRef);
+                if (userRatingSnap.exists()) {
+                    const data = userRatingSnap.data();
+                    setUserRating(data.score || 0);
+                    if (data.breakdown) {
+                        setAwardsDetails(data.breakdown);
+                    }
+                    // could also set rating type if we wanted to enforce rendering correctly
+                }
+            } catch (error) {
+                console.error("Error fetching user rating:", error);
+            }
+        };
+        fetchUserRating();
+    }, [albumId]);
+
     const handleRatingSubmit = async (selectedRating, details = null) => {
         if (!album) return;
 
@@ -149,6 +175,30 @@ const AlbumDetailScreen = ({ route }) => {
         }
     };
 
+    const handleDeleteRating = () => {
+        Alert.alert(
+            "Remove Rating",
+            "Are you sure you want to remove your rating for this album?",
+            [
+                { text: "Cancel", style: "cancel" },
+                {
+                    text: "Remove",
+                    style: "destructive",
+                    onPress: async () => {
+                        try {
+                            await deleteRating(albumId);
+                            setUserRating(0);
+                            setRatingModalVisible(false);
+                            Alert.alert("Removed", "Your rating has been successfully removed.");
+                        } catch (error) {
+                            Alert.alert("Error", "Failed to remove rating.");
+                        }
+                    }
+                }
+            ]
+        );
+    };
+
     // Tracks Render
     const renderTrackItem = ({ item, index }) => (
         <View style={styles.trackItem}>
@@ -162,6 +212,22 @@ const AlbumDetailScreen = ({ route }) => {
             </Text>
         </View>
     );
+
+    // Helpers for Physical Collection
+    const isFormatOwned = (format) => {
+        return physicalCollection.some(item => String(item.id) === String(albumId) && item.format === format);
+    };
+
+    const togglePhysicalFormat = async (format) => {
+        if (!album) return;
+        if (isFormatOwned(format)) {
+            await removeFromPhysicalCollection(albumId, format);
+            showToast(`Removed from ${format}s`);
+        } else {
+            await addToPhysicalCollection(album, format);
+            showToast(`Added to ${format}s`);
+        }
+    };
 
     if (loading && !album) return <View style={styles.container}><Text>Loading...</Text></View>;
     if (!album) return <View style={styles.container}><Text>Album not found.</Text></View>;
@@ -185,7 +251,10 @@ const AlbumDetailScreen = ({ route }) => {
                     <Image source={{ uri: artworkUrl }} style={styles.coverArt} resizeMode="contain" />
                     <View style={styles.detailsContainer}>
                         <Text style={styles.title}>{album.attributes?.name || album.title}</Text>
-                        <TouchableOpacity onPress={() => navigation.push('ArtistDetail', { artistName: album.attributes?.artistName, artistId: 'mock-artist-id' })}>
+                        <TouchableOpacity onPress={() => {
+                            const realArtistId = album.relationships?.artists?.data?.[0]?.id || 'unknown';
+                            navigation.push('ArtistDetail', { artistName: album.attributes?.artistName, artistId: realArtistId });
+                        }}>
                             <Text style={styles.artist}>{album.attributes?.artistName}</Text>
                         </TouchableOpacity>
                         <Text style={styles.info}>{album.attributes?.genreNames?.[0]} • {album.attributes?.releaseDate?.substring(0, 4)}</Text>
@@ -193,6 +262,41 @@ const AlbumDetailScreen = ({ route }) => {
                         {album.attributes?.editorialNotes?.short && (
                             <Text style={styles.description}>{album.attributes.editorialNotes.short}</Text>
                         )}
+
+                        {/* Rating Summary Section */}
+                        <View style={styles.ratingSummaryContainer}>
+                            {/* Left Column: Your Rating */}
+                            <View style={styles.yourRatingBox}>
+                                <Text style={styles.ratingSummaryTitle}>YOUR RATING</Text>
+                                <Text style={styles.yourRatingScore}>
+                                    {userRating > 0 ? (ratingMethod === 'Percentage' ? `${userRating}%` : (ratingMethod === 'Awards' ? `${userRating}/10` : (ratingMethod === '1-5' ? `${userRating}/5` : `${userRating}/10`))) : 'Rate'}
+                                </Text>
+                                {userRating > 0 && <Icon name="trophy" size={24} color="#ff8c00" style={{ marginTop: 5 }} />}
+                            </View>
+
+                            {/* Right Column: TOMO Users */}
+                            <View style={styles.tomoUsersBox}>
+                                <Text style={[styles.ratingSummaryTitle, { color: '#000' }]}>TOMO USERS</Text>
+                                <View style={styles.tomoUsersList}>
+                                    <View style={styles.tomoUserRow}>
+                                        <View style={[styles.ratingIconCircle, { backgroundColor: '#ffcc00' }]}><Text style={[styles.ratingIconText, { color: '#000' }]}>10</Text></View>
+                                        <Text style={[styles.tomoUserScore, { color: '#000' }]}>{globalStats?.classic?.average ? `${globalStats.classic.average.toFixed(1)}/10` : 'N/A'}</Text>
+                                    </View>
+                                    <View style={styles.tomoUserRow}>
+                                        <MaterialIcon name="pizza" size={20} color="#ff5722" style={{ width: 20, textAlign: 'center' }} />
+                                        <Text style={[styles.tomoUserScore, { color: '#000' }]}>{globalStats?.pizza?.average ? `${globalStats.pizza.average.toFixed(1)}/5` : 'N/A'}</Text>
+                                    </View>
+                                    <View style={styles.tomoUserRow}>
+                                        <MaterialIcon name="percent" size={20} color="#4CAF50" style={{ width: 20, textAlign: 'center' }} />
+                                        <Text style={[styles.tomoUserScore, { color: '#000' }]}>{globalStats?.percentage?.average ? `${globalStats.percentage.average.toFixed(1)}%` : 'N/A'}</Text>
+                                    </View>
+                                    <View style={styles.tomoUserRow}>
+                                        <Icon name="trophy" size={20} color="#ffcc00" style={{ width: 20, textAlign: 'center' }} />
+                                        <Text style={[styles.tomoUserScore, { color: '#000' }]}>{globalStats?.awards?.average ? `${globalStats.awards.average.toFixed(1)}/10` : 'N/A'}</Text>
+                                    </View>
+                                </View>
+                            </View>
+                        </View>
 
                         <View style={styles.buttonGrid}>
                             <TouchableOpacity style={[styles.gridButton, { backgroundColor: '#e50914' }]} onPress={() => setRatingModalVisible(true)}>
@@ -224,6 +328,14 @@ const AlbumDetailScreen = ({ route }) => {
                             >
                                 <Icon name="bookmark" size={16} color="white" style={{ marginRight: 8 }} />
                                 <Text style={styles.gridButtonText}>Listen Later</Text>
+                            </TouchableOpacity>
+
+                            <TouchableOpacity
+                                style={[styles.gridButton, { backgroundColor: '#2E8B57' }]}
+                                onPress={() => setPhysicalModalVisible(true)}
+                            >
+                                <Icon name="dot-circle-o" size={16} color="white" style={{ marginRight: 8 }} />
+                                <Text style={styles.gridButtonText}>Physical</Text>
                             </TouchableOpacity>
                         </View>
 
@@ -258,9 +370,7 @@ const AlbumDetailScreen = ({ route }) => {
             <Modal animationType="slide" transparent={true} visible={ratingModalVisible} onRequestClose={() => { setRatingModalVisible(false); setIsPlayed(false); }}>
                 <View style={styles.modalContainer}>
                     <View style={styles.modalContent}>
-                        {!['1-10', '1-5', 'Percentage'].includes(ratingMethod) && (
-                            <Text style={styles.modalTitle}>Rate {album.attributes?.name}</Text>
-                        )}
+                        {/* Removed manual Title for Awards */}
 
                         {/* Rating Components Logic same as MovieDetail */}
                         {ratingMethod === '1-5' && (
@@ -268,6 +378,7 @@ const AlbumDetailScreen = ({ route }) => {
                                 initialRating={userRating}
                                 onSubmitRating={(rating) => handleRatingSubmit(rating)}
                                 onCancel={() => { setRatingModalVisible(false); setIsPlayed(false); }}
+                                onDeleteRating={userRating > 0 ? handleDeleteRating : null}
                                 artistName={album.attributes?.artistName || album.artistName}
                                 albumArtwork={artworkUrl}
                                 isPlayed={isPlayed}
@@ -279,6 +390,7 @@ const AlbumDetailScreen = ({ route }) => {
                                 initialRating={userRating}
                                 onSubmitRating={(rating) => handleRatingSubmit(rating)}
                                 onCancel={() => { setRatingModalVisible(false); setIsPlayed(false); }}
+                                onDeleteRating={userRating > 0 ? handleDeleteRating : null}
                                 artistName={album.attributes?.artistName || album.artistName}
                                 albumArtwork={artworkUrl}
                                 isPlayed={isPlayed}
@@ -290,6 +402,7 @@ const AlbumDetailScreen = ({ route }) => {
                                 value={userRating}
                                 onChange={(rating) => handleRatingSubmit(rating)}
                                 onCancel={() => { setRatingModalVisible(false); setIsPlayed(false); }}
+                                onDeleteRating={userRating > 0 ? handleDeleteRating : null}
                                 artistName={album.attributes?.artistName || album.artistName}
                                 albumArtwork={artworkUrl}
                                 isPlayed={isPlayed}
@@ -298,29 +411,20 @@ const AlbumDetailScreen = ({ route }) => {
                         )}
 
                         {ratingMethod === 'Awards' && (
-                            <View style={{ width: '100%', height: 600, alignItems: 'stretch' }}>
+                            <View style={{ width: '100%', alignItems: 'stretch', flexShrink: 1 }}>
                                 <AwardsRating
                                     initialRatings={awardsDetails || {}}
+                                    onSubmitRating={(rating, details) => handleRatingSubmit(rating, details)}
                                     onChange={(avg, details) => {
                                         setUserRating(avg);
                                         setAwardsDetails(details);
                                     }}
+                                    onCancel={() => { setRatingModalVisible(false); setIsPlayed(false); }}
+                                    onDeleteRating={userRating > 0 ? handleDeleteRating : null}
                                     isPlayed={isPlayed}
                                     onTogglePlayed={() => setIsPlayed(!isPlayed)}
                                 />
-                                <TouchableOpacity
-                                    style={[styles.modalSecondaryButton, { alignSelf: 'center', backgroundColor: '#d4a03e', borderRadius: 20, marginTop: 15, paddingHorizontal: 30 }]}
-                                    onPress={() => handleRatingSubmit(userRating, awardsDetails)}
-                                >
-                                    <Text style={[styles.modalSecondaryButtonText, { color: 'white', fontWeight: 'bold' }]}>Submit Rating</Text>
-                                </TouchableOpacity>
                             </View>
-                        )}
-
-                        {!['1-10', '1-5', 'Percentage'].includes(ratingMethod) && (
-                            <TouchableOpacity style={[styles.modalSecondaryButton, { marginTop: 20 }]} onPress={() => { setRatingModalVisible(false); setIsPlayed(false); }}>
-                                <Text style={styles.modalSecondaryButtonText}>Cancel</Text>
-                            </TouchableOpacity>
                         )}
                     </View>
                 </View>
@@ -353,6 +457,43 @@ const AlbumDetailScreen = ({ route }) => {
 
                         <TouchableOpacity style={[styles.modalSecondaryButton, { marginTop: 20, backgroundColor: '#f0f0f0', borderRadius: 20, paddingHorizontal: 40 }]} onPress={() => setAddToListModalVisible(false)}>
                             <Text style={styles.modalSecondaryButtonText}>Cancel</Text>
+                        </TouchableOpacity>
+                    </View>
+                </View>
+            </Modal>
+
+            {/* Physical Format Modal */}
+            <Modal animationType="slide" transparent={true} visible={physicalModalVisible} onRequestClose={() => setPhysicalModalVisible(false)}>
+                <View style={[styles.modalContainer, { justifyContent: 'flex-end', padding: 0 }]}>
+                    <View style={[styles.modalContent, { width: '100%', borderBottomLeftRadius: 0, borderBottomRightRadius: 0, paddingBottom: 40 }]}>
+                        <Text style={styles.modalTitle}>Manage Physical Collection</Text>
+                        <Text style={{ color: '#666', marginBottom: 20, textAlign: 'center' }}>Tap to add or remove this album from your physical format collections.</Text>
+
+                        <View style={{ width: '100%' }}>
+                            {['Vinyl', 'CD', 'Cassette'].map(format => {
+                                const owned = isFormatOwned(format);
+                                return (
+                                    <TouchableOpacity
+                                        key={format}
+                                        style={[styles.listItemBtn, { backgroundColor: owned ? '#fff8e1' : '#fff', paddingHorizontal: 15, borderRadius: 10, marginBottom: 5 }]}
+                                        onPress={() => togglePhysicalFormat(format)}
+                                    >
+                                        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                                            <Text style={{ fontSize: 24, marginRight: 15 }}>
+                                                {format === 'Vinyl' ? '⏺️' : format === 'CD' ? '💿' : '📼'}
+                                            </Text>
+                                            <Text style={[styles.listItemBtnText, { fontWeight: owned ? 'bold' : 'normal', color: owned ? '#ff8c00' : '#333' }]}>
+                                                {format}
+                                            </Text>
+                                        </View>
+                                        <Icon name={owned ? "check-circle" : "circle-o"} size={24} color={owned ? "#ff8c00" : "#ccc"} />
+                                    </TouchableOpacity>
+                                );
+                            })}
+                        </View>
+
+                        <TouchableOpacity style={[styles.modalSecondaryButton, { marginTop: 20, backgroundColor: '#f0f0f0', borderRadius: 20, paddingHorizontal: 40 }]} onPress={() => setPhysicalModalVisible(false)}>
+                            <Text style={styles.modalSecondaryButtonText}>Done</Text>
                         </TouchableOpacity>
                     </View>
                 </View>
@@ -434,28 +575,97 @@ const styles = StyleSheet.create({
         color: '#444',
         textAlign: 'center',
         fontStyle: 'italic',
-        marginBottom: 20,
+        marginBottom: 10,
         paddingHorizontal: 10
+    },
+    ratingSummaryContainer: {
+        flexDirection: 'row',
+        backgroundColor: '#e9af45', // Gold background
+        borderRadius: 15,
+        padding: 15,
+        marginVertical: 15,
+        width: '95%',
+        alignSelf: 'center',
+        justifyContent: 'space-between',
+        shadowColor: "#000",
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.1,
+        shadowRadius: 4,
+        elevation: 2,
+    },
+    yourRatingBox: {
+        flex: 1,
+        backgroundColor: '#fff', // White inner box
+        borderRadius: 10,
+        padding: 15,
+        alignItems: 'center',
+        justifyContent: 'center',
+        marginRight: 10,
+    },
+    tomoUsersBox: {
+        flex: 1.2,
+        paddingLeft: 10,
+        justifyContent: 'center',
+    },
+    ratingSummaryTitle: {
+        color: '#888',
+        fontSize: 12,
+        fontWeight: 'bold',
+        letterSpacing: 1,
+        marginBottom: 10,
+        textAlign: 'center',
+    },
+    yourRatingScore: {
+        color: '#ff8c00', // Matches TOMO orange
+        fontSize: 28,
+        fontWeight: 'bold',
+    },
+    tomoUsersList: {
+        marginTop: 5,
+    },
+    tomoUserRow: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        marginBottom: 8,
+    },
+    ratingIconCircle: {
+        width: 20,
+        height: 20,
+        borderRadius: 10,
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    ratingIconText: {
+        color: '#fff',
+        fontSize: 10,
+        fontWeight: 'bold',
+    },
+    tomoUserScore: {
+        color: '#333',
+        marginLeft: 10,
+        fontSize: 14,
+        fontWeight: '600',
     },
     buttonGrid: {
         flexDirection: 'row',
-        flexWrap: 'wrap',
-        justifyContent: 'center',
-        gap: 10
+        width: '95%',
+        alignSelf: 'center',
+        justifyContent: 'space-between',
+        gap: 8,
     },
     gridButton: {
+        flex: 1,
         flexDirection: 'row',
         paddingVertical: 10,
-        paddingHorizontal: 15,
+        paddingHorizontal: 5,
         borderRadius: 20,
         alignItems: 'center',
-        minWidth: 100,
         justifyContent: 'center'
     },
     gridButtonText: {
         color: '#fff',
         fontWeight: 'bold',
-        fontSize: 12
+        fontSize: 11
     },
     tracksSection: {
         padding: 20,

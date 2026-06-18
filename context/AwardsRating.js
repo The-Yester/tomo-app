@@ -15,8 +15,12 @@ const COLOR_BG = 'transparent';
 const COLOR_CARD_BG = '#F2F2F2';
 const COLOR_TEXT_PRIMARY = '#000000';
 const COLOR_TEXT_SECONDARY = '#666666';
-const COLOR_ACCENT = '#d4a03e'; // TOPO Gold
+const COLOR_ACCENT = '#d4a03e'; // TOMO Gold
 const COLOR_SLIDER_MAX = '#E0E0E0';
+const COLOR_SUBMIT_BUTTON_BG = '#d4a03e';
+const COLOR_SUBMIT_BUTTON_TEXT = '#FFFFFF';
+const COLOR_CANCEL_BUTTON_BG = '#E0E0E0';
+const COLOR_CANCEL_BUTTON_TEXT = '#333333';
 
 const SCREEN_WIDTH = Dimensions.get('window').width;
 
@@ -44,7 +48,7 @@ const CategoryRow = memo(({ category, value, onValueChange }) => {
 
       <View style={styles.sliderContainer}>
         <Slider
-          style={{ width: '100%', height: 40 }}
+          style={{ width: '100%', height: 25 }}
           minimumValue={0}
           maximumValue={10}
           step={0.1} // Smooth 0.1 increments
@@ -69,7 +73,7 @@ const CategoryRow = memo(({ category, value, onValueChange }) => {
 
 const DEFAULT_EXCLUDED = [];
 
-const AwardsRating = ({ initialRatings = {}, onChange, excludedCategories = DEFAULT_EXCLUDED, isPlayed, onTogglePlayed }) => {
+const AwardsRating = ({ initialRatings = {}, onChange, onSubmitRating, onCancel, onDeleteRating, excludedCategories = DEFAULT_EXCLUDED, isPlayed, onTogglePlayed }) => {
   const [ratings, setRatings] = useState(() => {
     const defaultRatings = {};
     AWARD_CATEGORIES.forEach(category => {
@@ -81,6 +85,7 @@ const AwardsRating = ({ initialRatings = {}, onChange, excludedCategories = DEFA
 
   // Track last reported to prevent loops
   const lastReportedJson = React.useRef("");
+  const hasUserInteracted = React.useRef(false);
 
   // Calculate Average on change
   useEffect(() => {
@@ -98,15 +103,16 @@ const AwardsRating = ({ initialRatings = {}, onChange, excludedCategories = DEFA
 
       // Update ref before calling out
       lastReportedJson.current = currentJson;
-      onChange?.(parseFloat(average.toFixed(1)), ratings);
+      // ONLY broadcast changes upwards if the user actually clicked a slider, protecting the parent from premature 0s
+      if (hasUserInteracted.current) {
+        onChange?.(parseFloat(average.toFixed(1)), ratings);
+      }
     } else {
       if (lastReportedJson.current !== currentJson) {
         lastReportedJson.current = currentJson;
-        onChange?.(null, ratings);
-      }
-      if (lastReportedJson.current !== currentJson) {
-        lastReportedJson.current = currentJson;
-        onChange?.(null, ratings);
+        if (hasUserInteracted.current) {
+          onChange?.(null, ratings);
+        }
       }
     }
   }, [ratings, excludedCategories]); // Removed onChange to prevent loops
@@ -115,7 +121,6 @@ const AwardsRating = ({ initialRatings = {}, onChange, excludedCategories = DEFA
   // This is tricky to do without loops. We only do it if local state is "default" (mostly 0s)
   // OR we assume parent knows best when providing new initialRatings.
   // A safe way is to use a Ref to track if we've "touched" the controls.
-  const hasUserInteracted = React.useRef(false);
 
   useEffect(() => {
     if (!hasUserInteracted.current && initialRatings && Object.keys(initialRatings).length > 0) {
@@ -153,31 +158,24 @@ const AwardsRating = ({ initialRatings = {}, onChange, excludedCategories = DEFA
     return (sum / validValues.length).toFixed(1);
   };
 
+  const handleSubmit = () => {
+    if (onSubmitRating) {
+      onSubmitRating(parseFloat(getOverallScore() === "N/A" ? 0 : getOverallScore()), ratings);
+    }
+  };
+
   return (
     <View style={styles.container}>
       <View style={styles.header}>
         <Text style={styles.title}>Awards Rating</Text>
         <Text style={styles.subtitle}>Rate categories 0-10 (0 = N/A)</Text>
-        <TouchableOpacity
-          style={[styles.playedToggle, isPlayed && styles.playedToggleActive]}
-          onPress={onTogglePlayed}
-        >
-          <MaterialCommunityIcons
-            name={isPlayed ? "check-circle" : "circle-outline"}
-            size={20}
-            color={isPlayed ? "#FFFFFF" : COLOR_TEXT_SECONDARY}
-          />
-          <Text style={[styles.playedToggleText, isPlayed && styles.playedToggleTextActive]}>
-            Press to Add to Recently played
-          </Text>
-        </TouchableOpacity>
         <View style={styles.averageContainer}>
           <Text style={styles.averageLabel}>Overall Score</Text>
           <Text style={styles.averageValue}>{getOverallScore()}</Text>
         </View>
       </View>
 
-      <ScrollView contentContainerStyle={styles.scrollContent} removeClippedSubviews={true}>
+      <ScrollView style={{ flexShrink: 1, width: '100%' }} contentContainerStyle={styles.scrollContent} removeClippedSubviews={true}>
         {AWARD_CATEGORIES.filter(cat => !excludedCategories.includes(cat)).map((category) => (
           <CategoryRow
             key={category}
@@ -187,43 +185,79 @@ const AwardsRating = ({ initialRatings = {}, onChange, excludedCategories = DEFA
           />
         ))}
       </ScrollView>
+
+      <View style={styles.footer}>
+        <TouchableOpacity
+          style={[styles.playedToggle, isPlayed && styles.playedToggleActive]}
+          onPress={onTogglePlayed}
+        >
+          <MaterialCommunityIcons
+            name={isPlayed ? "check-circle" : "circle-outline"}
+            size={18}
+            color={isPlayed ? "#FFFFFF" : COLOR_TEXT_SECONDARY}
+          />
+          <Text style={[styles.playedToggleText, isPlayed && styles.playedToggleTextActive]}>
+            Press to Add to Recently Played
+          </Text>
+        </TouchableOpacity>
+
+        <View style={styles.buttonsRow}>
+          {onCancel && (
+            <TouchableOpacity style={styles.cancelButton} onPress={onCancel}>
+              <Text style={styles.cancelButtonText}>Cancel</Text>
+            </TouchableOpacity>
+          )}
+          <TouchableOpacity style={styles.submitButton} onPress={handleSubmit}>
+            <Text style={styles.submitButtonText}>Submit Rating</Text>
+          </TouchableOpacity>
+        </View>
+
+        {onDeleteRating && (
+          <TouchableOpacity style={styles.deleteButton} onPress={onDeleteRating}>
+            <MaterialCommunityIcons name="trash-can-outline" size={18} color="#FF3B30" />
+            <Text style={styles.deleteButtonText}>Remove Rating</Text>
+          </TouchableOpacity>
+        )}
+      </View>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    flexShrink: 1,
     backgroundColor: COLOR_BG,
+    width: '100%',
   },
   header: {
-    padding: 20,
+    paddingVertical: 10,
+    paddingHorizontal: 15,
     backgroundColor: COLOR_BG,
     borderBottomWidth: 1,
     borderBottomColor: '#EEEEEE',
     alignItems: 'center',
   },
   title: {
-    fontSize: 22,
+    fontSize: 18,
     fontWeight: 'bold',
     color: COLOR_TEXT_PRIMARY,
-    marginBottom: 5,
+    marginBottom: 2,
   },
   subtitle: {
-    fontSize: 14,
+    fontSize: 12,
     color: COLOR_TEXT_SECONDARY,
-    marginBottom: 15,
+    marginBottom: 10,
   },
   averageContainer: {
     flexDirection: 'row',
     alignItems: 'center',
     backgroundColor: COLOR_CARD_BG,
-    paddingVertical: 8,
-    paddingHorizontal: 20,
+    paddingVertical: 6,
+    paddingHorizontal: 15,
     borderRadius: 20,
   },
   averageLabel: {
-    fontSize: 16,
+    fontSize: 14,
     color: COLOR_TEXT_SECONDARY,
     marginRight: 10,
   },
@@ -233,31 +267,35 @@ const styles = StyleSheet.create({
     color: COLOR_ACCENT,
   },
   scrollContent: {
-    paddingHorizontal: 5,
-    paddingVertical: 15,
-    paddingBottom: 40,
+    paddingHorizontal: 0,
+    paddingVertical: 10,
+  },
+  footer: {
+    paddingTop: 10,
+    backgroundColor: COLOR_BG,
+    width: '100%',
   },
   row: {
     backgroundColor: COLOR_CARD_BG,
-    marginBottom: 15,
-    borderRadius: 15,
-    paddingHorizontal: 15,
-    paddingVertical: 20,
+    marginBottom: 6,
+    borderRadius: 8,
+    paddingHorizontal: 10,
+    paddingVertical: 4,
     width: '100%',
   },
   labelContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    marginBottom: 5,
+    marginBottom: 0,
   },
   categoryLabel: {
-    fontSize: 16,
+    fontSize: 14,
     fontWeight: '600',
     color: COLOR_TEXT_PRIMARY,
   },
   valueText: {
-    fontSize: 18,
+    fontSize: 15,
     fontWeight: 'bold',
     color: COLOR_ACCENT,
   },
@@ -282,24 +320,73 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#E0E0E0',
+    backgroundColor: '#EEEEEE',
     paddingVertical: 10,
-    paddingHorizontal: 20,
+    paddingHorizontal: 15,
     borderRadius: 25,
-    marginBottom: 15,
-    width: '100%',
+    marginBottom: 10,
+    marginTop: 10,
+    alignSelf: 'stretch',
   },
   playedToggleActive: {
     backgroundColor: COLOR_ACCENT,
   },
   playedToggleText: {
     color: COLOR_TEXT_SECONDARY,
-    fontSize: 14,
+    fontSize: 12,
     fontWeight: 'bold',
     marginLeft: 8,
   },
   playedToggleTextActive: {
     color: '#FFFFFF',
+  },
+  buttonsRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    width: '100%',
+    gap: 10,
+    marginTop: 10,
+  },
+  cancelButton: {
+    backgroundColor: COLOR_CANCEL_BUTTON_BG,
+    paddingVertical: 8,
+    borderRadius: 25,
+    flex: 1,
+    alignItems: 'center',
+  },
+  cancelButtonText: {
+    color: COLOR_CANCEL_BUTTON_TEXT,
+    fontSize: SCREEN_WIDTH * 0.035,
+    fontWeight: 'bold',
+  },
+  submitButton: {
+    backgroundColor: COLOR_SUBMIT_BUTTON_BG,
+    paddingVertical: 8,
+    borderRadius: 25,
+    flex: 1,
+    alignItems: 'center',
+  },
+  submitButtonText: {
+    color: COLOR_SUBMIT_BUTTON_TEXT,
+    fontSize: SCREEN_WIDTH * 0.035,
+    fontWeight: 'bold',
+  },
+  deleteButton: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#FFE5E5',
+    paddingVertical: 8,
+    borderRadius: 25,
+    width: '100%',
+    marginTop: 10,
+    marginBottom: 10,
+  },
+  deleteButtonText: {
+    color: '#FF3B30',
+    fontSize: SCREEN_WIDTH * 0.035,
+    fontWeight: 'bold',
+    marginLeft: 8,
   }
 });
 

@@ -55,6 +55,14 @@ const TrendingScreen = ({ navigation }) => {
         );
     }
 
+    const renderFooter = () => (
+        <View style={styles.disclaimerContainer}>
+            <Text style={styles.disclaimerText}>
+                This product uses data provided by Apple Music & Custom Solutions, but is not endorsed or certified. TOMO Music is a music discovery and rating app. This app does not stream music and is not affiliated with or endorsed by any music corporation or streaming services.
+            </Text>
+        </View>
+    );
+
     return (
         <View style={styles.container}>
             <SafeAreaView style={styles.safeArea}>
@@ -70,6 +78,7 @@ const TrendingScreen = ({ navigation }) => {
                     numColumns={2}
                     key="grid" // Forces fresh render for grid layout
                     columnWrapperStyle={styles.columnWrapper}
+                    ListFooterComponent={renderFooter}
                 />
             </SafeAreaView>
         </View>
@@ -172,6 +181,17 @@ const styles = StyleSheet.create({
         color: '#000',
         marginLeft: 4,
     },
+    disclaimerContainer: {
+        paddingVertical: 30,
+        paddingHorizontal: 20,
+        alignItems: 'center',
+    },
+    disclaimerText: {
+        fontSize: 10,
+        color: '#999',
+        textAlign: 'center',
+        lineHeight: 14,
+    }
 });
 
 export default TrendingScreen;

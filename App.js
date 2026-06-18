@@ -16,6 +16,7 @@ import CuratedCornerScreen from './screens/CuratedCornerScreen';
 import CreateCurationScreen from './screens/CreateCurationScreen';
 import ProfileScreen from './screens/ProfileScreen';
 import ProfileSettings from './screens/ProfileSettings';
+import PhysicalCollectionScreen from './screens/PhysicalCollectionScreen';
 import 'react-native-get-random-values';
 import * as Notifications from 'expo-notifications';
 import { useRef, useEffect, useState } from 'react';
@@ -44,6 +45,7 @@ const createTabStack = (MainScreenName, MainComponent) => {
             <TabStack.Screen name="PublicProfile" component={PublicProfileScreen} />
             <TabStack.Screen name="ProfileSettings" component={ProfileSettings} />
             <TabStack.Screen name="FollowList" component={FollowListScreen} />
+            <TabStack.Screen name="PhysicalCollection" component={PhysicalCollectionScreen} />
         </TabStack.Navigator>
     );
     return TabStackNavigator;
@@ -51,6 +53,7 @@ const createTabStack = (MainScreenName, MainComponent) => {
 
 // Stacks for each tab
 const HomeStackNavigator = createTabStack("HomeScreen", HomeScreenMusic);
+const PhysicalCollectionStackNavigator = createTabStack("PhysicalCollectionScreen", PhysicalCollectionScreen);
 const TrendingStackNavigator = createTabStack("TrendingScreen", TrendingScreen);
 const ListStackNavigator = createTabStack("ListScreen", ListScreen);
 const CuratedCornerStackNavigator = createTabStack("CuratedCornerScreen", CuratedCornerScreen);
@@ -64,6 +67,11 @@ function BottomTabs() {
                 name="Home"
                 component={HomeStackNavigator}
                 options={{ tabBarIcon: ({ color, size }) => <Icon name="home" color={color} size={size} /> }}
+            />
+            <Tab.Screen
+                name="Collection"
+                component={PhysicalCollectionStackNavigator}
+                options={{ tabBarIcon: ({ color, size }) => <Icon name="archive" color={color} size={size} /> }}
             />
             <Tab.Screen
                 name="Trending"

@@ -1,13 +1,194 @@
-import React, { useState, useEffect, useContext } from 'react';
-import { View, Text, FlatList, Image, TouchableOpacity, StyleSheet, SafeAreaView, ActivityIndicator, Platform, StatusBar, Alert } from 'react-native';
+import React, { useState, useEffect, useContext, useRef } from 'react';
+import { View, Text, FlatList, Image, TouchableOpacity, StyleSheet, SafeAreaView, ActivityIndicator, Platform, StatusBar, Alert, Dimensions } from 'react-native';
+import { captureRef } from 'react-native-view-shot';
+import * as Sharing from 'expo-sharing';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { useNavigation } from '@react-navigation/native';
-import { subscribeToCurations, likeCuration, formatArtworkUrl, followUser, unfollowUser } from '../api/MusicService';
+import { subscribeToCurations, likeCuration, formatArtworkUrl, followUser, unfollowUser, deleteCuration } from '../api/MusicService';
 import { auth, db } from '../firebaseConfig';
 import { doc, getDoc } from 'firebase/firestore';
 import { MusicContext } from '../context/MusicContext'; // Import Context
 import moment from 'moment';
 import { v4 as uuidv4 } from 'uuid';
+
+const CurationCard = ({ item, isFollowing, isMe, isLiked, handleFollowToggle, handleLike, handleAddToLibrary, navigation }) => {
+    const cardRef = useRef();
+    const shareRef = useRef();
+    const timeString = item.timestamp ? moment(item.timestamp.toDate ? item.timestamp.toDate() : item.timestamp).fromNow() : 'Just now';
+
+    const handleShare = async () => {
+        try {
+            // Slight delay to ensure off-screen view is fully rendered before capture
+            await new Promise(resolve => setTimeout(resolve, 50));
+            const uri = await captureRef(shareRef, {
+                format: 'png',
+                quality: 1,
+                result: 'tmpfile'
+            });
+            await Sharing.shareAsync(uri, { dialogTitle: 'Share this collection', UTI: 'public.png', mimeType: 'image/png' });
+        } catch (error) {
+            console.error("Share error:", error);
+            Alert.alert("Error", "Could not capture and share the image.");
+        }
+    };
+
+    const handleDelete = () => {
+        Alert.alert(
+            "Delete Post",
+            "Are you sure you want to delete this list? This cannot be undone.",
+            [
+                { text: "Cancel", style: "cancel" },
+                {
+                    text: "Delete",
+                    style: "destructive",
+                    onPress: async () => {
+                        try {
+                            await deleteCuration(item.id);
+                        } catch (error) {
+                            Alert.alert("Error", "Could not delete the post.");
+                        }
+                    }
+                }
+            ]
+        );
+    };
+
+    return (
+        <View style={styles.card} collapsable={false} ref={cardRef}>
+            {/* Header: User Info & Follow */}
+            <View style={styles.cardHeader}>
+                <TouchableOpacity
+                    style={styles.userInfo}
+                    onPress={() => navigation.navigate('PublicProfile', { userId: item.userId })}
+                >
+                    <Image
+                        source={item.userPhoto ? { uri: item.userPhoto } : { uri: 'https://via.placeholder.com/40' }}
+                        style={styles.avatar}
+                    />
+                    <View>
+                        <Text style={styles.username}>@{item.username}</Text>
+                        <Text style={styles.timestamp}>{timeString}</Text>
+                    </View>
+                </TouchableOpacity>
+
+                {!isMe && (
+                    <TouchableOpacity
+                        style={[styles.followButton, isFollowing && styles.followingButton]}
+                        onPress={() => handleFollowToggle(item.userId)}
+                    >
+                        <Text style={[styles.followText, isFollowing && styles.followingText]}>
+                            {isFollowing ? "Following" : "Follow"}
+                        </Text>
+                    </TouchableOpacity>
+                )}
+            </View>
+
+            {/* Content: Title & Description */}
+            <View style={styles.cardContent}>
+                <Text style={styles.curationTitle}>{item.title}</Text>
+                {item.description ? <Text style={styles.curationDesc}>{item.description}</Text> : null}
+            </View>
+
+            {/* Album Carousel (Horizontal Scroll) */}
+            <View style={styles.albumGrid}>
+                {item.albums && item.albums.length > 0 && (
+                    <FlatList
+                        data={item.albums}
+                        keyExtractor={(album, index) => `${item.id}-album-${index}`}
+                        horizontal={true}
+                        showsHorizontalScrollIndicator={false}
+                        contentContainerStyle={{ paddingRight: 15 }}
+                        renderItem={({ item: album }) => (
+                            <TouchableOpacity
+                                style={styles.gridItem}
+                                onPress={() => navigation.navigate('AlbumDetails', { albumId: album.id, album: album })}
+                            >
+                                <Image
+                                    source={{ uri: formatArtworkUrl(album.attributes?.artwork?.url || album.artwork?.url || (typeof album.artwork === 'string' ? album.artwork : null), 200, 200) }}
+                                    style={styles.albumCover}
+                                />
+                            </TouchableOpacity>
+                        )}
+                    />
+                )}
+            </View>
+
+            {/* Actions: Like & Save */}
+            <View style={styles.cardActions}>
+                <TouchableOpacity style={styles.actionButton} onPress={() => handleLike(item)}>
+                    <Icon name={isLiked ? "heart" : "heart-o"} size={20} color={isLiked ? "#E0245E" : "#657786"} />
+                    <Text style={[styles.actionText, isLiked && { color: "#E0245E" }]}>{item.likes || 0}</Text>
+                </TouchableOpacity>
+
+                <TouchableOpacity style={styles.actionButton} onPress={() => handleAddToLibrary(item)}>
+                    <Icon name="bookmark-o" size={20} color="#657786" />
+                    <Text style={styles.actionText}>Save</Text>
+                </TouchableOpacity>
+
+                {isMe && (
+                    <TouchableOpacity style={styles.actionButton} onPress={handleShare}>
+                        <Icon name="share-square-o" size={20} color="#657786" />
+                    </TouchableOpacity>
+                )}
+
+                {isMe && (
+                    <TouchableOpacity style={styles.deleteButton} onPress={handleDelete}>
+                        <MaterialCommunityIcons name="trash-can-outline" size={20} color="#d9534f" />
+                    </TouchableOpacity>
+                )}
+            </View>
+
+            {/* OFF-SCREEN SHARE VIEW FOR CLEANER INSTAGRAM STORIES */}
+            <View style={styles.offScreenContainer} collapsable={false}>
+                <View style={styles.shareCard} ref={shareRef} collapsable={false}>
+                    {/* Header: User Info & TOPO Banner */}
+                    <View style={styles.shareHeader}>
+                        <View style={styles.userInfo}>
+                            <Image
+                                source={item.userPhoto ? { uri: item.userPhoto } : { uri: 'https://via.placeholder.com/40' }}
+                                style={styles.avatar}
+                            />
+                            <View>
+                                <Text style={styles.username}>@{item.username}</Text>
+                                <Text style={styles.timestamp}>{timeString}</Text>
+                            </View>
+                        </View>
+                        <View style={styles.topoLogoContainer}>
+                            <Image 
+                                source={require('../assets/fixed-icon.png')} 
+                                style={styles.topoLogoImage} 
+                                resizeMode="contain" 
+                            />
+                        </View>
+                    </View>
+
+                    {/* Content: Title Only (No Description) */}
+                    <View style={styles.shareCardContent}>
+                        <Text style={styles.curationTitle}>{item.title}</Text>
+                    </View>
+
+                    {/* Album Grid (Max 8, 4 per row, Percentage Spacing) */}
+                    <View style={styles.shareAlbumGrid}>
+                        {item.albums && item.albums.slice(0, 8).map((album, index) => (
+                            <View
+                                key={index}
+                                style={[styles.shareGridItem, { marginRight: (index + 1) % 4 === 0 ? 0 : '2.66%' }]}
+                                collapsable={false}
+                            >
+                                <Image
+                                    source={{ uri: formatArtworkUrl(album.attributes?.artwork?.url || album.artwork?.url || (typeof album.artwork === 'string' ? album.artwork : null), 300, 300) }}
+                                    style={styles.shareAlbumCover}
+                                    resizeMode="cover"
+                                />
+                            </View>
+                        ))}
+                    </View>
+                </View>
+            </View>
+        </View>
+    );
+};
 
 const CuratedCornerScreen = () => {
     const navigation = useNavigation();
@@ -46,7 +227,7 @@ const CuratedCornerScreen = () => {
     // 3. Filter Feed
     useEffect(() => {
         if (feedType === 'following') {
-            const filtered = allCurations.filter(item => followingList.includes(item.userId) || item.userId === auth.currentUser?.uid);
+            const filtered = allCurations.filter(item => followingList.includes(item.userId));
             setDisplayedCurations(filtered);
         } else if (feedType === 'myposts') {
             const filtered = allCurations.filter(item => item.userId === auth.currentUser?.uid);
@@ -98,85 +279,20 @@ const CuratedCornerScreen = () => {
 
     const renderCurationItem = ({ item }) => {
         const isLiked = auth.currentUser && item.likedBy && item.likedBy.includes(auth.currentUser.uid);
-        const timeString = item.timestamp ? moment(item.timestamp.toDate ? item.timestamp.toDate() : item.timestamp).fromNow() : 'Just now';
         const isFollowing = followingList.includes(item.userId);
         const isMe = auth.currentUser?.uid === item.userId;
 
         return (
-            <View style={styles.card}>
-                {/* Header: User Info & Follow */}
-                <View style={styles.cardHeader}>
-                    <TouchableOpacity
-                        style={styles.userInfo}
-                        onPress={() => navigation.navigate('PublicProfile', { userId: item.userId })}
-                    >
-                        <Image
-                            source={item.userPhoto ? { uri: item.userPhoto } : { uri: 'https://via.placeholder.com/40' }}
-                            style={styles.avatar}
-                        />
-                        <View>
-                            <Text style={styles.username}>@{item.username}</Text>
-                            <Text style={styles.timestamp}>{timeString}</Text>
-                        </View>
-                    </TouchableOpacity>
-
-                    {!isMe && (
-                        <TouchableOpacity
-                            style={[styles.followButton, isFollowing && styles.followingButton]}
-                            onPress={() => handleFollowToggle(item.userId)}
-                        >
-                            <Text style={[styles.followText, isFollowing && styles.followingText]}>
-                                {isFollowing ? "Following" : "Follow"}
-                            </Text>
-                        </TouchableOpacity>
-                    )}
-                </View>
-
-                {/* Content: Title & Description */}
-                <View style={styles.cardContent}>
-                    <Text style={styles.curationTitle}>{item.title}</Text>
-                    {item.description ? <Text style={styles.curationDesc}>{item.description}</Text> : null}
-                </View>
-
-                {/* Album Grid (Preview up to 4) */}
-                <View style={styles.albumGrid}>
-                    {item.albums && item.albums.slice(0, 4).map((album, index) => (
-                        <TouchableOpacity
-                            key={`${item.id}-album-${index}`}
-                            style={styles.gridItem}
-                            onPress={() => navigation.navigate('AlbumDetails', { albumId: album.id, album: album })}
-                        >
-                            <Image
-                                source={{ uri: formatArtworkUrl(album.attributes?.artwork?.url, 200, 200) }}
-                                style={styles.albumCover}
-                            />
-                        </TouchableOpacity>
-                    ))}
-                    {item.albums && item.albums.length > 4 && (
-                        <View style={styles.moreOverlay}>
-                            <Text style={styles.moreText}>+{item.albums.length - 4}</Text>
-                        </View>
-                    )}
-                </View>
-
-                {/* Actions: Like & Save */}
-                <View style={styles.cardActions}>
-                    <TouchableOpacity style={styles.actionButton} onPress={() => handleLike(item)}>
-                        <Icon name={isLiked ? "heart" : "heart-o"} size={20} color={isLiked ? "#E0245E" : "#657786"} />
-                        <Text style={[styles.actionText, isLiked && { color: "#E0245E" }]}>{item.likes || 0}</Text>
-                    </TouchableOpacity>
-
-                    <TouchableOpacity style={styles.actionButton} onPress={() => handleAddToLibrary(item)}>
-                        <Icon name="bookmark-o" size={20} color="#657786" />
-                        <Text style={styles.actionText}>Save</Text>
-                    </TouchableOpacity>
-
-                    {/* Share Placeholder */}
-                    <TouchableOpacity style={styles.actionButton}>
-                        <Icon name="share-square-o" size={20} color="#657786" />
-                    </TouchableOpacity>
-                </View>
-            </View>
+            <CurationCard
+                item={item}
+                isFollowing={isFollowing}
+                isMe={isMe}
+                isLiked={isLiked}
+                handleFollowToggle={handleFollowToggle}
+                handleLike={handleLike}
+                handleAddToLibrary={handleAddToLibrary}
+                navigation={navigation}
+            />
         );
     };
 
@@ -234,6 +350,8 @@ const CuratedCornerScreen = () => {
         </SafeAreaView>
     );
 };
+
+const { width } = Dimensions.get('window');
 
 const styles = StyleSheet.create({
     container: {
@@ -365,36 +483,19 @@ const styles = StyleSheet.create({
         lineHeight: 20
     },
     albumGrid: {
-        flexDirection: 'row',
         marginBottom: 15,
         borderRadius: 8,
         overflow: 'hidden'
     },
     gridItem: {
-        width: '25%',
+        width: 100, // Fixed width for horizontal scrolling
         aspectRatio: 1,
-        padding: 2
+        marginRight: 8 // Gap between items
     },
     albumCover: {
         width: '100%',
         height: '100%',
         borderRadius: 4
-    },
-    moreOverlay: {
-        position: 'absolute',
-        right: 2,
-        bottom: 2,
-        width: '24%', // Match grid item roughly
-        aspectRatio: 1,
-        backgroundColor: 'rgba(0,0,0,0.6)',
-        justifyContent: 'center',
-        alignItems: 'center',
-        borderRadius: 4
-    },
-    moreText: {
-        color: '#fff',
-        fontWeight: 'bold',
-        fontSize: 16
     },
     cardActions: {
         flexDirection: 'row',
@@ -412,10 +513,64 @@ const styles = StyleSheet.create({
         color: '#657786',
         fontSize: 14
     },
+    deleteButton: {
+        padding: 5,
+        marginLeft: 'auto' // Pushes it to the far right edge of the actions row
+    },
     emptyText: {
         fontSize: 16,
         color: '#657786',
         textAlign: 'center'
+    },
+    // OFF SCREEN SHARE STYLES
+    offScreenContainer: {
+        position: 'absolute',
+        top: -10000,
+        left: -10000,
+        opacity: 0,
+    },
+    shareCard: {
+        width: 380, // Fixed width prevents off-screen stretching issues across different devices
+        backgroundColor: '#fff',
+        padding: 24,
+        borderRadius: 16,
+    },
+    shareHeader: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'flex-start',
+        marginBottom: 15,
+    },
+    topoLogoContainer: {
+        width: 50,
+        height: 50,
+        borderRadius: 25, // Makes it a perfect circle
+        backgroundColor: '#000', // Solid black background
+        justifyContent: 'center',
+        alignItems: 'center',
+        overflow: 'hidden', // Ensures background cleanly clips if needed
+    },
+    topoLogoImage: {
+        width: 40, // Scaled down slightly to fit inside the circle
+        height: 40,
+    },
+    shareCardContent: {
+        marginBottom: 15,
+    },
+    shareAlbumGrid: {
+        flexDirection: 'row',
+        flexWrap: 'wrap',
+    },
+    shareGridItem: {
+        width: '23%',
+        aspectRatio: 1,
+        marginBottom: 10, // vertical space between rows
+    },
+    shareAlbumCover: {
+        width: '100%',
+        height: '100%',
+        borderRadius: 6,
+        backgroundColor: '#eee',
     }
 });
 

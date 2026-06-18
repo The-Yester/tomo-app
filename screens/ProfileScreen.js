@@ -12,9 +12,12 @@ import { useNavigation, useFocusEffect } from '@react-navigation/native';
 import { auth, db } from '../firebaseConfig';
 import { doc, getDoc } from 'firebase/firestore';
 import { formatArtworkUrl } from '../api/MusicService';
+import { MusicContext } from '../context/MusicContext';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 const ProfileScreen = () => {
     const navigation = useNavigation();
+    const { physicalCollection } = React.useContext(MusicContext);
     const [profilePhoto, setProfilePhoto] = useState(null);
     const [username, setUsername] = useState('');
     const [name, setName] = useState('');

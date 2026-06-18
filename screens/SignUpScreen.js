@@ -246,7 +246,7 @@ const SignUpScreen = () => {
                                         label={city}
                                         value={city}
                                         // Remove explicit color prop for Android to let system default ensure visibility
-                                        color={Platform.OS === 'ios' ? '#fff' : undefined}
+                                        color={Platform.OS === 'ios' ? '#000' : undefined}
                                     />
                                 ))}
                             </Picker>

@@ -120,8 +120,8 @@ export const removeNomineeFromCategory = async (eventId, categoryId, nomineeId) 
 
         const updatedCategories = eventDocData.categories.map(cat => {
             if (cat.id === categoryId) {
-                // Remove by unique ID if present, otherwise fallback to tmdbId for legacy
-                return { ...cat, nominees: cat.nominees.filter(n => (n.id ? n.id !== nomineeId : n.tmdbId !== nomineeId)) };
+                // Remove by unique ID if present, otherwise fallback to musicId for legacy
+                return { ...cat, nominees: cat.nominees.filter(n => (n.id ? n.id !== nomineeId : n.musicId !== nomineeId)) };
             }
             return cat;
         });
@@ -248,8 +248,8 @@ export const updateNominee = async (eventId, categoryId, nomineeId, updates) => 
         const updatedCategories = eventDocData.categories.map(cat => {
             if (cat.id === categoryId) {
                 const updatedNominees = cat.nominees.map(n => {
-                    // Match by unique ID (fallback to tmdbId)
-                    const isMatch = n.id ? n.id === nomineeId : n.tmdbId === nomineeId;
+                    // Match by unique ID (fallback to musicId)
+                    const isMatch = n.id ? n.id === nomineeId : n.musicId === nomineeId;
                     if (isMatch) {
                         return { ...n, ...updates };
                     }

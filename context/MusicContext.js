@@ -1,7 +1,8 @@
 import React, { createContext, useState, useEffect, useMemo } from 'react';
 import { onAuthStateChanged } from 'firebase/auth';
-import { doc, getDoc, setDoc, updateDoc, arrayUnion, arrayRemove, runTransaction, collection, getDocs } from 'firebase/firestore';
+import { doc, getDoc, setDoc, updateDoc, arrayUnion, arrayRemove, runTransaction, collection, getDocs, deleteDoc } from 'firebase/firestore';
 import { auth, db } from '../firebaseConfig';
+import { getPhysicalCollection, addPhysicalAlbum, removePhysicalAlbum } from '../api/MusicService';
 
 export const OVERALL_RATINGS_LIST_ID = 'overall_ratings_list_id';
 export const OVERALL_RATINGS_LIST_NAME = 'Overall Ratings';
@@ -21,7 +22,11 @@ export const MusicContext = createContext({
     addToRecentlyPlayed: () => { },
     addToRecentActivity: () => { },
     updateOverallRatings: () => { },
-    submitRating: () => { }
+    submitRating: () => { },
+    deleteRating: () => { },
+    physicalCollection: [],
+    addToPhysicalCollection: () => { },
+    removeFromPhysicalCollection: () => { }
 });
 
 export const MusicProvider = ({ children }) => {
@@ -34,6 +39,7 @@ export const MusicProvider = ({ children }) => {
     const [recentlyPlayed, setRecentlyPlayed] = useState([]);
     const [recentActivity, setRecentActivity] = useState([]);
     const [ratingMethod, setRatingMethod] = useState('1-10');
+    const [physicalCollection, setPhysicalCollection] = useState([]);
 
     // Listen for Auth Changes to load data
     useEffect(() => {
@@ -49,6 +55,7 @@ export const MusicProvider = ({ children }) => {
                 ]);
                 setOverallRatedAlbums([]);
                 setRecentlyPlayed([]);
+                setPhysicalCollection([]);
                 setRatingMethod('1-10');
             }
         });
@@ -115,6 +122,10 @@ export const MusicProvider = ({ children }) => {
                 if (data.recentlyPlayed) setRecentlyPlayed(data.recentlyPlayed);
                 if (data.recentActivity) setRecentActivity(data.recentActivity);
                 if (data.ratingMethod) setRatingMethod(data.ratingMethod);
+
+                // Fetch physical collection
+                const physicalItems = await getPhysicalCollection(uid);
+                setPhysicalCollection(physicalItems);
             } else {
                 // Initialize default doc
                 await setDoc(userDocRef, {
@@ -174,9 +185,23 @@ export const MusicProvider = ({ children }) => {
         return list ? list.albums : [];
     };
 
+    const stripAlbumData = (album) => {
+        if (!album) return null;
+        return {
+            id: album.id,
+            name: album.name || album.attributes?.name || '',
+            artistName: album.artistName || album.attributes?.artistName || '',
+            artwork: album.artwork || album.attributes?.artwork || null,
+            releaseDate: album.releaseDate || album.attributes?.releaseDate || null
+        };
+    };
+
     const addAlbumToList = async (listId, album) => {
+        const strippedAlbum = stripAlbumData(album);
+        if (!strippedAlbum) return;
+
         const updatedLists = musicLists.map(list =>
-            list.id === listId ? { ...list, albums: [...list.albums.filter(a => a.id !== album.id), album] } : list
+            list.id === listId ? { ...list, albums: [...list.albums.filter(a => a.id !== strippedAlbum.id), strippedAlbum] } : list
         );
         setMusicLists(updatedLists);
         await saveData('musicLists', updatedLists);
@@ -191,18 +216,24 @@ export const MusicProvider = ({ children }) => {
     };
 
     const addToRecentlyPlayed = async (album) => {
+        const strippedAlbum = stripAlbumData(album);
+        if (!strippedAlbum) return;
+
         setRecentlyPlayed(prev => {
-            const filteredList = prev.filter(a => a.id?.toString() !== album.id?.toString());
-            const updatedList = [album, ...filteredList].slice(0, 10);
+            const filteredList = prev.filter(a => a.id?.toString() !== strippedAlbum.id?.toString());
+            const updatedList = [strippedAlbum, ...filteredList].slice(0, 10);
             saveData('recentlyPlayed', updatedList);
             return updatedList;
         });
     };
 
     const addToRecentActivity = async (item) => {
+        const strippedItem = stripAlbumData(item);
+        if (!strippedItem) return;
+
         setRecentActivity(prev => {
-            const filteredList = prev.filter(a => a.id?.toString() !== item.id?.toString());
-            const updatedList = [item, ...filteredList].slice(0, 20);
+            const filteredList = prev.filter(a => a.id?.toString() !== strippedItem.id?.toString());
+            const updatedList = [strippedItem, ...filteredList].slice(0, 20);
             saveData('recentActivity', updatedList);
             return updatedList;
         });
@@ -290,6 +321,77 @@ export const MusicProvider = ({ children }) => {
 
         } catch (error) {
             console.error("Error submitting rating using submitRating:", error);
+            throw error;
+        }
+    };
+
+    const deleteRating = async (albumId) => {
+        if (!user) return;
+
+        try {
+            // 1. Delete User's Individual Rating (Private Profile)
+            const userRatingRef = doc(db, "users", user.uid, "album_ratings", albumId.toString());
+            await deleteDoc(userRatingRef);
+
+            // 2. Delete from Public Album Subcollection (for Aggregation)
+            const publicRatingRef = doc(db, "albums", albumId.toString(), "user_ratings", user.uid);
+            await deleteDoc(publicRatingRef);
+
+            // 3. Recalculate Global Stats
+            const ratingsCollection = collection(db, "albums", albumId.toString(), "user_ratings");
+            const snapshot = await getDocs(ratingsCollection);
+
+            const newStats = {
+                classic: { count: 0, sum: 0, average: 0 },
+                pizza: { count: 0, sum: 0, average: 0 },
+                percentage: { count: 0, sum: 0, average: 0 },
+                awards: { count: 0, sum: 0, average: 0 },
+                thumbs: { count: 0, sum: 0, average: 0 }
+            };
+
+            snapshot.forEach(doc => {
+                const r = doc.data();
+                let t = r.type;
+                if (t && newStats[t]) {
+                    newStats[t].count += 1;
+                    newStats[t].sum += r.score;
+                }
+            });
+
+            Object.keys(newStats).forEach(key => {
+                if (newStats[key].count > 0) {
+                    newStats[key].average = newStats[key].sum / newStats[key].count;
+                }
+            });
+
+            // Write back updated stats to album doc
+            const albumRef = doc(db, "albums", albumId.toString());
+            await setDoc(albumRef, { stats: newStats }, { merge: true });
+
+            // 4. Update Local State (Optimistic)
+            setOverallRatedAlbums(prev => {
+                const updatedList = prev.filter(a => a && a.id && String(a.id) !== String(albumId));
+                saveData('overallRatedAlbums', updatedList);
+                return updatedList;
+            });
+
+            // Clean up Recently Rated
+            setRecentActivity(prev => {
+                const updatedList = prev.filter(a => a && a.id && String(a.id) !== String(albumId));
+                saveData('recentActivity', updatedList);
+                return updatedList;
+            });
+
+            // Clean up Recently Played
+            setRecentlyPlayed(prev => {
+                const updatedList = prev.filter(a => a && a.id && String(a.id) !== String(albumId));
+                saveData('recentlyPlayed', updatedList);
+                return updatedList;
+            });
+
+        } catch (error) {
+            console.error("Error deleting rating:", error);
+            throw error;
         }
     };
 
@@ -320,6 +422,46 @@ export const MusicProvider = ({ children }) => {
         });
     };
 
+    const addToPhysicalCollection = async (album, format) => {
+        if (!user) return;
+
+        // Optimistic UI update
+        const newItem = {
+            id: album.id,
+            name: album.name || album.attributes?.name || '',
+            artistName: album.artistName || album.attributes?.artistName || '',
+            artwork: album.artwork || album.attributes?.artwork || null,
+            format: format,
+            addedAt: new Date(), // Mock date for immediate UI ordering
+        };
+
+        setPhysicalCollection(prev => [newItem, ...prev]);
+
+        try {
+            await addPhysicalAlbum(user.uid, album, format);
+        } catch (error) {
+            // Revert if failed
+            setPhysicalCollection(prev => prev.filter(item => !(item.id === album.id && item.format === format)));
+            console.error(error);
+        }
+    };
+
+    const removeFromPhysicalCollection = async (albumId, format) => {
+        if (!user) return;
+
+        // Optimistic UI update
+        setPhysicalCollection(prev => prev.filter(item => !(String(item.id) === String(albumId) && item.format === format)));
+
+        try {
+            await removePhysicalAlbum(user.uid, albumId, format);
+        } catch (error) {
+            // Re-fetch on failure to restore state
+            const items = await getPhysicalCollection(user.uid);
+            setPhysicalCollection(items);
+            console.error(error);
+        }
+    };
+
     const value = useMemo(() => ({
         musicLists,
         overallRatedAlbums,
@@ -328,6 +470,7 @@ export const MusicProvider = ({ children }) => {
         ratingMethod,
         setRatingMethod: updateRatingMethod,
         submitRating,
+        deleteRating,
         addList,
         deleteList,
         getAlbumsInList,
@@ -336,7 +479,10 @@ export const MusicProvider = ({ children }) => {
         addToRecentlyPlayed,
         addToRecentActivity,
         updateOverallRatings,
-    }), [musicLists, overallRatedAlbums, recentlyPlayed, recentActivity, ratingMethod]);
+        physicalCollection,
+        addToPhysicalCollection,
+        removeFromPhysicalCollection,
+    }), [musicLists, overallRatedAlbums, recentlyPlayed, recentActivity, ratingMethod, physicalCollection]);
 
     return (
         <MusicContext.Provider value={value}>

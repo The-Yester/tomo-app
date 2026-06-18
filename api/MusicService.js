@@ -1,27 +1,69 @@
 import axios from 'axios';
 import { db } from '../firebaseConfig';
-import { collection, addDoc, query, orderBy, onSnapshot, doc, updateDoc, arrayUnion, arrayRemove, getDoc } from 'firebase/firestore';
+import { collection, addDoc, query, orderBy, onSnapshot, doc, updateDoc, arrayUnion, arrayRemove, getDoc, deleteDoc } from 'firebase/firestore';
 import { APPLE_MUSIC_API_BASE, getAppleMusicHeaders } from './AppleMusicConfig';
 
-// --- API QUEUE (Rate Limiter) ---
+// --- API QUEUE (Rate Limiter with Cancellation Support) ---
 // Apple Music API can return 429 if too many requests hit at once (e.g., from Promise.all)
 class RequestQueue {
     constructor() {
         this.queue = [];
+        this.activeRequests = new Map(); // category -> active request item
         this.isProcessing = false;
         // Delay between requests in ms
         this.delay = 250;
     }
 
-    add(requestFn) {
+    add(requestFn, category = 'default') {
+        const controller = new AbortController();
+
         return new Promise((resolve, reject) => {
-            this.queue.push({
+            // Cancel existing request in the same category
+            if (category !== 'default') {
+                this.cancelCategory(category);
+            }
+
+            const item = {
                 requestFn,
                 resolve,
-                reject
-            });
+                reject,
+                category,
+                controller
+            };
+
+            this.queue.push(item);
+
+            // Track queued request for this category
+            if (category !== 'default') {
+                this.activeRequests.set(category, item);
+            }
+
             this.processQueue();
         });
+    }
+
+    cancelCategory(category) {
+        // Remove from queue and reject
+        this.queue = this.queue.filter(item => {
+            if (item.category === category) {
+                item.controller.abort();
+                const err = new Error('Aborted');
+                err.name = 'AbortError';
+                item.reject(err);
+                return false;
+            }
+            return true;
+        });
+
+        // Abort running request if it's the active one
+        const active = this.activeRequests.get(category);
+        if (active) {
+            active.controller.abort();
+            const err = new Error('Aborted');
+            err.name = 'AbortError';
+            active.reject(err);
+            this.activeRequests.delete(category);
+        }
     }
 
     async processQueue() {
@@ -30,13 +72,45 @@ class RequestQueue {
         this.isProcessing = true;
 
         while (this.queue.length > 0) {
-            const { requestFn, resolve, reject } = this.queue.shift();
-            try {
-                const result = await requestFn();
-                resolve(result);
-            } catch (error) {
-                reject(error);
+            const item = this.queue.shift();
+            const { requestFn, resolve, reject, category, controller } = item;
+
+            // If it was already aborted while in the queue, skip it
+            if (controller.signal.aborted) {
+                continue;
             }
+
+            // Set as active request for the category while it runs
+            if (category !== 'default') {
+                this.activeRequests.set(category, item);
+            }
+
+            try {
+                // Pass the abort signal to the request function
+                const result = await requestFn(controller.signal);
+                
+                // If it was aborted during execution, reject it
+                if (controller.signal.aborted) {
+                    const err = new Error('Aborted');
+                    err.name = 'AbortError';
+                    reject(err);
+                } else {
+                    resolve(result);
+                }
+            } catch (error) {
+                if (axios.isCancel(error) || error.name === 'AbortError' || error.message === 'canceled') {
+                    const err = new Error('Aborted');
+                    err.name = 'AbortError';
+                    reject(err);
+                } else {
+                    reject(error);
+                }
+            } finally {
+                if (category !== 'default' && this.activeRequests.get(category) === item) {
+                    this.activeRequests.delete(category);
+                }
+            }
+
             // Wait before next request
             if (this.queue.length > 0) {
                 await new Promise(r => setTimeout(r, this.delay));
@@ -57,19 +131,32 @@ export const formatArtworkUrl = (url, width = 300, height = 300) => {
 
 // --- API FUNCTIONS ---
 
+// Caches for search queries and search hints
+const searchCache = new Map();
+const hintCache = new Map();
+const SEARCH_CACHE_LIMIT = 100;
+const HINTS_CACHE_LIMIT = 100;
+
 export const searchMusic = async (searchQuery) => {
     if (!searchQuery || searchQuery.trim() === '') return [];
 
+    const cleanQuery = searchQuery.trim();
+    const cacheKey = cleanQuery.toLowerCase();
+
+    if (searchCache.has(cacheKey)) {
+        return searchCache.get(cacheKey);
+    }
+
     try {
-        const cleanQuery = searchQuery.trim();
-        const response = await apiQueue.add(() => axios.get(`${APPLE_MUSIC_API_BASE}/catalog/us/search`, {
+        const response = await apiQueue.add((signal) => axios.get(`${APPLE_MUSIC_API_BASE}/catalog/us/search`, {
             headers: getAppleMusicHeaders(),
+            signal,
             params: {
                 term: cleanQuery,
                 types: 'albums,artists',
                 limit: 15
             }
-        }));
+        }), 'search');
 
         const rawAlbums = response.data.results?.albums?.data || [];
         const artists = response.data.results?.artists?.data || [];
@@ -81,36 +168,130 @@ export const searchMusic = async (searchQuery) => {
         if (artists.length > 0) {
             const topArtistId = artists[0].id;
             try {
-                const artistAlbumsResponse = await apiQueue.add(() => axios.get(`${APPLE_MUSIC_API_BASE}/catalog/us/artists/${topArtistId}/albums`, {
+                const artistAlbumsResponse = await apiQueue.add((signal) => axios.get(`${APPLE_MUSIC_API_BASE}/catalog/us/artists/${topArtistId}/albums`, {
                     headers: getAppleMusicHeaders(),
+                    signal,
                     params: {
                         limit: 15
                     }
-                }));
+                }), 'search');
 
                 const artistAlbums = artistAlbumsResponse.data.data || [];
                 finalAlbums = [...artistAlbums];
             } catch (artistErr) {
+                if (artistErr.name === 'AbortError') throw artistErr;
                 console.error("Error fetching artist's top albums for search priority:", artistErr.message);
             }
         }
 
-        // Now append the rest of the generic album search hits, carefully avoiding duplicates.
-        // E.g. If the user searched "Kanye", we just injected all his actual albums.
-        // We now append stray albums from the raw search that also matched but weren't by him 
-        // OR were singles/compilations by him that didn't make his top 15.
-        const existingAlbumIds = new Set(finalAlbums.map(a => a.id));
+        const uniqueAlbumsMap = new Map();
 
-        rawAlbums.forEach(album => {
-            if (!existingAlbumIds.has(album.id)) {
-                finalAlbums.push(album);
-                existingAlbumIds.add(album.id);
+        // Helper to add albums while avoiding duplicates (clean vs explicit)
+        const addAlbumUnique = (album) => {
+            const name = album.attributes?.name?.toLowerCase().trim() || '';
+            const artist = album.attributes?.artistName?.toLowerCase().trim() || '';
+            const sig = `${name}::${artist}`;
+
+            // If we haven't seen this name/artist combo, or if the new one is explicitly an album and the old one was a single, replace it
+            if (!uniqueAlbumsMap.has(sig)) {
+                uniqueAlbumsMap.set(sig, album);
             }
+        };
+
+        // Add artist's top albums first
+        finalAlbums.forEach(addAlbumUnique);
+
+        // Add raw search results
+        rawAlbums.forEach(addAlbumUnique);
+
+        // Convert back to array
+        let processedAlbums = Array.from(uniqueAlbumsMap.values());
+
+        // Sort Albums: Albums first, Singles last. Then sort by releaseDate descending
+        processedAlbums.sort((a, b) => {
+            const aName = (a.attributes?.name || '').toLowerCase();
+            const bName = (b.attributes?.name || '').toLowerCase();
+
+            const aIsSingle = a.attributes?.isSingle || aName.includes('- single') || aName.includes('(single)');
+            const bIsSingle = b.attributes?.isSingle || bName.includes('- single') || bName.includes('(single)');
+
+            if (aIsSingle && !bIsSingle) return 1;  // Demote 'a' (Single)
+            if (!aIsSingle && bIsSingle) return -1; // Promote 'a' (Album)
+
+            // Both are same type, sort by release date (newest first)
+            const dateA = new Date(a.attributes?.releaseDate || '1970-01-01');
+            const dateB = new Date(b.attributes?.releaseDate || '1970-01-01');
+            return dateB - dateA;
         });
 
-        return finalAlbums;
+        // 🟢 NEW: Add actual artist profiles to the very top if any were matched
+        const mappedArtists = artists.map(artist => ({
+            id: artist.id,
+            type: 'artists',
+            attributes: {
+                name: artist.attributes?.name,
+                artistName: 'Artist',
+                // Artists usually don't return artwork in the standard US Search query unless expanded, 
+                // but we map it just in case, or we use a fallback placeholder icon in the UI
+                artwork: artist.attributes?.artwork || null
+            }
+        }));
+
+        // Combine: Artists at the top, then Albums
+        const finalCombinedResults = [...mappedArtists, ...processedAlbums];
+
+        // Cache the result
+        if (searchCache.size >= SEARCH_CACHE_LIMIT) {
+            const firstKey = searchCache.keys().next().value;
+            searchCache.delete(firstKey);
+        }
+        searchCache.set(cacheKey, finalCombinedResults);
+
+        return finalCombinedResults;
     } catch (error) {
+        if (error.name === 'AbortError') {
+            throw error;
+        }
         console.error('Error searching Apple Music:', error.response?.data || error.message);
+        return [];
+    }
+};
+
+export const getSearchHints = async (term) => {
+    if (!term || term.trim() === '') return [];
+    
+    const cleanQuery = term.trim();
+    const cacheKey = cleanQuery.toLowerCase();
+
+    if (hintCache.has(cacheKey)) {
+        return hintCache.get(cacheKey);
+    }
+
+    try {
+        const response = await apiQueue.add((signal) => axios.get(`${APPLE_MUSIC_API_BASE}/catalog/us/search/hints`, {
+            headers: getAppleMusicHeaders(),
+            signal,
+            params: {
+                term: cleanQuery,
+                limit: 10
+            }
+        }), 'hints');
+        
+        const hints = response.data.results?.terms || [];
+
+        // Cache the hints
+        if (hintCache.size >= HINTS_CACHE_LIMIT) {
+            const firstKey = hintCache.keys().next().value;
+            hintCache.delete(firstKey);
+        }
+        hintCache.set(cacheKey, hints);
+
+        return hints;
+    } catch (error) {
+        if (error.name === 'AbortError') {
+            throw error;
+        }
+        console.error('Error fetching search hints:', error.response?.data || error.message);
         return [];
     }
 };
@@ -126,6 +307,10 @@ export const getAlbumDetails = async (albumId) => {
         }
         return null;
     } catch (error) {
+        // Silently catch 404s (e.g. when an album is removed from Apple Music)
+        if (error.response?.status === 404) {
+            return null;
+        }
         console.error('Error fetching album details:', error.response?.data || error.message);
         return null;
     }
@@ -218,7 +403,26 @@ export const subscribeToCurations = (callback) => {
 
 export const addCuration = async (curationData) => {
     // curationData: { title, description, albums: [], userId, username, userPhoto, timestamp }
-    return await addDoc(collection(db, "curations"), curationData);
+    // Clean payload of any `undefined` properties since Firebase strictly blocks them
+    const sanitizedData = JSON.parse(JSON.stringify(curationData));
+
+    // JSON.stringify strips Date objects into ISO strings, but Firebase prefers real timestamps or ISO strings depending on schema. 
+    // We'll preserve the actual timestamp object explicitly just in case JSON.stringify breaks it:
+    if (curationData.timestamp) {
+        sanitizedData.timestamp = curationData.timestamp;
+    }
+
+    return await addDoc(collection(db, "curations"), sanitizedData);
+};
+
+export const deleteCuration = async (curationId) => {
+    if (!curationId) return;
+    try {
+        await deleteDoc(doc(db, "curations", curationId));
+    } catch (error) {
+        console.error("Error deleting curation:", error);
+        throw error;
+    }
 };
 
 export const likeCuration = async (curationId, userId, currentLikes, currentLikedBy) => {
@@ -278,6 +482,70 @@ export const unfollowUser = async (currentUid, targetUid) => {
         await updateDoc(targetRef, { followers: newFollowers });
     }
 };
+
+// --- Physical Collection ---
+
+export const addPhysicalAlbum = async (userId, album, format) => {
+    if (!userId || !album || !format) return;
+    try {
+        const physicalRef = doc(db, 'users', userId, 'physical_collection', `${album.id}_${format}`);
+        await updateDoc(physicalRef, {
+            id: album.id,
+            name: album.name || album.attributes?.name || '',
+            artistName: album.artistName || album.attributes?.artistName || '',
+            artwork: album.artwork || album.attributes?.artwork || null,
+            format: format,
+            addedAt: new Date(),
+        });
+    } catch (error) {
+        if (error.code === 'not-found') {
+            const physicalRef = doc(db, 'users', userId, 'physical_collection', `${album.id}_${format}`);
+            await updateDoc(doc(db, 'users', userId), { _dummy: true }); // Ensure user doc exists, though it should
+            // Use setDoc instead of updateDoc since the doc is new
+            const { setDoc } = require('firebase/firestore');
+            await setDoc(physicalRef, {
+                id: album.id,
+                name: album.name || album.attributes?.name || '',
+                artistName: album.artistName || album.attributes?.artistName || '',
+                artwork: album.artwork || album.attributes?.artwork || null,
+                format: format,
+                addedAt: new Date(),
+            });
+        } else {
+            console.error('Error adding to physical collection:', error);
+            throw error;
+        }
+    }
+};
+
+export const removePhysicalAlbum = async (userId, albumId, format) => {
+    if (!userId || !albumId || !format) return;
+    try {
+        const physicalRef = doc(db, 'users', userId, 'physical_collection', `${albumId}_${format}`);
+        // We need deleteDoc imported if not already. It is imported at the top.
+        await deleteDoc(physicalRef);
+    } catch (error) {
+        console.error('Error removing from physical collection:', error);
+        throw error;
+    }
+};
+
+export const getPhysicalCollection = async (userId) => {
+    if (!userId) return [];
+    try {
+        const { getDocs } = require('firebase/firestore');
+        const q = query(collection(db, 'users', userId, 'physical_collection'), orderBy('addedAt', 'desc'));
+        const snapshot = await getDocs(q);
+        return snapshot.docs.map(doc => ({
+            id: doc.data().id,
+            ...doc.data()
+        }));
+    } catch (error) {
+        console.error('Error fetching physical collection:', error);
+        return [];
+    }
+};
+
 
 // --- Time Capsule Mock Data ---
 const TIME_CAPSULE_DATA = {

@@ -328,8 +328,8 @@ const AdminAwardsScreen = () => {
         try {
             if (isEditingNominee) {
                 // EDIT EXISTING
-                // Identify by unique ID if available, else fallback to tmdbId
-                const targetId = pendingMovie.id || pendingMovie.tmdbId;
+                // Identify by unique ID if available, else fallback to musicId
+                const targetId = pendingMovie.id || pendingMovie.musicId;
 
                 await updateNominee(selectedEvent.id, selectedCategory.id, targetId, { name: finalName });
 
@@ -337,7 +337,7 @@ const AdminAwardsScreen = () => {
                 const updatedCat = {
                     ...selectedCategory,
                     nominees: selectedCategory.nominees.map(n => {
-                        const isMatch = n.id ? n.id === targetId : n.tmdbId === targetId;
+                        const isMatch = n.id ? n.id === targetId : n.musicId === targetId;
                         return isMatch ? { ...n, name: finalName } : n;
                     })
                 };
@@ -357,7 +357,7 @@ const AdminAwardsScreen = () => {
 
                 const nominee = {
                     id: uniqueId,
-                    tmdbId: pendingMovie.id,
+                    musicId: pendingMovie.id,
                     title: pendingMovie.title,
                     name: finalName,
                     poster_path: pendingMovie.poster_path
@@ -442,7 +442,7 @@ const AdminAwardsScreen = () => {
 
                             const updatedCat = {
                                 ...selectedCategory,
-                                nominees: selectedCategory.nominees.filter(n => (n.id ? n.id !== nomineeId : n.tmdbId !== nomineeId))
+                                nominees: selectedCategory.nominees.filter(n => (n.id ? n.id !== nomineeId : n.musicId !== nomineeId))
                             };
                             const updatedEvent = {
                                 ...selectedEvent,
@@ -493,13 +493,13 @@ const AdminAwardsScreen = () => {
     };
 
     const renderNominee = ({ item }) => {
-        // Winner Check: prefer winnerId, fallback to tmdbId
+        // Winner Check: prefer winnerId, fallback to musicId
         const isWinner = selectedCategory?.winnerId
             ? selectedCategory.winnerId === item.id
-            : selectedCategory?.winnerTmdbId === item.tmdbId;
+            : selectedCategory?.winnerTmdbId === item.musicId;
 
-        // Identifier for actions: use unique ID if available, else tmdbId
-        const identifier = item.id || item.tmdbId;
+        // Identifier for actions: use unique ID if available, else musicId
+        const identifier = item.id || item.musicId;
 
         return (
             <View style={[styles.nomineeItem, isWinner && { borderColor: '#FFD700', borderWidth: 2, backgroundColor: '#2a2a00' }]}>
@@ -766,7 +766,7 @@ const AdminAwardsScreen = () => {
                             <FlatList
                                 data={selectedCategory.nominees || []}
                                 renderItem={renderNominee}
-                                keyExtractor={item => item.id || item.tmdbId.toString()}
+                                keyExtractor={item => item.id || item.musicId.toString()}
                                 style={styles.list}
                                 ListEmptyComponent={<Text style={styles.emptyText}>No nominees yet.</Text>}
                             />

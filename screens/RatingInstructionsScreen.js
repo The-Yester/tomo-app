@@ -20,7 +20,7 @@ const RatingInstructionsScreen = () => {
             <ScrollView contentContainerStyle={styles.content}>
 
                 <Text style={styles.introText}>
-                    TOPO offers multiple ways to rate movies so you can express your opinion exactly how you want. Choose your preferred style in Profile Settings!
+                    TOMO offers multiple ways to rate music & albums so you can express your opinion exactly how you want. Choose your preferred style in Profile Settings!
                 </Text>
 
                 <View style={styles.section}>
@@ -33,7 +33,7 @@ const RatingInstructionsScreen = () => {
                         <View style={styles.textContainer}>
                             <Text style={styles.systemTitle}>1-10 (Classic)</Text>
                             <Text style={styles.systemDesc}>
-                                The standard decimal rating. Rate movies on a scale of 1.0 to 10.0 for maximum precision.
+                                The standard decimal rating. Rate albums on a scale of 1.0 to 10.0 for maximum precision.
                             </Text>
                         </View>
                     </View>
@@ -45,7 +45,7 @@ const RatingInstructionsScreen = () => {
                         <View style={styles.textContainer}>
                             <Text style={styles.systemTitle}>Pizza Rating</Text>
                             <Text style={styles.systemDesc}>
-                                A fun, casual scale from 1 to 5 slices. Because some movies are just "cheesy" good!
+                                A fun, casual scale from 1 to 5 slices. Because some albums are just "cheesy" good!
                             </Text>
                         </View>
                     </View>
@@ -64,62 +64,18 @@ const RatingInstructionsScreen = () => {
 
                     <View style={styles.systemRow}>
                         <View style={styles.iconContainer}>
-                            <MaterialIcon name="thumb-up" size={32} color="#4CAF50" />
-                        </View>
-                        <View style={styles.textContainer}>
-                            <Text style={styles.systemTitle}>E&R Variation</Text>
-                            <Text style={styles.systemDesc}>
-                                A tribute to the legendary Ebert & Roeper. Rate with 0.5 to 4.0 Thumbs Up.
-                            </Text>
-                        </View>
-                    </View>
-
-                    <View style={styles.systemRow}>
-                        <View style={styles.iconContainer}>
                             <Icon name="trophy" size={30} color="#FFD700" />
                         </View>
                         <View style={styles.textContainer}>
                             <Text style={styles.systemTitle}>Awards (Detailed)</Text>
                             <Text style={styles.systemDesc}>
-                                For the critics! Rate specific categories like Acting, Directing, and Writing. The overall score is calculated automatically.
+                                For the critics! Rate specific categories like Sound, Lyrics, and Production. The overall score is calculated automatically.
                             </Text>
                         </View>
                     </View>
                 </View>
 
                 <View style={styles.separator} />
-
-                <View style={styles.awardsSection}>
-                    <View style={styles.awardsHeaderRow}>
-                        <Icon name="trophy" size={24} color="#FFD700" style={{ marginRight: 10 }} />
-                        <Text style={styles.awardsSectionTitle}>Awards Hub Integration</Text>
-                    </View>
-
-                    <Text style={styles.awardsText}>
-                        Your ratings play a huge role in the Awards Season!
-                    </Text>
-
-                    <View style={styles.bulletPoint}>
-                        <MaterialIcon name="vote" size={20} color="#ccc" style={{ marginTop: 2, marginRight: 10 }} />
-                        <Text style={styles.bulletText}>
-                            When you rate a movie that has been nominated in the Awards Hub, your rating is automatically displayed alongside the nomination.
-                        </Text>
-                    </View>
-
-                    <View style={styles.bulletPoint}>
-                        <Icon name="eye" size={18} color="#ccc" style={{ marginTop: 2, marginRight: 12 }} />
-                        <Text style={styles.bulletText}>
-                            This gives you insight into your "prediction" or support for that film's chances of winning.
-                        </Text>
-                    </View>
-
-                    <View style={styles.bulletPoint}>
-                        <MaterialIcon name="chart-line" size={20} color="#ccc" style={{ marginTop: 2, marginRight: 10 }} />
-                        <Text style={styles.bulletText}>
-                            When your ratings appear next to each nominated film, they serve as a guide—helping you quickly see which movie you’re most confident should win.
-                        </Text>
-                    </View>
-                </View>
 
             </ScrollView>
         </SafeAreaView>

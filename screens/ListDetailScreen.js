@@ -4,24 +4,35 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import Swipeable from 'react-native-gesture-handler/Swipeable';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { MusicContext } from '../context/MusicContext';
+import * as Sharing from 'expo-sharing';
 import { useNavigation } from '@react-navigation/native';
 import { formatArtworkUrl, addCuration } from '../api/MusicService';
 import { auth, db } from '../firebaseConfig';
 import { doc, getDoc, serverTimestamp } from 'firebase/firestore';
 const OVERALL_RATINGS_LIST_NAME = "Overall Ratings";
+// Window Dimensions Calculation
 const { width } = Dimensions.get('window');
-const COLUMN_COUNT = 3;
-const TILE_SIZE = (width - 32) / COLUMN_COUNT; // 16px padding on each side
+// Padding on content container is 16 on each side (32 total), gap is 10 x 2 (20 total)
+const TILE_SIZE = (width - 32 - 20) / 3;
 
 const ListDetailScreen = ({ route }) => {
   const { listId, listName } = route.params;
-  const { getAlbumsInList, removeAlbumFromList, overallRatedAlbums } = useContext(MusicContext);
+  const { getAlbumsInList, removeAlbumFromList, overallRatedAlbums, ratingMethod } = useContext(MusicContext);
   const navigation = useNavigation();
   const [sortBy, setSortBy] = useState('Highest Rated');
   const [isSortModalVisible, setSortModalVisible] = useState(false);
   const [viewType, setViewType] = useState('deck'); // 'deck' or 'gallery'
   const [isPublishing, setIsPublishing] = useState(false);
   const [showTooltip, setShowTooltip] = useState(false);
+
+  const displayRating = (val) => {
+    if (val === undefined || val === null) return 'N/A';
+    const parsed = parseFloat(val);
+    if (ratingMethod === 'Percentage') {
+      return parsed % 1 === 0 ? `${parsed}%` : `${parsed.toFixed(1)}%`;
+    }
+    return parsed.toFixed(1);
+  };
 
   useLayoutEffect(() => {
     navigation.setOptions({ headerShown: false });
@@ -225,7 +236,7 @@ const ListDetailScreen = ({ route }) => {
             <View style={[styles.ratingBox, styles.yourRatingBox]}>
               <Text style={styles.ratingBoxLabel}>Rating</Text>
               <Text style={styles.ratingBoxValue}>
-                {yourRating !== undefined && yourRating !== null ? parseFloat(yourRating).toFixed(1) : 'N/A'}
+                {displayRating(yourRating)}
               </Text>
             </View>
 
@@ -238,31 +249,42 @@ const ListDetailScreen = ({ route }) => {
     );
   };
 
-  const renderGalleryItem = ({ item }) => {
+  const renderGalleryItem = ({ item, index }) => {
     const artworkUrl = item.attributes?.artwork?.url
       ? formatArtworkUrl(item.attributes.artwork.url, 300, 300)
       : item.artwork?.url ? formatArtworkUrl(item.artwork.url, 300, 300)
         : 'https://via.placeholder.com/150';
 
+    const rank = index + 1;
+    const yourRating = item.userOverallRating;
+
     return (
-      <TouchableOpacity
-        style={styles.galleryItem}
-        onPress={() => handleItemPress(item)}
-        onLongPress={() => {
-          if (!isOverallRatingsList) {
-            Alert.alert(
-              "Remove Album",
-              `Remove "${item.name}"?`,
-              [
-                { text: "Cancel", style: "cancel" },
-                { text: "Remove", onPress: () => removeAlbumFromList(listId, item.id), style: 'destructive' }
-              ]
-            );
-          }
-        }}
-      >
-        <Image source={{ uri: artworkUrl }} style={styles.galleryImage} />
-      </TouchableOpacity>
+      <View style={styles.galleryItemContainer}>
+        <TouchableOpacity
+          style={styles.galleryItem}
+          onPress={() => handleItemPress(item)}
+          onLongPress={() => {
+            if (!isOverallRatingsList) {
+              Alert.alert(
+                "Remove Album",
+                `Remove "${item.name}"?`,
+                [
+                  { text: "Cancel", style: "cancel" },
+                  { text: "Remove", onPress: () => removeAlbumFromList(listId, item.id), style: 'destructive' }
+                ]
+              );
+            }
+          }}
+        >
+          <Image source={{ uri: artworkUrl }} style={styles.galleryImage} />
+        </TouchableOpacity>
+        <View style={styles.galleryItemInfoRow}>
+          <Text style={styles.galleryItemRank}>{rank}.</Text>
+          <Text style={styles.galleryItemRating}>
+            {displayRating(yourRating)}
+          </Text>
+        </View>
+      </View>
     );
   };
 
@@ -389,6 +411,7 @@ const styles = StyleSheet.create({
   },
   columnWrapper: {
     justifyContent: 'flex-start',
+    gap: 10,
   },
   itemContainer: {
     flexDirection: 'row',
@@ -400,11 +423,13 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     borderBottomColor: '#C6A87C'
   },
-  galleryItem: {
+  galleryItemContainer: {
     width: TILE_SIZE,
+    marginBottom: 16,
+  },
+  galleryItem: {
+    flex: 1,
     height: TILE_SIZE,
-    marginBottom: 10,
-    marginRight: 10, // approximate gap
     borderRadius: 8,
     overflow: 'hidden',
     backgroundColor: '#ccc',
@@ -413,6 +438,23 @@ const styles = StyleSheet.create({
     width: '100%',
     height: '100%',
     resizeMode: 'cover',
+  },
+  galleryItemInfoRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    paddingHorizontal: 2,
+    marginTop: 4,
+  },
+  galleryItemRank: {
+    fontSize: 14,
+    fontWeight: 'bold',
+    color: '#d4a03e',
+  },
+  galleryItemRating: {
+    fontSize: 14,
+    fontWeight: 'bold',
+    color: '#d4a03e',
   },
   posterImage: {
     width: 60,

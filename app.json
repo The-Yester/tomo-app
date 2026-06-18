@@ -2,13 +2,13 @@
   "expo": {
     "name": "TOMO",
     "slug": "tomo",
-    "version": "1.0.1",
+    "version": "1.1.1",
     "platforms": [
       "ios",
       "android"
     ],
     "orientation": "portrait",
-    "icon": "./assets/fixed-icon.png",
+    "icon": "./assets/fixed-icon-padded.png",
     "userInterfaceStyle": "light",
     "newArchEnabled": false,
     "splash": {
@@ -19,22 +19,22 @@
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.ryanyester.tomo",
-      "buildNumber": "9",
+      "buildNumber": "11",
       "infoPlist": {
         "ITSAppUsesNonExemptEncryption": false
       }
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/fixed-icon.png",
+        "foregroundImage": "./assets/fixed-icon-padded.png",
         "backgroundColor": "#23242f"
       },
       "package": "com.ryanyester.tomo",
-      "versionCode": 2
+      "versionCode": 11
     },
     "extra": {
       "eas": {
-        "projectId": "baa2a43e-a568-4f77-96d3-23750b05d5bf"
+        "projectId": "3065f097-2f11-4baf-b641-834f7c6bf9a5"
       }
     },
     "owner": "ryester",
@@ -43,7 +43,7 @@
       [
         "expo-notifications",
         {
-          "icon": "./assets/fixed-icon.png",
+          "icon": "./assets/fixed-icon-padded.png",
           "color": "#ffffff"
         }
       ],

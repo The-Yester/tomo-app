@@ -1,6 +1,6 @@
-# TOPO Deployment Guide
+# TOMO Deployment Guide
 
-This guide details how to build and submit the TOPO app to the Apple App Store and Google Play Store using Expo Application Services (EAS).
+This guide details how to build and submit the TOMO app to the Apple App Store and Google Play Store using Expo Application Services (EAS).
 
 ## Prerequisites
 

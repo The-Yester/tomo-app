@@ -1,0 +1,1273 @@
+{
+  "searchResults": [
+    {
+      "id": "19547707",
+      "type": "artists",
+      "href": "/v1/catalog/us/artists/19547707",
+      "attributes": {
+        "artwork": {
+          "bgColor": "90a7b0",
+          "height": 4000,
+          "textColor1": "040504",
+          "textColor2": "18110d",
+          "textColor3": "202626",
+          "textColor4": "302f2e",
+          "url": "https://is1-ssl.mzstatic.com/image/thumb/AMCArtistImages211/v4/fe/c3/ed/fec3edce-793c-b7d0-427f-656aa5067677/be6774cb-09b4-4632-b76b-f30ec0dab20a_ami-identity-df3014d7419f858d6779417e2b9cef00-2024-04-17T19-50-53.897Z_cropped.png/{w}x{h}bb.jpg",
+          "width": 4000
+        },
+        "genreNames": [
+          "Alternative"
+        ],
+        "name": "Say Anything",
+        "url": "https://music.apple.com/us/artist/say-anything/19547707"
+      },
+      "relationships": {
+        "albums": {
+          "href": "/v1/catalog/us/artists/19547707/albums",
+          "next": "/v1/catalog/us/artists/19547707/albums?offset=25",
+          "data": [
+            {
+              "id": "1471051942",
+              "type": "albums",
+              "href": "/v1/catalog/us/albums/1471051942"
+            },
+            {
+              "id": "333447144",
+              "type": "albums",
+              "href": "/v1/catalog/us/albums/333447144"
+            },
+            {
+              "id": "1076772825",
+              "type": "albums",
+              "href": "/v1/catalog/us/albums/1076772825"
+            },
+            {
+              "id": "265127521",
+              "type": "albums",
+              "href": "/v1/catalog/us/albums/265127521"
+            },
+            {
+              "id": "1415182225",
+              "type": "albums",
+              "href": "/v1/catalog/us/albums/1415182225"
+            },
+            {
+              "id": "266222260",
+              "type": "albums",
+              "href": "/v1/catalog/us/albums/266222260"
+            },
+            {
+              "id": "1679098677",
+              "type": "albums",
+              "href": "/v1/catalog/us/albums/1679098677"
+            },
+            {
+              "id": "264810964",
+              "type": "albums",
+              "href": "/v1/catalog/us/albums/264810964"
+            },
+            {
+              "id": "586692453",
+              "type": "albums",
+              "href": "/v1/catalog/us/albums/586692453"
+            },
+            {
+              "id": "1697041523",
+              "type": "albums",
+              "href": "/v1/catalog/us/albums/1697041523"
+            },
+            {
+              "id": "869377842",
+              "type": "albums",
+              "href": "/v1/catalog/us/albums/869377842"
+            },
+            {
+              "id": "1731432255",
+              "type": "albums",
+              "href": "/v1/catalog/us/albums/1731432255"
+            },
+            {
+              "id": "265682322",
+              "type": "albums",
+              "href": "/v1/catalog/us/albums/265682322"
+            },
+            {
+              "id": "1215423097",
+              "type": "albums",
+              "href": "/v1/catalog/us/albums/1215423097"
+            },
+            {
+              "id": "933069383",
+              "type": "albums",
+              "href": "/v1/catalog/us/albums/933069383"
+            },
+            {
+              "id": "495415055",
+              "type": "albums",
+              "href": "/v1/catalog/us/albums/495415055"
+            },
+            {
+              "id": "1707423798",
+              "type": "albums",
+              "href": "/v1/catalog/us/albums/1707423798"
+            },
+            {
+              "id": "1841821875",
+              "type": "albums",
+              "href": "/v1/catalog/us/albums/1841821875"
+            },
+            {
+              "id": "1116811943",
+              "type": "albums",
+              "href": "/v1/catalog/us/albums/1116811943"
+            },
+            {
+              "id": "495463378",
+              "type": "albums",
+              "href": "/v1/catalog/us/albums/495463378"
+            },
+            {
+              "id": "1776963196",
+              "type": "albums",
+              "href": "/v1/catalog/us/albums/1776963196"
+            },
+            {
+              "id": "1639569323",
+              "type": "albums",
+              "href": "/v1/catalog/us/albums/1639569323"
+            },
+            {
+              "id": "1852432375",
+              "type": "albums",
+              "href": "/v1/catalog/us/albums/1852432375"
+            },
+            {
+              "id": "1857411088",
+              "type": "albums",
+              "href": "/v1/catalog/us/albums/1857411088"
+            },
+            {
+              "id": "1852182975",
+              "type": "albums",
+              "href": "/v1/catalog/us/albums/1852182975"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "1876001215",
+      "type": "artists",
+      "href": "/v1/catalog/us/artists/1876001215",
+      "attributes": {
+        "artwork": {
+          "bgColor": "88888b",
+          "height": 3000,
+          "textColor1": "08090b",
+          "textColor2": "111213",
+          "textColor3": "222225",
+          "textColor4": "29292b",
+          "url": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/a7/29/70/a72970ed-f12a-4342-29e3-75897693fb32/artwork.jpg/{w}x{h}ac.jpg",
+          "width": 3000
+        },
+        "genreNames": [],
+        "name": "Nobody Can Say Anything",
+        "url": "https://music.apple.com/us/artist/nobody-can-say-anything/1876001215"
+      },
+      "relationships": {
+        "albums": {
+          "href": "/v1/catalog/us/artists/1876001215/albums",
+          "data": [
+            {
+              "id": "1876612457",
+              "type": "albums",
+              "href": "/v1/catalog/us/albums/1876612457"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "1499111392",
+      "type": "artists",
+      "href": "/v1/catalog/us/artists/1499111392",
+      "attributes": {
+        "artwork": {
+          "bgColor": "7db1d2",
+          "height": 3000,
+          "textColor1": "000000",
+          "textColor2": "451616",
+          "textColor3": "19232a",
+          "textColor4": "50353c",
+          "url": "https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/a6/d5/59/a6d55999-4092-faeb-440e-bb8b6ce2001c/5059505302992_cover.jpg/{w}x{h}ac.jpg",
+          "width": 3000
+        },
+        "genreNames": [
+          "Alternative"
+        ],
+        "name": "Too Tired to Say Anything",
+        "url": "https://music.apple.com/us/artist/too-tired-to-say-anything/1499111392"
+      },
+      "relationships": {
+        "albums": {
+          "href": "/v1/catalog/us/artists/1499111392/albums",
+          "data": [
+            {
+              "id": "1499111391",
+              "type": "albums",
+              "href": "/v1/catalog/us/albums/1499111391"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "1562250735",
+      "type": "artists",
+      "href": "/v1/catalog/us/artists/1562250735",
+      "attributes": {
+        "artwork": {
+          "bgColor": "02110b",
+          "height": 3000,
+          "textColor1": "01cb4a",
+          "textColor2": "91b1d3",
+          "textColor3": "01a53d",
+          "textColor4": "7491ab",
+          "url": "https://is1-ssl.mzstatic.com/image/thumb/Music114/v4/1d/cf/08/1dcf0878-4b1d-305b-f4f0-efb5a6009e07/artwork.jpg/{w}x{h}ac.jpg",
+          "width": 3000
+        },
+        "genreNames": [
+          "Alternative"
+        ],
+        "name": "NO ONE SAY ANYTHING",
+        "url": "https://music.apple.com/us/artist/no-one-say-anything/1562250735"
+      },
+      "relationships": {
+        "albums": {
+          "href": "/v1/catalog/us/artists/1562250735/albums",
+          "data": [
+            {
+              "id": "1569633950",
+              "type": "albums",
+              "href": "/v1/catalog/us/albums/1569633950"
+            },
+            {
+              "id": "1562340918",
+              "type": "albums",
+              "href": "/v1/catalog/us/albums/1562340918"
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "detailResults": {
+    "data": [
+      {
+        "id": "19547707",
+        "type": "artists",
+        "href": "/v1/catalog/us/artists/19547707",
+        "attributes": {
+          "artwork": {
+            "bgColor": "90a7b0",
+            "height": 4000,
+            "textColor1": "040504",
+            "textColor2": "18110d",
+            "textColor3": "202626",
+            "textColor4": "302f2e",
+            "url": "https://is1-ssl.mzstatic.com/image/thumb/AMCArtistImages211/v4/fe/c3/ed/fec3edce-793c-b7d0-427f-656aa5067677/be6774cb-09b4-4632-b76b-f30ec0dab20a_ami-identity-df3014d7419f858d6779417e2b9cef00-2024-04-17T19-50-53.897Z_cropped.png/{w}x{h}bb.jpg",
+            "width": 4000
+          },
+          "genreNames": [
+            "Alternative"
+          ],
+          "name": "Say Anything",
+          "url": "https://music.apple.com/us/artist/say-anything/19547707"
+        },
+        "relationships": {
+          "albums": {
+            "href": "/v1/catalog/us/artists/19547707/albums",
+            "next": "/v1/catalog/us/artists/19547707/albums?offset=25",
+            "data": [
+              {
+                "id": "1471051942",
+                "type": "albums",
+                "href": "/v1/catalog/us/albums/1471051942",
+                "attributes": {
+                  "artistName": "Say Anything",
+                  "artwork": {
+                    "bgColor": "f7fbf7",
+                    "height": 1500,
+                    "textColor1": "2c100c",
+                    "textColor2": "422017",
+                    "textColor3": "553f3b",
+                    "textColor4": "664c44",
+                    "url": "https://is1-ssl.mzstatic.com/image/thumb/Music113/v4/85/57/0d/85570de8-6ec3-1931-0521-a1107c4b2397/859721741750_1.jpg/{w}x{h}bb.jpg",
+                    "width": 1500
+                  },
+                  "contentRating": "explicit",
+                  "copyright": "℗ 2005 Doghouse America, Inc.",
+                  "genreNames": [
+                    "Alternative",
+                    "Music",
+                    "Rock",
+                    "Adult Alternative",
+                    "Punk"
+                  ],
+                  "isCompilation": false,
+                  "isComplete": true,
+                  "isMasteredForItunes": false,
+                  "isSingle": false,
+                  "name": "Is a Real Boy",
+                  "playParams": {
+                    "id": "1471051942",
+                    "kind": "album"
+                  },
+                  "recordLabel": "Doghouse Records",
+                  "releaseDate": "2004-08-03",
+                  "trackCount": 21,
+                  "upc": "859721741750",
+                  "url": "https://music.apple.com/us/album/is-a-real-boy/1471051942"
+                }
+              },
+              {
+                "id": "333447144",
+                "type": "albums",
+                "href": "/v1/catalog/us/albums/333447144",
+                "attributes": {
+                  "artistName": "Say Anything",
+                  "artwork": {
+                    "bgColor": "1a1a1d",
+                    "height": 600,
+                    "textColor1": "cecdd2",
+                    "textColor2": "cdc0c0",
+                    "textColor3": "aaa9ae",
+                    "textColor4": "a99f9f",
+                    "url": "https://is1-ssl.mzstatic.com/image/thumb/Features114/v4/0a/40/a0/0a40a072-ed72-6cf9-c6ba-0007dcabbe1c/dj.crjsdmjt.jpg/{w}x{h}bb.jpg",
+                    "width": 600
+                  },
+                  "copyright": "℗ 2009 RCA/JIVE Label Group, a unit of Sony Music Entertainment",
+                  "genreNames": [
+                    "Alternative",
+                    "Music",
+                    "Punk",
+                    "Rock",
+                    "Adult Alternative"
+                  ],
+                  "isCompilation": false,
+                  "isComplete": true,
+                  "isMasteredForItunes": false,
+                  "isSingle": false,
+                  "name": "Say Anything (Deluxe Version)",
+                  "playParams": {
+                    "id": "333447144",
+                    "kind": "album"
+                  },
+                  "recordLabel": "RCA Records Label",
+                  "releaseDate": "2009-10-30",
+                  "trackCount": 17,
+                  "upc": "884977362329",
+                  "url": "https://music.apple.com/us/album/say-anything-deluxe-version/333447144"
+                }
+              },
+              {
+                "id": "1076772825",
+                "type": "albums",
+                "href": "/v1/catalog/us/albums/1076772825",
+                "attributes": {
+                  "artistName": "Say Anything",
+                  "artwork": {
+                    "bgColor": "694830",
+                    "height": 1500,
+                    "textColor1": "ead4e0",
+                    "textColor2": "eeb39e",
+                    "textColor3": "d0b8bd",
+                    "textColor4": "d39d88",
+                    "url": "https://is1-ssl.mzstatic.com/image/thumb/Music69/v4/3b/59/11/3b5911f7-1990-7889-1c65-c1d2a5f5316a/886445706796.jpg/{w}x{h}bb.jpg",
+                    "width": 1500
+                  },
+                  "copyright": "℗ 2016 Equal Vision Records, Inc.",
+                  "editorialNotes": {
+                    "short": "This surprise album from the ‘00s emo heroes expands their vision and ambition.",
+                    "standard": "On <i>I Don’t Think It Is</i>, iconoclastic bandleader Max Bemis is the emo Kanye West, stretching the stylistic boundaries of his genre, vacillating between tender personal revelation and self-aggrandizement. Opener “Give a Damn” is a fist-pumping, noise-blasting rejection of authority, while the delicately barbed “The Bret Easton Ellis School of Witchcraft and Wizardry” takes on a former punk friend gone yuppie. Harder in sound than their previous albums—mixing in mathy post-hardcore, straightforward anthemic emo, and even some hip-hop—this may be Say Anything's most sharp and ambitious work to date."
+                  },
+                  "genreNames": [
+                    "Alternative",
+                    "Music",
+                    "Punk"
+                  ],
+                  "isCompilation": false,
+                  "isComplete": true,
+                  "isMasteredForItunes": false,
+                  "isSingle": false,
+                  "name": "I Don't Think It Is",
+                  "playParams": {
+                    "id": "1076772825",
+                    "kind": "album"
+                  },
+                  "recordLabel": "Equal Vision Records",
+                  "releaseDate": "2016-02-05",
+                  "trackCount": 12,
+                  "upc": "886445706796",
+                  "url": "https://music.apple.com/us/album/i-dont-think-it-is/1076772825"
+                }
+              },
+              {
+                "id": "265127521",
+                "type": "albums",
+                "href": "/v1/catalog/us/albums/265127521",
+                "attributes": {
+                  "artistName": "Say Anything",
+                  "artwork": {
+                    "bgColor": "100f12",
+                    "height": 600,
+                    "textColor1": "d9cc96",
+                    "textColor2": "cdb484",
+                    "textColor3": "b1a67c",
+                    "textColor4": "a7936d",
+                    "url": "https://is1-ssl.mzstatic.com/image/thumb/Music/95/9c/4a/mzi.vbqpqsrg.jpg/{w}x{h}bb.jpg",
+                    "width": 600
+                  },
+                  "copyright": "℗ 2007 J Records, a unit of SONY BMG MUSIC ENTERTAINMENT",
+                  "genreNames": [
+                    "Alternative",
+                    "Music",
+                    "Rock"
+                  ],
+                  "isCompilation": false,
+                  "isComplete": true,
+                  "isMasteredForItunes": false,
+                  "isSingle": true,
+                  "name": "Shiksa (Girlfriend) - Single",
+                  "playParams": {
+                    "id": "265127521",
+                    "kind": "album"
+                  },
+                  "recordLabel": "J Records",
+                  "releaseDate": "2007-10-08",
+                  "trackCount": 1,
+                  "upc": "888880329950",
+                  "url": "https://music.apple.com/us/album/shiksa-girlfriend-single/265127521"
+                }
+              },
+              {
+                "id": "1415182225",
+                "type": "albums",
+                "href": "/v1/catalog/us/albums/1415182225",
+                "attributes": {
+                  "artistName": "Say Anything",
+                  "artwork": {
+                    "bgColor": "fef9ef",
+                    "height": 1500,
+                    "textColor1": "0c0403",
+                    "textColor2": "1f130e",
+                    "textColor3": "3c3532",
+                    "textColor4": "4c413b",
+                    "url": "https://is1-ssl.mzstatic.com/image/thumb/Music128/v4/5c/43/67/5c4367d0-885c-5afa-474e-a74160b2b42f/821826023956.jpg/{w}x{h}bb.jpg",
+                    "width": 1500
+                  },
+                  "contentRating": "explicit",
+                  "copyright": "℗ 2018 Say Anything, under exclusive license to Dine Alone Music Inc.",
+                  "genreNames": [
+                    "Alternative",
+                    "Music"
+                  ],
+                  "isCompilation": false,
+                  "isComplete": true,
+                  "isMasteredForItunes": false,
+                  "isSingle": false,
+                  "name": "Oliver Appropriate",
+                  "playParams": {
+                    "id": "1415182225",
+                    "kind": "album"
+                  },
+                  "recordLabel": "Dine Alone Music Inc.",
+                  "releaseDate": "2019-01-25",
+                  "trackCount": 14,
+                  "upc": "821826023956",
+                  "url": "https://music.apple.com/us/album/oliver-appropriate/1415182225"
+                }
+              },
+              {
+                "id": "266222260",
+                "type": "albums",
+                "href": "/v1/catalog/us/albums/266222260",
+                "attributes": {
+                  "artistName": "Say Anything",
+                  "artwork": {
+                    "bgColor": "462a3e",
+                    "height": 600,
+                    "textColor1": "fcf8e7",
+                    "textColor2": "e4bb6e",
+                    "textColor3": "d8cfc5",
+                    "textColor4": "c49e64",
+                    "url": "https://is1-ssl.mzstatic.com/image/thumb/Features/43/2e/1a/dj.otkdyyng.jpg/{w}x{h}bb.jpg",
+                    "width": 600
+                  },
+                  "contentRating": "explicit",
+                  "copyright": "℗ 2007 J Records, a unit of SONY BMG MUSIC ENTERTAINMENT",
+                  "genreNames": [
+                    "Rock",
+                    "Music",
+                    "Alternative",
+                    "Indie Rock",
+                    "Punk"
+                  ],
+                  "isCompilation": false,
+                  "isComplete": true,
+                  "isMasteredForItunes": false,
+                  "isSingle": false,
+                  "name": "In Defense of the Genre",
+                  "playParams": {
+                    "id": "266222260",
+                    "kind": "album"
+                  },
+                  "recordLabel": "J Records",
+                  "releaseDate": "2007-10-23",
+                  "trackCount": 27,
+                  "upc": "886971870121",
+                  "url": "https://music.apple.com/us/album/in-defense-of-the-genre/266222260"
+                }
+              },
+              {
+                "id": "1679098677",
+                "type": "albums",
+                "href": "/v1/catalog/us/albums/1679098677",
+                "attributes": {
+                  "artistName": "Say Anything",
+                  "artwork": {
+                    "bgColor": "f5f5f1",
+                    "height": 3000,
+                    "textColor1": "121511",
+                    "textColor2": "181a0f",
+                    "textColor3": "3f423d",
+                    "textColor4": "44453c",
+                    "url": "https://is1-ssl.mzstatic.com/image/thumb/Music126/v4/de/05/b0/de05b0c9-8451-fe8a-069e-a3da0561f116/821826035980.jpg/{w}x{h}bb.jpg",
+                    "width": 3000
+                  },
+                  "contentRating": "explicit",
+                  "copyright": "℗ 2023 Say Anything under exclusive license to Dine Alone Music Inc.",
+                  "genreNames": [
+                    "Alternative",
+                    "Music"
+                  ],
+                  "isCompilation": false,
+                  "isComplete": true,
+                  "isMasteredForItunes": false,
+                  "isSingle": true,
+                  "name": "PSYCHE! - Single",
+                  "playParams": {
+                    "id": "1679098677",
+                    "kind": "album"
+                  },
+                  "recordLabel": "Dine Alone Music Inc.",
+                  "releaseDate": "2023-04-28",
+                  "trackCount": 1,
+                  "upc": "821826035980",
+                  "url": "https://music.apple.com/us/album/psyche-single/1679098677"
+                }
+              },
+              {
+                "id": "264810964",
+                "type": "albums",
+                "href": "/v1/catalog/us/albums/264810964",
+                "attributes": {
+                  "artistName": "Say Anything",
+                  "artwork": {
+                    "bgColor": "41362c",
+                    "height": 600,
+                    "textColor1": "d9c4bc",
+                    "textColor2": "e5bc61",
+                    "textColor3": "bba79f",
+                    "textColor4": "c4a156",
+                    "url": "https://is1-ssl.mzstatic.com/image/thumb/Music/e9/a4/33/mzi.eoyuchoj.jpg/{w}x{h}bb.jpg",
+                    "width": 600
+                  },
+                  "copyright": "℗ 2007 J Records, a unit of SONY BMG MUSIC ENTERTAINMENT",
+                  "genreNames": [
+                    "Alternative",
+                    "Music"
+                  ],
+                  "isCompilation": false,
+                  "isComplete": true,
+                  "isMasteredForItunes": false,
+                  "isSingle": true,
+                  "name": "Baby Girl, I'm a Blur - Single",
+                  "playParams": {
+                    "id": "264810964",
+                    "kind": "album"
+                  },
+                  "recordLabel": "J Records",
+                  "releaseDate": "2007-10-01",
+                  "trackCount": 1,
+                  "upc": "888880324276",
+                  "url": "https://music.apple.com/us/album/baby-girl-im-a-blur-single/264810964"
+                }
+              },
+              {
+                "id": "586692453",
+                "type": "albums",
+                "href": "/v1/catalog/us/albums/586692453",
+                "attributes": {
+                  "artistName": "Say Anything",
+                  "artwork": {
+                    "bgColor": "18181a",
+                    "height": 1500,
+                    "textColor1": "eee6cd",
+                    "textColor2": "d8d1bb",
+                    "textColor3": "c3bda9",
+                    "textColor4": "b2ac9b",
+                    "url": "https://is1-ssl.mzstatic.com/image/thumb/Music118/v4/8b/f3/0e/8bf30ee9-371d-798e-9f60-2d8a34bd2bb0/886443776296.jpg/{w}x{h}bb.jpg",
+                    "width": 1500
+                  },
+                  "copyright": "℗ 2013 Equal Vision Records, Inc.",
+                  "genreNames": [
+                    "Alternative",
+                    "Music",
+                    "Rock",
+                    "Adult Alternative",
+                    "Punk"
+                  ],
+                  "isCompilation": false,
+                  "isComplete": true,
+                  "isMasteredForItunes": false,
+                  "isSingle": false,
+                  "name": "All My Friends Are Enemies: Early Rarities",
+                  "playParams": {
+                    "id": "586692453",
+                    "kind": "album"
+                  },
+                  "recordLabel": "Equal Vision Records",
+                  "releaseDate": "2013-01-22",
+                  "trackCount": 45,
+                  "upc": "886443776296",
+                  "url": "https://music.apple.com/us/album/all-my-friends-are-enemies-early-rarities/586692453"
+                }
+              },
+              {
+                "id": "1697041523",
+                "type": "albums",
+                "href": "/v1/catalog/us/albums/1697041523",
+                "attributes": {
+                  "artistName": "Say Anything",
+                  "artwork": {
+                    "bgColor": "ffffff",
+                    "height": 3000,
+                    "textColor1": "0b0b0b",
+                    "textColor2": "272727",
+                    "textColor3": "3c3c3c",
+                    "textColor4": "525252",
+                    "url": "https://is1-ssl.mzstatic.com/image/thumb/Music116/v4/d9/cb/10/d9cb104b-ce4d-3647-0c82-2f50e607ae31/197189375361.jpg/{w}x{h}bb.jpg",
+                    "width": 3000
+                  },
+                  "contentRating": "explicit",
+                  "copyright": "℗ 2023 Say Anything under exclusive license to Dine Alone Music Inc.",
+                  "genreNames": [
+                    "Alternative",
+                    "Music"
+                  ],
+                  "isCompilation": false,
+                  "isComplete": true,
+                  "isMasteredForItunes": false,
+                  "isSingle": true,
+                  "name": "ARE YOU (IN) THERE? - Single",
+                  "playParams": {
+                    "id": "1697041523",
+                    "kind": "album"
+                  },
+                  "recordLabel": "Dine Alone Music Inc.",
+                  "releaseDate": "2023-08-10",
+                  "trackCount": 1,
+                  "upc": "197189375361",
+                  "url": "https://music.apple.com/us/album/are-you-in-there-single/1697041523"
+                }
+              },
+              {
+                "id": "869377842",
+                "type": "albums",
+                "href": "/v1/catalog/us/albums/869377842",
+                "attributes": {
+                  "artistName": "Say Anything",
+                  "artwork": {
+                    "bgColor": "614646",
+                    "height": 1500,
+                    "textColor1": "d2ecf5",
+                    "textColor2": "f8c099",
+                    "textColor3": "bbcad2",
+                    "textColor4": "d9a788",
+                    "url": "https://is1-ssl.mzstatic.com/image/thumb/Music118/v4/5a/8d/d6/5a8dd614-7c23-5d16-5b6b-fcbd1dc7f6ae/886444576765.jpg/{w}x{h}bb.jpg",
+                    "width": 1500
+                  },
+                  "copyright": "℗ 2014 Equal Vision Records, Inc.",
+                  "editorialNotes": {
+                    "standard": "At once bratty and introspective, Say Anything’s Max Bemis serves up an idiosyncratic brand of melodic pop on <i>Hebrews</i> while retaining his bitingly satiric edge. If his band’s 2012 album <i>Anarchy, My Dear</i> was a provocative departure, <i>Hebrews</i> is a full-on challenge to anyone expecting the group to stick to familiar punk-pop formulas. Bemis drills deep down into his psyche in these songs, dissecting his motivations for living and making music with almost masochistic relish. He takes a scalpel to his own artistic pretensions (as well as show business in general) in songs like “Judas Decapitation,” “Kall Me Kubrick,” and “My Greatest Fear Is Splendid. “Lost My Touch” (featuring Christie Dupree’s honeyed vocals) offers sober thoughts on growing older and raising kids, while “Plan” speculates about the mysteries of God’s intentions toward humanity. Bemis’ dense, obsessive lyrics—delivered with an insinuating croon that modulates into an unhinged snarl—might be hard to take if <i>Hebrews</i>' music weren't so consistently inventive in its blend of sweeping strings, chiming keyboards, and driving rhythms."
+                  },
+                  "genreNames": [
+                    "Alternative",
+                    "Music",
+                    "Punk",
+                    "Rock",
+                    "Adult Alternative"
+                  ],
+                  "isCompilation": false,
+                  "isComplete": true,
+                  "isMasteredForItunes": false,
+                  "isSingle": false,
+                  "name": "Hebrews",
+                  "playParams": {
+                    "id": "869377842",
+                    "kind": "album"
+                  },
+                  "recordLabel": "Equal Vision Records",
+                  "releaseDate": "2014-06-10",
+                  "trackCount": 12,
+                  "upc": "886444576765",
+                  "url": "https://music.apple.com/us/album/hebrews/869377842"
+                }
+              },
+              {
+                "id": "1731432255",
+                "type": "albums",
+                "href": "/v1/catalog/us/albums/1731432255",
+                "attributes": {
+                  "artistName": "Say Anything",
+                  "artwork": {
+                    "bgColor": "f9f9f9",
+                    "height": 3000,
+                    "textColor1": "161616",
+                    "textColor2": "313131",
+                    "textColor3": "434343",
+                    "textColor4": "595959",
+                    "url": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/07/f4/47/07f447a2-db41-c53e-7350-1c2e3676b7e3/821826037298.jpg/{w}x{h}bb.jpg",
+                    "width": 3000
+                  },
+                  "contentRating": "explicit",
+                  "copyright": "℗ 2024 Say Anything under exclusive license to Dine Alone Music Inc.",
+                  "genreNames": [
+                    "Alternative",
+                    "Music"
+                  ],
+                  "isCompilation": false,
+                  "isComplete": true,
+                  "isMasteredForItunes": false,
+                  "isSingle": false,
+                  "name": "…Is Committed",
+                  "playParams": {
+                    "id": "1731432255",
+                    "kind": "album"
+                  },
+                  "recordLabel": "Dine Alone Music Inc.",
+                  "releaseDate": "2024-05-24",
+                  "trackCount": 12,
+                  "upc": "821826037298",
+                  "url": "https://music.apple.com/us/album/is-committed/1731432255"
+                }
+              },
+              {
+                "id": "265682322",
+                "type": "albums",
+                "href": "/v1/catalog/us/albums/265682322",
+                "attributes": {
+                  "artistName": "Say Anything",
+                  "artwork": {
+                    "bgColor": "1a1b1a",
+                    "height": 600,
+                    "textColor1": "e6c8b9",
+                    "textColor2": "d1b49f",
+                    "textColor3": "bda699",
+                    "textColor4": "ac9684",
+                    "url": "https://is1-ssl.mzstatic.com/image/thumb/Music/cc/81/87/mzi.ciyvaijq.jpg/{w}x{h}bb.jpg",
+                    "width": 600
+                  },
+                  "copyright": "℗ 2007 J Records, a unit of SONY BMG MUSIC ENTERTAINMENT",
+                  "genreNames": [
+                    "Alternative",
+                    "Music"
+                  ],
+                  "isCompilation": false,
+                  "isComplete": true,
+                  "isMasteredForItunes": false,
+                  "isSingle": true,
+                  "name": "Skinny, Mean Man - Single",
+                  "playParams": {
+                    "id": "265682322",
+                    "kind": "album"
+                  },
+                  "recordLabel": "J Records",
+                  "releaseDate": "2007-10-15",
+                  "trackCount": 1,
+                  "upc": "888880329899",
+                  "url": "https://music.apple.com/us/album/skinny-mean-man-single/265682322"
+                }
+              },
+              {
+                "id": "1215423097",
+                "type": "albums",
+                "href": "/v1/catalog/us/albums/1215423097",
+                "attributes": {
+                  "artistName": "Say Anything",
+                  "artwork": {
+                    "bgColor": "8a8988",
+                    "height": 1500,
+                    "textColor1": "09090b",
+                    "textColor2": "1e1a12",
+                    "textColor3": "232224",
+                    "textColor4": "33302a",
+                    "url": "https://is1-ssl.mzstatic.com/image/thumb/Music118/v4/52/11/ed/5211ed1c-af41-0a06-67c1-74f516e32ecf/886446426549.jpg/{w}x{h}bb.jpg",
+                    "width": 1500
+                  },
+                  "copyright": "℗ 2017 Equal Vision Records, Inc.",
+                  "genreNames": [
+                    "Rock",
+                    "Music"
+                  ],
+                  "isCompilation": false,
+                  "isComplete": true,
+                  "isMasteredForItunes": false,
+                  "isSingle": true,
+                  "name": "They're Not Horses, They're Unicorns - Single",
+                  "playParams": {
+                    "id": "1215423097",
+                    "kind": "album"
+                  },
+                  "recordLabel": "Equal Vision Records",
+                  "releaseDate": "2017-03-31",
+                  "trackCount": 1,
+                  "upc": "886446426549",
+                  "url": "https://music.apple.com/us/album/theyre-not-horses-theyre-unicorns-single/1215423097"
+                }
+              },
+              {
+                "id": "933069383",
+                "type": "albums",
+                "href": "/v1/catalog/us/albums/933069383",
+                "attributes": {
+                  "artistName": "Say Anything",
+                  "artwork": {
+                    "bgColor": "272a25",
+                    "height": 1500,
+                    "textColor1": "e4e0e7",
+                    "textColor2": "cfc3d2",
+                    "textColor3": "bebcc0",
+                    "textColor4": "aea4af",
+                    "url": "https://is1-ssl.mzstatic.com/image/thumb/Music3/v4/4a/7e/d8/4a7ed8eb-0bf6-c60f-ce75-789437081d66/886443354937.jpg/{w}x{h}bb.jpg",
+                    "width": 1500
+                  },
+                  "copyright": "℗ 2012 Equal Vision Records",
+                  "genreNames": [
+                    "Rock",
+                    "Music",
+                    "Alternative",
+                    "Punk"
+                  ],
+                  "isCompilation": false,
+                  "isComplete": true,
+                  "isMasteredForItunes": false,
+                  "isSingle": false,
+                  "name": "Anarchy, My Dear (Deluxe)",
+                  "playParams": {
+                    "id": "933069383",
+                    "kind": "album"
+                  },
+                  "recordLabel": "Equal Vision Records",
+                  "releaseDate": "2012-12-31",
+                  "trackCount": 12,
+                  "upc": "886443354937",
+                  "url": "https://music.apple.com/us/album/anarchy-my-dear-deluxe/933069383"
+                }
+              },
+              {
+                "id": "495415055",
+                "type": "albums",
+                "href": "/v1/catalog/us/albums/495415055",
+                "attributes": {
+                  "artistName": "Say Anything",
+                  "artwork": {
+                    "bgColor": "272a25",
+                    "height": 1500,
+                    "textColor1": "e4e0e7",
+                    "textColor2": "cfc3d2",
+                    "textColor3": "bebcc0",
+                    "textColor4": "aea4af",
+                    "url": "https://is1-ssl.mzstatic.com/image/thumb/Music118/v4/c8/1d/63/c81d6389-0d41-39c9-37d4-d47d8fd7f4d0/886443347458.jpg/{w}x{h}bb.jpg",
+                    "width": 1500
+                  },
+                  "copyright": "℗ 2012 Equal Vision Records, Inc.",
+                  "editorialNotes": {
+                    "standard": "Say Anything’s fifth studio album, <i>Anarchy, My Dear</i>, is a genuinely angst-ridden release. It's easily the hardest Say Anything has crafted since 2004’s <i>. . .Is a Real Boy</i>. The group's album art even depicts a symbol of a burning flag stitched onto an actual flag. Singer Max Bemis has said that this album is about subverting society and breaking down boundaries. Sure enough, “Burn a Miracle” opens with taut pop-punk that leans a bit harder on the punk. Over guitar leads with late-'90s emo flavors, overdriven bass, and plenty of upstart lyrics, Bemis sings through a distortion filter. His chanting “burn a miracle” cleverly sounds like he’s shouting “burn America.” He namechecks Randy Newman in “Night’s Song,” a reggae-tinged ditty that juxtaposes a lightly bouncing melody with Bemis angrily spitting out his lyrics like a soured beverage."
+                  },
+                  "genreNames": [
+                    "Alternative",
+                    "Music",
+                    "Rock",
+                    "Adult Alternative",
+                    "Punk"
+                  ],
+                  "isCompilation": false,
+                  "isComplete": true,
+                  "isMasteredForItunes": false,
+                  "isSingle": false,
+                  "name": "Anarchy, My Dear",
+                  "playParams": {
+                    "id": "495415055",
+                    "kind": "album"
+                  },
+                  "recordLabel": "Equal Vision Records",
+                  "releaseDate": "2012-03-13",
+                  "trackCount": 11,
+                  "upc": "886443347458",
+                  "url": "https://music.apple.com/us/album/anarchy-my-dear/495415055"
+                }
+              },
+              {
+                "id": "1707423798",
+                "type": "albums",
+                "href": "/v1/catalog/us/albums/1707423798",
+                "attributes": {
+                  "artistName": "Say Anything",
+                  "artwork": {
+                    "bgColor": "f5f5f1",
+                    "height": 3000,
+                    "textColor1": "211c1f",
+                    "textColor2": "383131",
+                    "textColor3": "4b4749",
+                    "textColor4": "5e5857",
+                    "url": "https://is1-ssl.mzstatic.com/image/thumb/Music116/v4/c6/e2/1e/c6e21e76-a8e2-788d-0ae5-8bd639e5677b/821826037038.jpg/{w}x{h}bb.jpg",
+                    "width": 3000
+                  },
+                  "contentRating": "explicit",
+                  "copyright": "℗ 2023 Say Anything under exclusive license to Dine Alone Music Inc.",
+                  "genreNames": [
+                    "Alternative",
+                    "Music"
+                  ],
+                  "isCompilation": false,
+                  "isComplete": true,
+                  "isMasteredForItunes": false,
+                  "isSingle": true,
+                  "name": "CARRIE & LOWELL & CODY (PENDENT) - Single",
+                  "playParams": {
+                    "id": "1707423798",
+                    "kind": "album"
+                  },
+                  "recordLabel": "Dine Alone Music Inc.",
+                  "releaseDate": "2023-10-13",
+                  "trackCount": 1,
+                  "upc": "821826037038",
+                  "url": "https://music.apple.com/us/album/carrie-lowell-cody-pendent-single/1707423798"
+                }
+              },
+              {
+                "id": "1841821875",
+                "type": "albums",
+                "href": "/v1/catalog/us/albums/1841821875",
+                "attributes": {
+                  "artistName": "Say Anything",
+                  "artwork": {
+                    "bgColor": "ffffff",
+                    "height": 3000,
+                    "textColor1": "1f2228",
+                    "textColor2": "28343a",
+                    "textColor3": "4c4e53",
+                    "textColor4": "535c61",
+                    "url": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/8e/2e/18/8e2e180f-b0fb-13f9-7f82-d5df2ced67e0/artwork.jpg/{w}x{h}bb.jpg",
+                    "width": 3000
+                  },
+                  "copyright": "℗ 2025 Rory Records",
+                  "genreNames": [
+                    "Alternative",
+                    "Music",
+                    "Rock"
+                  ],
+                  "isCompilation": false,
+                  "isComplete": true,
+                  "isMasteredForItunes": false,
+                  "isSingle": false,
+                  "name": "Is Sleazy - Single",
+                  "playParams": {
+                    "id": "1841821875",
+                    "kind": "album"
+                  },
+                  "recordLabel": "Rory Records",
+                  "releaseDate": "2025-10-24",
+                  "trackCount": 3,
+                  "upc": "199740902085",
+                  "url": "https://music.apple.com/us/album/is-sleazy-single/1841821875"
+                }
+              },
+              {
+                "id": "1116811943",
+                "type": "albums",
+                "href": "/v1/catalog/us/albums/1116811943",
+                "attributes": {
+                  "artistName": "Say Anything",
+                  "artwork": {
+                    "bgColor": "1b1919",
+                    "height": 1500,
+                    "textColor1": "fc1918",
+                    "textColor2": "fa1c1c",
+                    "textColor3": "cf1918",
+                    "textColor4": "cd1b1b",
+                    "url": "https://is1-ssl.mzstatic.com/image/thumb/Music128/v4/f1/f0/87/f1f08721-713d-4ed6-70ce-3b5afa53a0a6/886445919769.jpg/{w}x{h}bb.jpg",
+                    "width": 1500
+                  },
+                  "copyright": "℗ 2016 Equal Vision Records, Inc.",
+                  "genreNames": [
+                    "Rock",
+                    "Music"
+                  ],
+                  "isCompilation": false,
+                  "isComplete": true,
+                  "isMasteredForItunes": false,
+                  "isSingle": true,
+                  "name": "Torches Apart - Single",
+                  "playParams": {
+                    "id": "1116811943",
+                    "kind": "album"
+                  },
+                  "recordLabel": "Equal Vision Records",
+                  "releaseDate": "2016-05-27",
+                  "trackCount": 1,
+                  "upc": "886445919769",
+                  "url": "https://music.apple.com/us/album/torches-apart-single/1116811943"
+                }
+              },
+              {
+                "id": "495463378",
+                "type": "albums",
+                "href": "/v1/catalog/us/albums/495463378",
+                "attributes": {
+                  "artistName": "Say Anything",
+                  "artwork": {
+                    "bgColor": "505050",
+                    "height": 1500,
+                    "textColor1": "ffffff",
+                    "textColor2": "f7f7f7",
+                    "textColor3": "dbdbdb",
+                    "textColor4": "d6d6d6",
+                    "url": "https://is1-ssl.mzstatic.com/image/thumb/Music118/v4/6b/9b/04/6b9b0425-9a45-9a82-afd7-4f74ddc43d3a/886443342200.jpg/{w}x{h}bb.jpg",
+                    "width": 1500
+                  },
+                  "copyright": "℗ 2012 Equal Vision Records",
+                  "genreNames": [
+                    "Alternative",
+                    "Music",
+                    "Punk",
+                    "Rock",
+                    "Adult Alternative"
+                  ],
+                  "isCompilation": false,
+                  "isComplete": true,
+                  "isMasteredForItunes": false,
+                  "isSingle": true,
+                  "name": "Say Anything - Single",
+                  "playParams": {
+                    "id": "495463378",
+                    "kind": "album"
+                  },
+                  "recordLabel": "Equal Vision Records",
+                  "releaseDate": "2012-02-14",
+                  "trackCount": 1,
+                  "upc": "886443342200",
+                  "url": "https://music.apple.com/us/album/say-anything-single/495463378"
+                }
+              },
+              {
+                "id": "1776963196",
+                "type": "albums",
+                "href": "/v1/catalog/us/albums/1776963196",
+                "attributes": {
+                  "artistName": "Say Anything",
+                  "artwork": {
+                    "bgColor": "ded7d4",
+                    "height": 3000,
+                    "textColor1": "1f1711",
+                    "textColor2": "2a1e1a",
+                    "textColor3": "453d38",
+                    "textColor4": "4e433f",
+                    "url": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/cc/f2/74/ccf274fb-9309-da6a-1698-fc6343cf17e7/790168704017.jpg/{w}x{h}bb.jpg",
+                    "width": 3000
+                  },
+                  "contentRating": "explicit",
+                  "copyright": "℗ 2024 Doghouse America",
+                  "genreNames": [
+                    "Alternative",
+                    "Music"
+                  ],
+                  "isCompilation": false,
+                  "isComplete": true,
+                  "isMasteredForItunes": false,
+                  "isSingle": false,
+                  "name": "Say Anything (Is A Real Boy... 20th Anniversary The Demos)",
+                  "playParams": {
+                    "id": "1776963196",
+                    "kind": "album"
+                  },
+                  "recordLabel": "Doghouse Records",
+                  "releaseDate": "2024-11-01",
+                  "trackCount": 14,
+                  "upc": "790168704017",
+                  "url": "https://music.apple.com/us/album/say-anything-is-a-real-boy-20th-anniversary-the-demos/1776963196"
+                }
+              },
+              {
+                "id": "1639569323",
+                "type": "albums",
+                "href": "/v1/catalog/us/albums/1639569323",
+                "attributes": {
+                  "artistName": "Say Anything",
+                  "artwork": {
+                    "bgColor": "131416",
+                    "height": 1499,
+                    "textColor1": "cbcbcf",
+                    "textColor2": "ccc2c1",
+                    "textColor3": "a6a6aa",
+                    "textColor4": "a79f9e",
+                    "url": "https://is1-ssl.mzstatic.com/image/thumb/Music112/v4/09/f1/4c/09f14c08-e867-7ae5-7f81-7417fcd16ff8/884977362336.jpg/{w}x{h}bb.jpg",
+                    "width": 1500
+                  },
+                  "copyright": "℗ 2009 RCA/JIVE Label Group, a unit of Sony Music Entertainment",
+                  "genreNames": [
+                    "Alternative",
+                    "Music",
+                    "Rock",
+                    "Adult Alternative",
+                    "Punk"
+                  ],
+                  "isCompilation": false,
+                  "isComplete": true,
+                  "isMasteredForItunes": false,
+                  "isSingle": false,
+                  "name": "Say Anything",
+                  "playParams": {
+                    "id": "1639569323",
+                    "kind": "album"
+                  },
+                  "recordLabel": "RCA Records Label",
+                  "releaseDate": "2009-11-03",
+                  "trackCount": 15,
+                  "upc": "884977362336",
+                  "url": "https://music.apple.com/us/album/say-anything/1639569323"
+                }
+              },
+              {
+                "id": "1852432375",
+                "type": "albums",
+                "href": "/v1/catalog/us/albums/1852432375",
+                "attributes": {
+                  "artistName": "Say Anything",
+                  "artwork": {
+                    "bgColor": "dedede",
+                    "height": 3000,
+                    "textColor1": "240e08",
+                    "textColor2": "301d15",
+                    "textColor3": "493833",
+                    "textColor4": "53443d",
+                    "url": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/08/9c/7c/089c7c9e-e60a-539d-e8fa-6f346b7d98af/artwork.jpg/{w}x{h}bb.jpg",
+                    "width": 3000
+                  },
+                  "contentRating": "explicit",
+                  "copyright": "℗ 2025 Rory Records",
+                  "genreNames": [
+                    "Alternative",
+                    "Music"
+                  ],
+                  "isCompilation": false,
+                  "isComplete": true,
+                  "isMasteredForItunes": false,
+                  "isSingle": true,
+                  "name": "F*******y - Single",
+                  "playParams": {
+                    "id": "1852432375",
+                    "kind": "album"
+                  },
+                  "recordLabel": "Rory Records",
+                  "releaseDate": "2025-11-15",
+                  "trackCount": 1,
+                  "upc": "199956698253",
+                  "url": "https://music.apple.com/us/album/f-y-single/1852432375"
+                }
+              },
+              {
+                "id": "1857411088",
+                "type": "albums",
+                "href": "/v1/catalog/us/albums/1857411088",
+                "attributes": {
+                  "artistName": "Say Anything",
+                  "artwork": {
+                    "bgColor": "dedede",
+                    "height": 3000,
+                    "textColor1": "230e08",
+                    "textColor2": "281711",
+                    "textColor3": "493833",
+                    "textColor4": "4d3f3a",
+                    "url": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/c6/d3/64/c6d3643d-7087-2385-b434-d196748049aa/artwork.jpg/{w}x{h}bb.jpg",
+                    "width": 3000
+                  },
+                  "copyright": "℗ 2025 Rory Records",
+                  "genreNames": [
+                    "Alternative",
+                    "Music"
+                  ],
+                  "isCompilation": false,
+                  "isComplete": true,
+                  "isMasteredForItunes": false,
+                  "isSingle": false,
+                  "name": "The Noise Of Say Anything's Room Without...",
+                  "playParams": {
+                    "id": "1857411088",
+                    "kind": "album"
+                  },
+                  "recordLabel": "Rory Records",
+                  "releaseDate": "2025-12-04",
+                  "trackCount": 21,
+                  "upc": "199948681690",
+                  "url": "https://music.apple.com/us/album/the-noise-of-say-anythings-room-without/1857411088"
+                }
+              },
+              {
+                "id": "1852182975",
+                "type": "albums",
+                "href": "/v1/catalog/us/albums/1852182975",
+                "attributes": {
+                  "artistName": "Say Anything",
+                  "artwork": {
+                    "bgColor": "dedede",
+                    "height": 3000,
+                    "textColor1": "240e08",
+                    "textColor2": "301d15",
+                    "textColor3": "493833",
+                    "textColor4": "53443d",
+                    "url": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/15/78/89/1578897f-8b8a-b049-2fbc-19250323387b/artwork.jpg/{w}x{h}bb.jpg",
+                    "width": 3000
+                  },
+                  "contentRating": "explicit",
+                  "copyright": "℗ 2025 Rory Records",
+                  "genreNames": [
+                    "Alternative",
+                    "Music"
+                  ],
+                  "isCompilation": false,
+                  "isComplete": true,
+                  "isMasteredForItunes": false,
+                  "isSingle": true,
+                  "name": "Death, Dancing - Single",
+                  "playParams": {
+                    "id": "1852182975",
+                    "kind": "album"
+                  },
+                  "recordLabel": "Rory Records",
+                  "releaseDate": "2025-11-14",
+                  "trackCount": 1,
+                  "upc": "199956698109",
+                  "url": "https://music.apple.com/us/album/death-dancing-single/1852182975"
+                }
+              }
+            ]
+          }
+        }
+      }
+    ]
+  },
+  "error": null
+}

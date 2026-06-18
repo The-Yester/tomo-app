@@ -3,7 +3,7 @@ import { View, Text, StyleSheet, Image, ScrollView, TouchableOpacity, ActivityIn
 import { useNavigation, useRoute } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import MaterialIcon from 'react-native-vector-icons/MaterialCommunityIcons';
-import { getArtistDetails, formatArtworkUrl } from '../api/MusicService';
+import { getArtistDetails, formatArtworkUrl, searchMusic } from '../api/MusicService';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 const ArtistDetailScreen = () => {
@@ -14,22 +14,44 @@ const ArtistDetailScreen = () => {
     const [details, setDetails] = useState(null);
     const [loading, setLoading] = useState(true);
     const [bioExpanded, setBioExpanded] = useState(false);
+    const [fallbackAlbums, setFallbackAlbums] = useState([]);
 
     useEffect(() => {
-        if (artistId) {
+        if (artistId || artistName) {
             fetchDetails();
         } else {
             setLoading(false);
         }
-    }, [artistId]);
+    }, [artistId, artistName]);
+
+    const fetchFallback = async (name) => {
+        try {
+            const results = await searchMusic(name);
+            const albumsOnly = results.filter(r => r.type === 'albums' && r.attributes?.artistName?.toLowerCase().includes(name.toLowerCase()));
+            setFallbackAlbums(albumsOnly);
+        } catch (e) {
+            console.log("Fallback search failed:", e);
+        }
+    };
 
     const fetchDetails = async () => {
         setLoading(true);
         try {
-            const data = await getArtistDetails(artistId);
-            setDetails(data);
+            if (artistId && artistId !== 'unknown') {
+                const data = await getArtistDetails(artistId);
+                setDetails(data);
+
+                if (!data && artistName) {
+                    await fetchFallback(artistName);
+                }
+            } else if (artistName) {
+                await fetchFallback(artistName);
+            }
         } catch (error) {
             console.error("Error fetching artist details:", error);
+            if (artistName) {
+                await fetchFallback(artistName);
+            }
         } finally {
             setLoading(false);
         }
@@ -43,15 +65,15 @@ const ArtistDetailScreen = () => {
         );
     }
 
-    if (!details && !artistName) return (
+    if (!details && !artistName && fallbackAlbums.length === 0) return (
         <View style={[styles.container, styles.center]}>
-            <Text style={{ color: '#fff' }}>Artist not found.</Text>
+            <Text style={{ color: '#333' }}>Artist not found.</Text>
         </View>
     );
 
     // Fallback if details fail but we have a name passed via route
-    const displayData = details || { attributes: { name: artistName } };
-    const albums = details?.relationships?.albums?.data || [];
+    const displayData = details || { attributes: { name: artistName, genreNames: fallbackAlbums.length > 0 ? fallbackAlbums[0].attributes?.genreNames : [] } };
+    const albums = details?.relationships?.albums?.data || fallbackAlbums;
 
     // Sort albums by date desc
     const sortedAlbums = [...albums].sort((a, b) => {
@@ -64,7 +86,7 @@ const ArtistDetailScreen = () => {
         <SafeAreaView style={styles.container} edges={['top']}>
             <View style={styles.header}>
                 <TouchableOpacity onPress={() => navigation.goBack()} style={styles.backButton}>
-                    <Icon name="arrow-left" size={20} color="#fff" />
+                    <Icon name="arrow-left" size={20} color="#333" />
                 </TouchableOpacity>
                 <Text style={styles.headerTitle} numberOfLines={1}>{displayData.attributes.name}</Text>
                 <View style={{ width: 24 }} />
@@ -74,11 +96,17 @@ const ArtistDetailScreen = () => {
                 {/* Profile Section */}
                 <View style={styles.profileSection}>
                     <View style={styles.profileImageWrapper}>
-                        <MaterialIcon name="microphone-variant" size={60} color="#555" />
-                        {/* If we had an artist image URL, we would show it here. 
-                            Apple Music API often embeds artist images in a separate relationship or search result.
-                            For now, using a placeholder icon or logic if URL existed. 
-                         */}
+                        {displayData.attributes.artwork?.url ? (
+                            <Image
+                                source={{ uri: formatArtworkUrl(displayData.attributes.artwork.url, 300, 300) }}
+                                style={{ width: 96, height: 96, borderRadius: 48 }}
+                            />
+                        ) : (
+                            <Image
+                                source={{ uri: 'https://ui-avatars.com/api/?name=' + encodeURIComponent(displayData.attributes.name || 'Artist') + '&background=e9af45&color=fff&size=300' }}
+                                style={{ width: 96, height: 96, borderRadius: 48 }}
+                            />
+                        )}
                     </View>
                     <View style={styles.profileInfo}>
                         <Text style={styles.name}>{displayData.attributes.name}</Text>
@@ -129,18 +157,18 @@ const ArtistDetailScreen = () => {
                                                 style={{ width: 30, height: 30, borderRadius: 4, marginRight: 10 }}
                                             />
                                         )}
-                                        <Text style={[styles.cellText, { fontWeight: 'bold', color: '#fff', flex: 1 }]} numberOfLines={1}>
+                                        <Text style={[styles.cellText, { fontWeight: 'bold', color: '#333', flex: 1 }]} numberOfLines={1}>
                                             {item.attributes.name}
                                         </Text>
                                     </View>
-                                    <Text style={[styles.cellText, { flex: 0.2, textAlign: 'right', fontStyle: 'italic', color: '#666' }]}>
+                                    <Text style={[styles.cellText, { flex: 0.2, textAlign: 'right', fontStyle: 'italic', color: '#888' }]}>
                                         {item.attributes.trackCount ? item.attributes.trackCount : '-'}
                                     </Text>
                                 </TouchableOpacity>
                             );
                         })
                     ) : (
-                        <Text style={{ color: '#666', fontStyle: 'italic', marginTop: 10 }}>No albums found.</Text>
+                        <Text style={{ color: '#888', fontStyle: 'italic', marginTop: 10 }}>No albums found.</Text>
                     )}
                 </View>
 
@@ -153,7 +181,7 @@ const ArtistDetailScreen = () => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#0a0a1a'
+        backgroundColor: '#f5f5f5' // Light background
     },
     center: {
         justifyContent: 'center',
@@ -164,12 +192,12 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'space-between',
         padding: 15,
-        backgroundColor: '#161625',
+        backgroundColor: '#fff', // White header
         borderBottomWidth: 1,
-        borderBottomColor: '#333'
+        borderBottomColor: '#ebebeb'
     },
     headerTitle: {
-        color: '#fff',
+        color: '#000',
         fontSize: 18,
         fontWeight: 'bold',
         flex: 1,
@@ -187,11 +215,16 @@ const styles = StyleSheet.create({
         width: 100,
         height: 100,
         borderRadius: 50,
-        backgroundColor: '#252535',
+        backgroundColor: '#fff', // White behind image
         justifyContent: 'center',
         alignItems: 'center',
         borderWidth: 2,
-        borderColor: '#ff8c00'
+        borderColor: '#ff8c00',
+        shadowColor: "#000",
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.15,
+        shadowRadius: 5,
+        elevation: 4,
     },
     profileInfo: {
         flex: 1,
@@ -201,7 +234,7 @@ const styles = StyleSheet.create({
     name: {
         fontSize: 26,
         fontWeight: 'bold',
-        color: '#fff',
+        color: '#000',
         marginBottom: 5,
         fontFamily: 'Trebuchet MS'
     },
@@ -212,7 +245,7 @@ const styles = StyleSheet.create({
     },
     birthInfo: {
         fontSize: 14,
-        color: '#888',
+        color: '#666',
         fontStyle: 'italic'
     },
     section: {
@@ -221,14 +254,14 @@ const styles = StyleSheet.create({
     sectionTitle: {
         fontSize: 20,
         fontWeight: 'bold',
-        color: '#fff',
+        color: '#000',
         marginBottom: 15,
         borderLeftWidth: 3,
-        borderLeftColor: '#e50914',
+        borderLeftColor: '#ff8c00', // Gold colored line marker
         paddingLeft: 10
     },
     bioText: {
-        color: '#ccc',
+        color: '#444',
         fontSize: 15,
         lineHeight: 24,
     },
@@ -240,14 +273,14 @@ const styles = StyleSheet.create({
     // Table Styles
     tableHeader: {
         flexDirection: 'row',
-        backgroundColor: '#222',
+        backgroundColor: '#e6e6e6', // Very light grey header
         paddingVertical: 10,
         paddingHorizontal: 10,
         borderRadius: 5,
         marginBottom: 5
     },
     tableHeadText: {
-        color: '#aaa',
+        color: '#555',
         fontWeight: 'bold',
         fontSize: 12,
         textTransform: 'uppercase'
@@ -258,16 +291,16 @@ const styles = StyleSheet.create({
         paddingVertical: 12,
         paddingHorizontal: 10,
         borderBottomWidth: 1,
-        borderBottomColor: '#222'
+        borderBottomColor: '#f0f0f0'
     },
     rowEven: {
-        backgroundColor: '#111'
+        backgroundColor: '#fff'
     },
     rowOdd: {
-        backgroundColor: '#0a0a1a'
+        backgroundColor: '#fdfdfd'
     },
     cellText: {
-        color: '#ccc',
+        color: '#333',
         fontSize: 14
     }
 });

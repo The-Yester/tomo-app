@@ -33,6 +33,11 @@ service cloud.firestore {
         allow read: if isAuthenticated();
         allow write: if isOwner(userId);
       }
+
+      // Subcollection: Physical Collection
+      match /physical_collection/{itemId} {
+        allow read, write: if isOwner(userId);
+      }
     }
 
     // --- CURATIONS (The Corner) ---

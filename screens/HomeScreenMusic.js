@@ -24,12 +24,17 @@ const HomeScreenMusic = () => {
         if (auth.currentUser) {
             try {
                 await updateDoc(doc(db, "users", auth.currentUser.uid), {
-                    hasSeenIntro: true
+                    hasSeenProfileIntroV2: true
                 });
             } catch (e) {
                 console.error("Error updating intro flag:", e);
             }
         }
+    };
+
+    const handleGoToProfileSetup = async () => {
+        await handleDismissIntro();
+        navigation.navigate('ProfileSettings');
     };
 
     const handleGenerateCapsule = async () => {
@@ -80,6 +85,30 @@ const HomeScreenMusic = () => {
             }));
     }, [overallRatedAlbums, currentYear, userProfile]);
 
+    const hydratedRecentlyPlayed = useMemo(() => {
+        if (!recentlyPlayed) return [];
+        return recentlyPlayed.map(album => {
+            const ratedVersion = overallRatedAlbums.find(ra => String(ra.id) === String(album.id));
+            return {
+                ...album,
+                userRating: ratedVersion ? ratedVersion.userOverallRating : undefined,
+                ratingMethod: userProfile?.ratingMethod || '1-10'
+            };
+        });
+    }, [recentlyPlayed, overallRatedAlbums, userProfile]);
+
+    const hydratedRecentActivity = useMemo(() => {
+        if (!recentActivity) return [];
+        return recentActivity.map(album => {
+            const ratedVersion = overallRatedAlbums.find(ra => String(ra.id) === String(album.id));
+            return {
+                ...album,
+                userRating: ratedVersion ? ratedVersion.userOverallRating : undefined,
+                ratingMethod: userProfile?.ratingMethod || '1-10'
+            };
+        });
+    }, [recentActivity, overallRatedAlbums, userProfile]);
+
     // Hydrated Top Friends (Fresh Data)
     const [hydratedTopFriends, setHydratedTopFriends] = useState([]);
 
@@ -91,7 +120,7 @@ const HomeScreenMusic = () => {
         const unsub = onSnapshot(doc(db, "users", user.uid), (docSnap) => {
             if (docSnap.exists()) {
                 setUserProfile(docSnap.data());
-                if (docSnap.data().hasSeenIntro === undefined || docSnap.data().hasSeenIntro === false) {
+                if (docSnap.data().hasSeenProfileIntroV2 === undefined || docSnap.data().hasSeenProfileIntroV2 === false) {
                     setShowIntroModal(true);
                 }
             }
@@ -149,7 +178,7 @@ const HomeScreenMusic = () => {
         let Component = null;
 
         if (method === 'Percentage' || method === 'percentage') {
-            displayValue = `${rating.toFixed(0)}%`;
+            displayValue = rating % 1 === 0 ? `${rating}%` : `${rating.toFixed(1)}%`;
             iconName = "percent";
             iconColor = "#4CAF50";
             Component = Icon;
@@ -196,7 +225,7 @@ const HomeScreenMusic = () => {
             ? formatArtworkUrl(item.attributes.artwork.url, 300, 300)
             : item.artwork?.url
                 ? formatArtworkUrl(item.artwork.url, 300, 300)
-                : item.poster_path ? `https://image.tmdb.org/t/p/w500${item.poster_path}` : 'https://via.placeholder.com/150';
+                : 'https://via.placeholder.com/150';
 
         return (
             <TouchableOpacity
@@ -223,24 +252,31 @@ const HomeScreenMusic = () => {
                 <View style={styles.modalOverlay}>
                     <View style={styles.modalContent}>
                         <ScrollView contentContainerStyle={styles.modalScroll}>
-                            <Text style={styles.modalTitle}>TOMO MUSIC</Text>
-                            <Text style={styles.modalSubtitle}>🎵 Get Started with Music Ratings</Text>
-
+                            <Text style={styles.modalTitle}>Welcome to TOMO</Text>
+                            <Text style={styles.modalSubtitle}>Before you start rating music, let's set up your profile!</Text>
 
                             <View style={styles.instructionStep}>
-                                <Text style={styles.stepTitle}>1. RATE YOUR FAVORITE ALBUMS</Text>
-                                <Text style={styles.bulletText}>• Search for albums and rate them</Text>
-                                <Text style={styles.bulletText}>• Add to your "Listen Later" list</Text>
+                                <Text style={styles.stepTitle}>1. SET YOUR RATING STYLE (⚠️ IMPORTANT)</Text>
+                                <Text style={styles.bulletText}>• This is crucial! Choose how you want to rate music (1-10, Pizza, Percentage, or Awards).</Text>
                             </View>
 
                             <View style={styles.instructionStep}>
-                                <Text style={styles.stepTitle}>2. SHARE WITH FRIENDS</Text>
-                                <Text style={styles.bulletText}>• Share your top albums on Reelz</Text>
+                                <Text style={styles.stepTitle}>2. PICK YOUR TOP 8 ALBUMS</Text>
+                                <Text style={styles.bulletText}>• Express your taste by featuring your top 8 favorite albums on your profile.</Text>
+                            </View>
+
+                            <View style={styles.instructionStep}>
+                                <Text style={styles.stepTitle}>3. FIND FRIENDS</Text>
+                                <Text style={styles.bulletText}>• Search for friends and follow them to see what they are listening to.</Text>
                             </View>
                         </ScrollView>
 
-                        <TouchableOpacity style={styles.dismissButton} onPress={handleDismissIntro}>
-                            <Text style={styles.dismissButtonText}>Let's Go!</Text>
+                        <TouchableOpacity style={styles.dismissButton} onPress={handleGoToProfileSetup}>
+                            <Text style={styles.dismissButtonText}>Setup Profile Now</Text>
+                        </TouchableOpacity>
+                        
+                        <TouchableOpacity style={{ marginTop: 15, alignItems: 'center' }} onPress={handleDismissIntro}>
+                            <Text style={{ color: '#888', textDecorationLine: 'underline' }}>Skip for now</Text>
                         </TouchableOpacity>
                     </View>
                 </View>
@@ -262,10 +298,13 @@ const HomeScreenMusic = () => {
                             <View style={styles.userInfo}>
                                 <Text style={styles.userName} numberOfLines={1}>{userProfile?.name || 'Tomo User'}</Text>
                                 <Text style={styles.userHandle}>@{userProfile?.username || 'username'}</Text>
-                                <TouchableOpacity onPress={() => navigation.navigate('ProfileSettings')}>
-                                    <Text style={styles.editLink}>Edit Profile</Text>
-                                </TouchableOpacity>
                             </View>
+                            <TouchableOpacity 
+                                style={styles.editProfileBtn} 
+                                onPress={() => navigation.navigate('ProfileSettings')}
+                            >
+                                <Text style={styles.editProfileBtnText}>Edit Profile</Text>
+                            </TouchableOpacity>
                         </View>
 
                         {/* Bio */}
@@ -392,7 +431,7 @@ const HomeScreenMusic = () => {
                     <Text style={styles.sectionTitle}>Recently Rated</Text>
                     <FlatList
                         horizontal
-                        data={recentActivity}
+                        data={hydratedRecentActivity}
                         renderItem={renderAlbumItem}
                         keyExtractor={(item) => `activity-${item.id}`}
                         showsHorizontalScrollIndicator={false}
@@ -407,7 +446,7 @@ const HomeScreenMusic = () => {
                     <Text style={styles.sectionTitle}>Recently Played</Text>
                     <FlatList
                         horizontal
-                        data={recentlyPlayed}
+                        data={hydratedRecentlyPlayed}
                         renderItem={renderAlbumItem}
                         keyExtractor={(item) => `played-${item.id}`}
                         showsHorizontalScrollIndicator={false}
@@ -444,6 +483,13 @@ const HomeScreenMusic = () => {
                 </View>
 
 
+
+                {/* --- APP DISCLAIMER --- */}
+                <View style={styles.disclaimerContainer}>
+                    <Text style={styles.disclaimerText}>
+                        This product uses data provided by Apple Music & Custom Solutions, but is not endorsed or certified. TOMO Music is a music discovery and rating app. This app does not stream music and is not affiliated with or endorsed by any music corporation or streaming services.
+                    </Text>
+                </View>
 
                 <View style={{ height: 40 }} />
             </ScrollView>
@@ -502,10 +548,23 @@ const styles = StyleSheet.create({
         color: '#666',
         marginBottom: 2,
     },
-    editLink: {
-        color: '#C6A87C', // Gold Link
+    editProfileBtn: {
+        backgroundColor: '#D4AF37', // Gold
+        paddingVertical: 8,
+        paddingHorizontal: 16,
+        borderRadius: 20,
+        marginLeft: 10,
+        shadowColor: "#000",
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.15,
+        shadowRadius: 3,
+        elevation: 3,
+    },
+    editProfileBtnText: {
+        color: '#fff',
+        fontWeight: 'bold',
         fontSize: 12,
-        fontWeight: '600',
+        letterSpacing: 0.3
     },
     bioText: {
         fontSize: 13,
@@ -883,6 +942,18 @@ const styles = StyleSheet.create({
     capsuleResetText: {
         color: '#d4a03e',
         fontWeight: '600'
+    },
+    disclaimerContainer: {
+        paddingHorizontal: 20,
+        paddingTop: 20,
+        paddingBottom: 10,
+        alignItems: 'center',
+    },
+    disclaimerText: {
+        fontSize: 10,
+        color: '#999',
+        textAlign: 'center',
+        lineHeight: 14,
     }
 });
 

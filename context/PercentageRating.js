@@ -11,8 +11,8 @@ const screenWidth = Dimensions.get('window').width;
 const componentWidth = screenWidth * 0.9; // Width of the card
 
 // Sizes for the circular slider
-const circleRadius = componentWidth * 0.35;
-const strokeWidth = componentWidth * 0.08;
+const circleRadius = componentWidth * 0.28;
+const strokeWidth = componentWidth * 0.06;
 const thumbRadius = strokeWidth * 0.6;
 const svgSize = (circleRadius + strokeWidth) * 2;
 const center = svgSize / 2;
@@ -33,11 +33,11 @@ const COLOR_SUBMIT_BUTTON_BG = '#d4a03e';
 const COLOR_SUBMIT_BUTTON_TEXT = '#FFFFFF';
 
 const RATING_DESCRIPTIONS = [
-    { value: 0, label: "Do Not Watch", short: "DNW" },
+    { value: 0, label: "Do Not Listen", short: "DNL" },
     { value: 1, label: "Awful", short: "Awful" },
     { value: 2, label: "Bad", short: "Bad" },
     { value: 3, label: "Poor", short: "Poor" },
-    { value: 4, label: "Watchable", short: "Watchable" },
+    { value: 4, label: "Listenable", short: "Listenable" },
     { value: 5, label: "Fair", short: "Fair" },
     { value: 6, label: "Good", short: "Good" },
     { value: 7, label: "More Than Good", short: "MTG" },
@@ -64,8 +64,8 @@ const getFeedback = (percentage) => {
     if (scaledValue >= 9) emoji = '🤩'; // Excellent/Perfect
     else if (scaledValue >= 7) emoji = '😄'; // MTG/Very Good
     else if (scaledValue >= 5) emoji = '🙂'; // Fair/Good
-    else if (scaledValue >= 3) emoji = '😟'; // Poor/Watchable
-    else emoji = '💀'; // DNW - Bad
+    else if (scaledValue >= 3) emoji = '😟'; // Poor/Listenable
+    else emoji = '💀'; // DNL - Bad
 
     return {
         emoji: emoji,
@@ -108,7 +108,7 @@ const describeArc = (x, y, radius, startAngleDeg, endAngleDeg) => {
 
 let currentAngleRef = { current: 0 };
 
-const PercentageRating = ({ value = 50, onChange = () => { }, onCancel, artistName, albumArtwork, isPlayed, onTogglePlayed }) => {
+const PercentageRating = ({ value = 50, onChange = () => { }, onDeleteRating, onCancel, artistName, albumArtwork, isPlayed, onTogglePlayed }) => {
     // Note: The parent component passes `onChange` which is effectively `onSubmit` in current usage for some reason?
     // Wait, in MovieDetailScreen: 
     // onChange={(newPercentage) => handleRatingSubmit(newPercentage)}
@@ -122,6 +122,10 @@ const PercentageRating = ({ value = 50, onChange = () => { }, onCancel, artistNa
 
     const [rating, setRating] = useState(Math.max(MIN_RATING, Math.min(MAX_RATING, value)));
     const animatedRating = useRef(new Animated.Value(rating)).current;
+
+    useEffect(() => {
+        setRating(Math.max(MIN_RATING, Math.min(MAX_RATING, value)));
+    }, [value]);
 
     useEffect(() => {
         Animated.timing(animatedRating, {
@@ -159,6 +163,13 @@ const PercentageRating = ({ value = 50, onChange = () => { }, onCancel, artistNa
 
     const handleSubmit = () => {
         onChange(rating); // Calling the prop 'onChange' which triggers submit in parent
+    };
+
+    const adjustRating = (amount) => {
+        setRating(prev => {
+            const newVal = parseFloat((prev + amount).toFixed(1));
+            return Math.max(MIN_RATING, Math.min(MAX_RATING, newVal));
+        });
     };
 
     const currentAngle = percentageToAngle(rating);
@@ -226,7 +237,7 @@ const PercentageRating = ({ value = 50, onChange = () => { }, onCancel, artistNa
                             textAnchor="middle"
                             dy={-(componentWidth * 0.03)}
                         >
-                            {`${rating}%`}
+                            {`${rating % 1 === 0 ? rating.toString() : rating.toFixed(1)}%`}
                         </SvgText>
                         <SvgText
                             fontSize={componentWidth * 0.1}
@@ -247,17 +258,36 @@ const PercentageRating = ({ value = 50, onChange = () => { }, onCancel, artistNa
                 </Svg>
             </View>
 
+            {/* Fine-Tuning Controls */}
+            <View style={styles.fineTuneRow}>
+                <TouchableOpacity style={styles.fineTuneButton} onPress={() => adjustRating(-1)}>
+                    <Text style={styles.fineTuneButtonText}>-1%</Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={styles.fineTuneButton} onPress={() => adjustRating(-0.1)}>
+                    <Text style={styles.fineTuneButtonText}>-0.1%</Text>
+                </TouchableOpacity>
+                
+                <Text style={styles.fineTuneLabel}>Fine-Tune</Text>
+
+                <TouchableOpacity style={styles.fineTuneButton} onPress={() => adjustRating(0.1)}>
+                    <Text style={styles.fineTuneButtonText}>+0.1%</Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={styles.fineTuneButton} onPress={() => adjustRating(1)}>
+                    <Text style={styles.fineTuneButtonText}>+1%</Text>
+                </TouchableOpacity>
+            </View>
+
             <TouchableOpacity
                 style={[styles.playedToggle, isPlayed && styles.playedToggleActive]}
                 onPress={onTogglePlayed}
             >
                 <MaterialCommunityIcons
                     name={isPlayed ? "check-circle" : "circle-outline"}
-                    size={20}
+                    size={18}
                     color={isPlayed ? "#FFFFFF" : COLOR_CANCEL_BUTTON_TEXT}
                 />
                 <Text style={[styles.playedToggleText, isPlayed && styles.playedToggleTextActive]}>
-                    Press to Add to Recently played
+                    Press to Add to Recently Played
                 </Text>
             </TouchableOpacity>
 
@@ -271,6 +301,13 @@ const PercentageRating = ({ value = 50, onChange = () => { }, onCancel, artistNa
                     <Text style={styles.submitButtonText}>Submit Rating</Text>
                 </TouchableOpacity>
             </View>
+
+            {onDeleteRating && (
+                <TouchableOpacity style={styles.deleteButton} onPress={onDeleteRating}>
+                    <MaterialCommunityIcons name="trash-can-outline" size={18} color="#FF3B30" />
+                    <Text style={styles.deleteButtonText}>Remove Rating</Text>
+                </TouchableOpacity>
+            )}
         </View>
     );
 };
@@ -281,23 +318,23 @@ const styles = StyleSheet.create({
         width: '100%',
     },
     title: {
-        fontSize: componentWidth * 0.065,
+        fontSize: componentWidth * 0.055,
         fontWeight: 'bold',
         color: COLOR_TITLE_TEXT,
-        marginBottom: 10,
+        marginBottom: 5,
     },
     coverArt: {
-        width: screenWidth * 0.3,
-        height: screenWidth * 0.3,
+        width: screenWidth * 0.22,
+        height: screenWidth * 0.22,
         borderRadius: 10,
-        marginBottom: 15,
+        marginBottom: 8,
     },
     circleContainer: {
         width: svgSize,
         height: svgSize,
         alignItems: 'center',
         justifyContent: 'center',
-        marginBottom: 30,
+        marginBottom: 35,
     },
     buttonsRow: {
         flexDirection: 'row',
@@ -307,26 +344,26 @@ const styles = StyleSheet.create({
     },
     cancelButton: {
         backgroundColor: COLOR_CANCEL_BUTTON_BG,
-        paddingVertical: 12,
+        paddingVertical: 8,
         borderRadius: 25,
         flex: 1,
         alignItems: 'center',
     },
     cancelButtonText: {
         color: COLOR_CANCEL_BUTTON_TEXT,
-        fontSize: componentWidth * 0.04,
+        fontSize: componentWidth * 0.035,
         fontWeight: 'bold',
     },
     submitButton: {
         backgroundColor: COLOR_SUBMIT_BUTTON_BG,
-        paddingVertical: 12,
+        paddingVertical: 8,
         borderRadius: 25,
         flex: 1,
         alignItems: 'center',
     },
     submitButtonText: {
         color: COLOR_SUBMIT_BUTTON_TEXT,
-        fontSize: componentWidth * 0.04,
+        fontSize: componentWidth * 0.035,
         fontWeight: 'bold',
     },
     playedToggle: {
@@ -334,23 +371,71 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         backgroundColor: COLOR_CANCEL_BUTTON_BG,
-        paddingVertical: 12,
-        paddingHorizontal: 20,
+        paddingVertical: 6,
+        paddingHorizontal: 15,
         borderRadius: 25,
         width: '100%',
-        marginBottom: 15,
+        marginBottom: 10,
     },
     playedToggleActive: {
         backgroundColor: COLOR_SUBMIT_BUTTON_BG,
     },
     playedToggleText: {
         color: COLOR_CANCEL_BUTTON_TEXT,
-        fontSize: componentWidth * 0.035,
+        fontSize: componentWidth * 0.03,
         fontWeight: 'bold',
         marginLeft: 8,
     },
     playedToggleTextActive: {
         color: '#FFFFFF',
+    },
+    deleteButton: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'center',
+        backgroundColor: '#FFE5E5',
+        paddingVertical: 8,
+        borderRadius: 25,
+        width: '100%',
+        marginTop: 10,
+        marginBottom: 5,
+    },
+    deleteButtonText: {
+        color: '#FF3B30',
+        fontSize: componentWidth * 0.035,
+        fontWeight: 'bold',
+        marginLeft: 8,
+    },
+    fineTuneRow: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        width: '100%',
+        paddingHorizontal: 10,
+        marginBottom: 20,
+    },
+    fineTuneButton: {
+        backgroundColor: '#F2F2F2',
+        borderWidth: 1,
+        borderColor: '#E0E0E0',
+        paddingVertical: 8,
+        paddingHorizontal: 12,
+        borderRadius: 15,
+        minWidth: 55,
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    fineTuneButtonText: {
+        fontSize: 12,
+        fontWeight: 'bold',
+        color: '#333',
+    },
+    fineTuneLabel: {
+        fontSize: 14,
+        fontWeight: 'bold',
+        color: '#d4a03e',
+        textTransform: 'uppercase',
+        letterSpacing: 0.5,
     }
 });
 

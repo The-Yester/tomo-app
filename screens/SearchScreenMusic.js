@@ -11,9 +11,10 @@ import {
     StatusBar,
     ActivityIndicator,
     SafeAreaView,
-    Dimensions
+    Dimensions,
+    ScrollView
 } from 'react-native';
-import { searchMusic, formatArtworkUrl } from '../api/MusicService';
+import { searchMusic, formatArtworkUrl, getSearchHints } from '../api/MusicService';
 import { debounce } from 'lodash';
 import { useNavigation } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -23,6 +24,7 @@ const SCREEN_WIDTH = Dimensions.get('window').width;
 const SearchScreenMusic = () => {
     const navigation = useNavigation();
     const [query, setQuery] = useState('');
+    const [hints, setHints] = useState([]);
     const [genres] = useState(MUSIC_GENRES);
     const [results, setResults] = useState([]);
     const [loading, setLoading] = useState(false);
@@ -37,10 +39,29 @@ const SearchScreenMusic = () => {
         try {
             const data = await searchMusic(searchQuery);
             setResults(data);
-        } catch (error) {
-            console.error("Error searching:", error);
-        } finally {
             setLoading(false);
+        } catch (error) {
+            if (error.name === 'AbortError') {
+                return; // Silence abort errors
+            }
+            console.error("Error searching:", error);
+            setLoading(false);
+        }
+    };
+
+    const fetchHints = async (searchQuery) => {
+        if (!searchQuery.trim()) {
+            setHints([]);
+            return;
+        }
+        try {
+            const data = await getSearchHints(searchQuery);
+            setHints(data);
+        } catch (error) {
+            if (error.name === 'AbortError') {
+                return; // Ignore abort errors
+            }
+            console.error("Error fetching hints:", error);
         }
     };
 
@@ -49,32 +70,65 @@ const SearchScreenMusic = () => {
         []
     );
 
+    const debouncedHints = useCallback(
+        debounce((text) => fetchHints(text), 200),
+        []
+    );
+
     const handleTextChange = (text) => {
         setQuery(text);
         if (text.length > 0) {
             setLoading(true);
+            debouncedHints(text);
+            debouncedSearch(text);
+        } else {
+            setHints([]);
+            setResults([]);
+            setLoading(false);
+            debouncedHints.cancel();
+            debouncedSearch.cancel();
         }
-        debouncedSearch(text);
+    };
+
+    const handleHintPress = (hint) => {
+        setQuery(hint);
+        setHints([]);
+        setLoading(true);
+        fetchResults(hint);
     };
 
     const renderResultItem = ({ item }) => {
-        const imageUrl = item.attributes?.artwork?.url
-            ? formatArtworkUrl(item.attributes.artwork.url, 200, 200)
-            : 'https://via.placeholder.com/150';
+        const isArtist = item.type === 'artists';
+
+        let imageUrl = 'https://via.placeholder.com/150';
+        if (item.attributes?.artwork?.url) {
+            imageUrl = formatArtworkUrl(item.attributes.artwork.url, 200, 200);
+        } else if (isArtist) {
+            // Apple Music Search api rarely returns artist profile pictures, so fallback to a generic user icon placeholder
+            imageUrl = 'https://ui-avatars.com/api/?name=' + encodeURIComponent(item.attributes?.name || 'Artist') + '&background=e9af45&color=fff&size=200';
+        }
+
+        const handlePress = () => {
+            if (isArtist) {
+                navigation.navigate('ArtistDetail', { artistName: item.attributes?.name, artistId: item.id });
+            } else {
+                navigation.navigate('AlbumDetails', { albumId: item.id, album: item });
+            }
+        };
 
         return (
             <TouchableOpacity
                 style={styles.resultItem}
-                onPress={() => navigation.navigate('AlbumDetails', { albumId: item.id, album: item })}
+                onPress={handlePress}
             >
                 <Image
                     source={{ uri: imageUrl }}
-                    style={styles.albumArt}
+                    style={isArtist ? styles.artistArt : styles.albumArt}
                 />
                 <View style={styles.resultInfo}>
                     <Text style={styles.resultTitle}>{item.attributes?.name || item.title}</Text>
                     <Text style={styles.resultSubtitle}>
-                        {item.attributes?.artistName || 'Unknown Artist'} • {item.attributes?.releaseDate?.substring(0, 4)}
+                        {isArtist ? 'Artist' : `${item.attributes?.artistName || 'Unknown Artist'} • ${item.attributes?.releaseDate?.substring(0, 4) || ''}`}
                     </Text>
                 </View>
                 <Icon name="chevron-right" size={14} color="#666" />
@@ -84,7 +138,9 @@ const SearchScreenMusic = () => {
 
     const renderFooter = () => (
         <View style={styles.attributionContainer}>
-            <Text style={styles.attributionText}>Data provided by Apple Music.</Text>
+            <Text style={styles.attributionText}>
+                This product uses data provided by Apple Music & Custom Solutions, but is not endorsed or certified. TOMO Music is a music discovery and rating app. This app does not stream music and is not affiliated with or endorsed by any music corporation or streaming services.
+            </Text>
         </View>
     );
 
@@ -111,7 +167,20 @@ const SearchScreenMusic = () => {
                         </TouchableOpacity>
                     )}
                 </View>
+
+                {hints.length > 0 && query.length > 0 && (
+                    <View style={styles.hintsContainer}>
+                        <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={styles.hintsScroll}>
+                            {hints.map((hint, index) => (
+                                <TouchableOpacity key={index} style={styles.hintChip} onPress={() => handleHintPress(hint)}>
+                                    <Text style={styles.hintText}>{hint}</Text>
+                                </TouchableOpacity>
+                            ))}
+                        </ScrollView>
+                    </View>
+                )}
             </View>
+
 
             {loading ? (
                 <View style={styles.centerContent}>
@@ -256,22 +325,48 @@ const styles = StyleSheet.create({
         color: '#000', // Black
     },
     searchBarContainer: {
-        paddingHorizontal: 20,
         marginBottom: 20,
+    },
+    hintsContainer: {
+        marginTop: 10,
+    },
+    hintsScroll: {
+        paddingHorizontal: 20,
+    },
+    hintChip: {
+        backgroundColor: '#e9af45',
+        paddingHorizontal: 15,
+        paddingVertical: 8,
+        borderRadius: 20,
+        marginRight: 10,
+        shadowColor: "#000",
+        shadowOffset: { width: 0, height: 1 },
+        shadowOpacity: 0.1,
+        shadowRadius: 2,
+        elevation: 2,
+    },
+    hintText: {
+        color: '#FFF',
+        fontSize: 14,
+        fontWeight: 'bold',
     },
     attributionContainer: {
         padding: 20,
         alignItems: 'center',
         justifyContent: 'center',
-        opacity: 0.5
+        marginTop: 20,
+        marginBottom: 40,
+        paddingHorizontal: 20,
     },
     attributionText: {
-        color: '#666',
-        fontSize: 12,
-        fontStyle: 'italic',
+        color: '#999',
+        fontSize: 10,
+        textAlign: 'center',
+        lineHeight: 14,
         textAlign: 'center',
     },
     searchBar: {
+        marginHorizontal: 20,
         flexDirection: 'row',
         alignItems: 'center',
         backgroundColor: '#FFF',
@@ -354,6 +449,13 @@ const styles = StyleSheet.create({
         borderRadius: 5,
         marginRight: 15,
         backgroundColor: '#DDD'
+    },
+    artistArt: {
+        width: 50,
+        height: 50,
+        borderRadius: 25,
+        marginRight: 15,
+        backgroundColor: '#e9af45'
     },
     resultInfo: {
         flex: 1

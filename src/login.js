@@ -88,7 +88,7 @@ const LoginScreen = () => {
         try {
             // Firebase Auth Login
             await signInWithEmailAndPassword(auth, email, password);
-            // Alert.alert('Success', 'Welcome to TOPO!'); // Optional, or just navigate
+            // Alert.alert('Success', 'Welcome to TOMO!'); // Optional, or just navigate
             navigation.navigate('MainTabs');
         } catch (error) {
             console.error('Login error:', error);

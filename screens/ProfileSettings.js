@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext, useRef } from 'react';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet, ScrollView, FlatList, Image, Modal, Alert, ActivityIndicator, Platform, Linking, Switch } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, ScrollView, FlatList, Image, Modal, Alert, ActivityIndicator, Platform, Linking, Switch, KeyboardAvoidingView } from 'react-native';
 import { CommonActions, useIsFocused } from '@react-navigation/native';
 import * as ImagePicker from 'expo-image-picker';
 import { MusicContext } from '../context/MusicContext';
@@ -7,7 +7,7 @@ import { Picker } from '@react-native-picker/picker';
 import US_CITIES from '../data/US_Cities';
 import { auth, db, storage } from '../firebaseConfig';
 import { doc, getDoc, updateDoc, collection, query, where, getDocs, arrayUnion, deleteDoc } from 'firebase/firestore';
-import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
+import { ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage';
 import { signOut, deleteUser } from 'firebase/auth';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -194,26 +194,33 @@ const ProfileSettings = ({ navigation }) => {
             if (!user) return;
 
             const userDocRef = doc(db, "users", user.uid);
-            let finalPhotoUrl = profilePhoto;
+            let finalPhotoUrl = profilePhoto; // Defaults to existing photo/null
 
-            if (profilePhoto && (profilePhoto.startsWith('file:') || profilePhoto.startsWith('content:'))) {
+            // Streaming Upload Method: fetch().blob() -> uploadBytesResumable
+            // The previous `storage/unknown` drops were identified as 404 missing buckets on Firebase Storage, NOT
+            // React Native 0.74 JS Bridge corruptions. Expo perfectly routes `file://` natively straight to the JS Blob object.
+            if (profilePhoto && (profilePhoto.startsWith('file:') || profilePhoto.startsWith('content:') || profilePhoto.startsWith('assets-library:'))) {
                 try {
-                    const blob = await new Promise((resolve, reject) => {
-                        const xhr = new XMLHttpRequest();
-                        xhr.onload = function () { resolve(xhr.response); };
-                        xhr.onerror = function (e) { reject(new TypeError("Network request failed")); };
-                        xhr.responseType = "blob";
-                        xhr.open("GET", profilePhoto, true);
-                        xhr.send(null);
+                    const response = await fetch(profilePhoto);
+                    const blob = await response.blob();
+                    const storageRef = ref(storage, `profile_photos/${user.uid}_${Date.now()}.jpg`);
+
+                    const uploadTask = uploadBytesResumable(storageRef, blob, { contentType: 'image/jpeg' });
+
+                    await new Promise((resolve, reject) => {
+                        uploadTask.on('state_changed',
+                            null,
+                            (error) => reject(error),
+                            () => resolve()
+                        );
                     });
 
-                    const storageRef = ref(storage, `profile_photos/${user.uid}_${Date.now()}.jpg`);
-                    await uploadBytes(storageRef, blob);
-                    blob.close();
                     finalPhotoUrl = await getDownloadURL(storageRef);
                 } catch (e) {
-                    console.error("Upload failed", e);
-                    // Continue without photo update if it fails
+                    console.error("Profile Photo Upload failed:", e);
+                    Alert.alert("Upload Failed", `Reason: ${e.message || JSON.stringify(e)}`);
+                    const existingDoc = await getDoc(userDocRef);
+                    finalPhotoUrl = existingDoc.exists() ? existingDoc.data().profilePhoto : null;
                 }
             }
 
@@ -246,7 +253,7 @@ const ProfileSettings = ({ navigation }) => {
     const searchUsers = async (text) => {
         setFriendSearchQuery(text);
         if (text.length < 1) {
-            setFriendSearchResults([]);
+            setFriendSearchResults(following);
             return;
         }
         const searchTerm = text.toLowerCase();
@@ -307,6 +314,9 @@ const ProfileSettings = ({ navigation }) => {
                 const filtered = data.filter(item => item.type === 'albums');
                 setSearchResults(filtered);
             } catch (error) {
+                if (error.name === 'AbortError') {
+                    return; // Silence abort errors
+                }
                 console.error(error);
             }
         }, 500); // 500ms debounce
@@ -344,7 +354,6 @@ const ProfileSettings = ({ navigation }) => {
             allowsEditing: true,
             aspect: [1, 1],
             quality: 0.5,
-            base64: true,
         });
         if (!result.canceled) {
             setProfilePhoto(result.assets[0].uri);
@@ -444,7 +453,7 @@ const ProfileSettings = ({ navigation }) => {
                             <Text style={styles.statLabel}>Followers</Text>
                         </TouchableOpacity>
                     </View>
-                    <TouchableOpacity style={styles.outlineButton} onPress={() => setIsFriendModalVisible(true)}>
+                    <TouchableOpacity style={styles.outlineButton} onPress={() => { setFriendSearchQuery(''); setFriendSearchResults(following); setIsFriendModalVisible(true); }}>
                         <Text style={styles.outlineButtonText}>Find Friends</Text>
                     </TouchableOpacity>
 
@@ -527,15 +536,16 @@ const ProfileSettings = ({ navigation }) => {
                 <View style={styles.section}>
                     <Text style={styles.label}>About</Text>
                     <View style={styles.aboutRow}><Text style={styles.aboutText}>App Version</Text><Text style={[styles.aboutText, { color: '#888' }]}>1.0.0</Text></View>
-                    <TouchableOpacity style={styles.aboutRow} onPress={() => Linking.openURL('https://sites.google.com/view/topo-termsofservice/home')}>
+                    <TouchableOpacity style={styles.aboutRow} onPress={() => Linking.openURL('https://sites.google.com/view/tomo-termsofservice/home')}>
                         <Text style={styles.aboutText}>Terms of Service</Text><Icon name="chevron-right" size={14} color="#666" />
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.aboutRow} onPress={() => Linking.openURL('https://sites.google.com/view/topo-privacypolicy/home')}>
+                    <TouchableOpacity style={styles.aboutRow} onPress={() => Linking.openURL('https://sites.google.com/view/tomo-privacypolicy/home')}>
                         <Text style={styles.aboutText}>Privacy Policy</Text><Icon name="chevron-right" size={14} color="#666" />
                     </TouchableOpacity>
-                    <View style={styles.aboutRow}>
-                        {/* Replaced TMDB with Generic or Apple Music info if needed, keeping simple for now */}
-                        <Text style={[styles.aboutText, { color: '#666', fontSize: 12 }]}>Data provided by Apple Music & Custom Solutions.</Text>
+                    <View style={styles.disclaimerRow}>
+                        <Text style={[styles.aboutText, { color: '#888', fontSize: 10, textAlign: 'center', lineHeight: 14 }]}>
+                            This product uses data provided by Apple Music & Custom Solutions, but is not endorsed or certified. TOMO Music is a music discovery and rating app. This app does not stream music and is not affiliated with or endorsed by any music corporation or streaming services.
+                        </Text>
                     </View>
                 </View>
 
@@ -549,64 +559,72 @@ const ProfileSettings = ({ navigation }) => {
             {/* Friend Search Modal */}
             <Modal visible={isFriendModalVisible} animationType="slide">
                 <SafeAreaView style={styles.searchModalContainer}>
-                    <View style={styles.searchHeader}>
-                        <TouchableOpacity onPress={() => setIsFriendModalVisible(false)}><Icon name="times" size={24} color="#fff" /></TouchableOpacity>
-                        <TextInput style={styles.searchInput} placeholder="Search users..." placeholderTextColor="#999" value={friendSearchQuery} onChangeText={searchUsers} autoFocus />
-                    </View>
-                    <FlatList
-                        data={friendSearchResults}
-                        keyExtractor={item => item.uid}
-                        renderItem={({ item }) => {
-                            const isFollowing = following.some(f => f.uid === item.uid);
-                            const isTop = topFriends.some(f => f.uid === item.uid);
-                            return (
-                                <View style={styles.friendRow}>
-                                    <TouchableOpacity style={{ flexDirection: 'row', alignItems: 'center', flex: 1 }} onPress={() => navigation.navigate('PublicProfile', { userId: item.uid })}>
-                                        <Image source={item.profilePhoto ? { uri: item.profilePhoto } : require('../assets/profile_placeholder.jpg')} style={styles.friendListImg} />
-                                        <Text style={styles.friendListname}>{item.username}</Text>
-                                    </TouchableOpacity>
-                                    {!isFollowing && <TouchableOpacity style={styles.followBtn} onPress={() => followUser(item)}><Text style={{ color: '#000', fontWeight: 'bold' }}>Follow</Text></TouchableOpacity>}
-                                    {isFollowing && <TouchableOpacity style={[styles.topFriendBtn, isTop && { backgroundColor: '#ff8c00' }]} onPress={() => toggleTopFriend(item)}><Text style={{ color: '#fff' }}>{isTop ? 'In Top 4' : 'Add Top 4'}</Text></TouchableOpacity>}
-                                </View>
-                            )
-                        }}
-                    />
+                    <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : undefined} style={{ flex: 1 }}>
+                        <View style={styles.searchHeader}>
+                            <TouchableOpacity style={styles.closeButton} onPress={() => setIsFriendModalVisible(false)}><Icon name="chevron-left" size={24} color="#ff8c00" /></TouchableOpacity>
+                            <TextInput style={styles.searchInput} placeholder="Search users..." placeholderTextColor="#999" value={friendSearchQuery} onChangeText={searchUsers} autoFocus />
+                        </View>
+                        <FlatList
+                            data={friendSearchResults}
+                            keyExtractor={item => item.uid}
+                            keyboardShouldPersistTaps="handled"
+                            contentContainerStyle={{ paddingBottom: 20 }}
+                            renderItem={({ item }) => {
+                                const isFollowing = following.some(f => f.uid === item.uid);
+                                const isTop = topFriends.some(f => f.uid === item.uid);
+                                return (
+                                    <View style={styles.friendRow}>
+                                        <TouchableOpacity style={{ flexDirection: 'row', alignItems: 'center', flex: 1 }} onPress={() => navigation.navigate('PublicProfile', { userId: item.uid })}>
+                                            <Image source={item.profilePhoto ? { uri: item.profilePhoto } : require('../assets/profile_placeholder.jpg')} style={styles.friendListImg} />
+                                            <Text style={styles.friendListname}>{item.username}</Text>
+                                        </TouchableOpacity>
+                                        {!isFollowing && <TouchableOpacity style={styles.followBtn} onPress={() => followUser(item)}><Text style={{ color: '#D4AF37', fontWeight: 'bold' }}>Follow</Text></TouchableOpacity>}
+                                        {isFollowing && <TouchableOpacity style={[styles.topFriendBtn, isTop && { backgroundColor: '#ff8c00' }]} onPress={() => toggleTopFriend(item)}><Text style={{ color: '#000000ff' }}>{isTop ? 'In Top 4' : 'Add Top 4'}</Text></TouchableOpacity>}
+                                    </View>
+                                )
+                            }}
+                        />
+                    </KeyboardAvoidingView>
                 </SafeAreaView>
             </Modal>
 
             {/* Music Search Modal */}
             <Modal visible={isSearchModalVisible} animationType="slide">
                 <SafeAreaView style={styles.searchModalContainer}>
-                    <View style={styles.searchHeader}>
-                        <TouchableOpacity onPress={() => setIsSearchModalVisible(false)}>
-                            <Icon name="times" size={24} color="#fff" />
-                        </TouchableOpacity>
-                        <TextInput
-                            style={styles.searchInput}
-                            placeholder="Search albums..."
-                            placeholderTextColor="#999"
-                            value={searchQuery}
-                            onChangeText={searchMusicHandler}
-                            autoFocus
-                        />
-                    </View>
-                    <FlatList
-                        data={searchResults}
-                        keyExtractor={item => item.id}
-                        renderItem={({ item }) => (
-                            <TouchableOpacity style={styles.searchItem} onPress={() => addTopAlbum(item)}>
-                                {item.attributes.artwork ? (
-                                    <Image source={{ uri: formatArtworkUrl(item.attributes.artwork.url, 100, 100) }} style={styles.searchPoster} />
-                                ) : (
-                                    <View style={[styles.searchPoster, { backgroundColor: '#333' }]} />
-                                )}
-                                <View>
-                                    <Text style={styles.searchTitle}>{item.attributes.name}</Text>
-                                    <Text style={styles.searchSubtitle} numberOfLines={1}>{item.attributes.artistName}</Text>
-                                </View>
+                    <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : undefined} style={{ flex: 1 }}>
+                        <View style={styles.searchHeader}>
+                            <TouchableOpacity style={styles.closeButton} onPress={() => setIsSearchModalVisible(false)}>
+                                <Icon name="chevron-left" size={24} color="#ff8c00" />
                             </TouchableOpacity>
-                        )}
-                    />
+                            <TextInput
+                                style={styles.searchInput}
+                                placeholder="Search albums..."
+                                placeholderTextColor="#999"
+                                value={searchQuery}
+                                onChangeText={searchMusicHandler}
+                                autoFocus
+                            />
+                        </View>
+                        <FlatList
+                            data={searchResults}
+                            keyExtractor={item => item.id}
+                            keyboardShouldPersistTaps="handled"
+                            contentContainerStyle={{ paddingBottom: 20 }}
+                            renderItem={({ item }) => (
+                                <TouchableOpacity style={styles.searchItem} onPress={() => addTopAlbum(item)}>
+                                    {item.attributes.artwork ? (
+                                        <Image source={{ uri: formatArtworkUrl(item.attributes.artwork.url, 100, 100) }} style={styles.searchPoster} />
+                                    ) : (
+                                        <View style={[styles.searchPoster, { backgroundColor: '#333' }]} />
+                                    )}
+                                    <View>
+                                        <Text style={styles.searchTitle}>{item.attributes.name}</Text>
+                                        <Text style={styles.searchSubtitle} numberOfLines={1}>{item.attributes.artistName}</Text>
+                                    </View>
+                                </TouchableOpacity>
+                            )}
+                        />
+                    </KeyboardAvoidingView>
                 </SafeAreaView>
             </Modal>
         </SafeAreaView>
@@ -652,8 +670,9 @@ const styles = StyleSheet.create({
     passwordButton: { flexDirection: 'row', alignItems: 'center', backgroundColor: '#fff', padding: 15, borderRadius: 10, borderWidth: 1, borderColor: '#ddd', marginBottom: 25 },
     passwordButtonText: { color: '#000', fontSize: 16 },
     searchModalContainer: { flex: 1, backgroundColor: '#F2F2F2' },
-    searchHeader: { flexDirection: 'row', alignItems: 'center', padding: 15, borderBottomWidth: 1, borderBottomColor: '#ddd', marginTop: Platform.OS === 'ios' ? 20 : 0, backgroundColor: '#fff' },
-    searchInput: { flex: 1, backgroundColor: '#F9F9F9', color: '#000', borderRadius: 8, padding: 10, fontSize: 16, marginLeft: 15, borderWidth: 1, borderColor: '#eee' },
+    searchHeader: { flexDirection: 'row', alignItems: 'center', padding: 15, borderBottomWidth: 1, borderBottomColor: '#ddd', marginTop: Platform.OS === 'ios' ? 20 : 15, paddingTop: Platform.OS === 'android' ? 20 : 0, backgroundColor: '#fff' },
+    closeButton: { paddingRight: 10, minWidth: 40, justifyContent: 'center', alignItems: 'center' },
+    searchInput: { flex: 1, backgroundColor: '#F9F9F9', color: '#000', borderRadius: 8, padding: 10, fontSize: 16, marginLeft: 5, borderWidth: 1, borderColor: '#eee' },
     searchItem: { flexDirection: 'row', alignItems: 'center', marginBottom: 15, backgroundColor: '#fff', padding: 10, borderRadius: 8, borderWidth: 1, borderColor: '#eee' },
     searchPoster: { width: 45, height: 45, borderRadius: 4, marginRight: 10 },
     searchTitle: { color: '#000', fontSize: 16, fontWeight: 'bold' },
