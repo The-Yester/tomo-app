@@ -83,13 +83,26 @@ export const MusicProvider = ({ children }) => {
 
                 if (albumSnap.exists()) {
                     const albumMeta = albumSnap.data();
+                    let ratedAtVal = null;
+                    if (ratingData.timestamp) {
+                        if (typeof ratingData.timestamp.toDate === 'function') {
+                            ratedAtVal = ratingData.timestamp.toDate().toISOString();
+                        } else {
+                            ratedAtVal = new Date(ratingData.timestamp).toISOString();
+                        }
+                    } else {
+                        ratedAtVal = new Date().toISOString();
+                    }
+
                     restoredAlbums.push({
                         id: albumId,
                         name: albumMeta.name || "Unknown",
                         artistName: albumMeta.artistName || "Unknown",
                         artwork: albumMeta.artwork || null,
                         userOverallRating: ratingData.score,
-                        releaseDate: albumMeta.releaseDate || null
+                        releaseDate: albumMeta.releaseDate || null,
+                        ratedAt: ratedAtVal,
+                        genreNames: albumMeta.genreNames || []
                     });
                 }
             }
@@ -309,6 +322,7 @@ export const MusicProvider = ({ children }) => {
                 name: albumMetadata.attributes?.name || albumMetadata.name || "Unknown",
                 artistName: albumMetadata.attributes?.artistName || albumMetadata.artistName || "Unknown",
                 artwork: albumMetadata.attributes?.artwork || albumMetadata.artwork || null,
+                genreNames: albumMetadata.attributes?.genreNames || albumMetadata.genreNames || [],
                 stats: newStats
             }, { merge: true });
 
@@ -407,13 +421,17 @@ export const MusicProvider = ({ children }) => {
                 artwork: albumInfo?.attributes?.artwork || albumInfo?.artwork || null,
                 userOverallRating: newRating,
                 releaseDate: albumInfo?.attributes?.releaseDate || albumInfo?.releaseDate,
+                genreNames: albumInfo?.attributes?.genreNames || albumInfo?.genreNames || []
             };
 
             if (albumIndex > -1) {
+                const existingAlbum = prevRatedAlbums[albumIndex];
+                albumData.ratedAt = existingAlbum?.ratedAt || new Date().toISOString();
                 updatedRatedAlbums = prevRatedAlbums.map((album, index) =>
                     index === albumIndex ? { ...album, ...albumData } : album
                 );
             } else {
+                albumData.ratedAt = new Date().toISOString();
                 updatedRatedAlbums = [albumData, ...prevRatedAlbums];
             }
 

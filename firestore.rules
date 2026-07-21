@@ -15,6 +15,11 @@ service cloud.firestore {
       return isAuthenticated() && request.auth.uid == userId;
     }
 
+    // Support collection group queries for album ratings
+    match /{path=**}/album_ratings/{ratingId} {
+      allow read: if isAuthenticated();
+    }
+
     // --- USERS COLLECTION ---
     match /users/{userId} {
       allow read: if isAuthenticated();

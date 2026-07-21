@@ -2,7 +2,7 @@
   "expo": {
     "name": "TOMO",
     "slug": "tomo",
-    "version": "1.1.2",
+    "version": "1.1.4",
     "platforms": [
       "ios",
       "android"
@@ -19,7 +19,7 @@
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.ryanyester.tomo",
-      "buildNumber": "12",
+      "buildNumber": "14",
       "infoPlist": {
         "ITSAppUsesNonExemptEncryption": false
       }
@@ -30,7 +30,7 @@
         "backgroundColor": "#23242f"
       },
       "package": "com.ryanyester.tomo",
-      "versionCode": 12
+      "versionCode": 14
     },
     "extra": {
       "eas": {

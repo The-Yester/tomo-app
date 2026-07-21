@@ -29,6 +29,7 @@ import PublicProfileScreen from './screens/PublicProfileScreen';
 import RatingInstructionsScreen from './screens/RatingInstructionsScreen';
 import ArtistDetailScreen from './screens/ArtistDetailScreen';
 import GenreDetailScreen from './screens/GenreDetailScreen';
+import YearInReviewScreen from './screens/YearInReviewScreen';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -46,6 +47,7 @@ const createTabStack = (MainScreenName, MainComponent) => {
             <TabStack.Screen name="ProfileSettings" component={ProfileSettings} />
             <TabStack.Screen name="FollowList" component={FollowListScreen} />
             <TabStack.Screen name="PhysicalCollection" component={PhysicalCollectionScreen} />
+            <TabStack.Screen name="YearInReview" component={YearInReviewScreen} />
         </TabStack.Navigator>
     );
     return TabStackNavigator;
@@ -152,6 +154,7 @@ function AppNavigator() {
                     <Stack.Screen name="RatingInstructions" component={RatingInstructionsScreen} options={{ headerShown: false }} />
                     <Stack.Screen name="ArtistDetail" component={ArtistDetailScreen} options={{ headerShown: false }} />
                     <Stack.Screen name="CreateCuration" component={CreateCurationScreen} options={{ headerShown: false }} />
+                    <Stack.Screen name="YearInReview" component={YearInReviewScreen} options={{ headerShown: false }} />
                 </Stack.Navigator>
             </NavigationContainer>
         </MusicProvider>

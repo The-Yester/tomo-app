@@ -160,10 +160,22 @@ const ProfileScreen = () => {
                     <Text style={infoSectionStyles.text}>{bio || 'N/A'}</Text>
                 </View>
 
-                <View style={infoSectionStyles.container}>
-                    <Text style={infoSectionStyles.title}>Rating Method</Text>
-                    <Text style={infoSectionStyles.text}>{ratingMethod || 'N/A'}</Text>
-                </View>
+                {/* Year in Review Banner */}
+                <TouchableOpacity
+                    style={reviewSectionStyles.container}
+                    onPress={() => navigation.navigate('YearInReview')}
+                >
+                    <View style={reviewSectionStyles.headerRow}>
+                        <View style={reviewSectionStyles.titleContainer}>
+                            <Icon name="trophy" size={16} color="#d4a03e" style={{ marginRight: 8 }} />
+                            <Text style={reviewSectionStyles.title}>Year in Review</Text>
+                        </View>
+                        <Icon name="chevron-right" size={14} color="#d4a03e" />
+                    </View>
+                    <Text style={reviewSectionStyles.subtitle}>
+                        Explore your dynamic stats, top genres, rating distributions, and high scores year-by-year.
+                    </Text>
+                </TouchableOpacity>
 
                 <View style={listSectionStyles.container}>
                     <Text style={listSectionStyles.title}>Top 8 Albums</Text>
@@ -187,24 +199,6 @@ const ProfileScreen = () => {
                     </View>
                 </View>
 
-                <View style={friendsSectionStyles.container}>
-                    <Text style={friendsSectionStyles.title}>Top Friends</Text>
-                    <View style={friendsSectionStyles.friendsGrid}>
-                        {topFriends.length > 0 ? (
-                            topFriends.map((friend, index) => (
-                                <View key={friend.uid || index} style={friendsSectionStyles.friendItem}>
-                                    <Image
-                                        source={friend.profilePhoto ? { uri: friend.profilePhoto } : require('../assets/profile_placeholder.jpg')}
-                                        style={friendsSectionStyles.friendPhoto}
-                                    />
-                                    <Text numberOfLines={1} style={friendsSectionStyles.friendName}>{friend.username}</Text>
-                                </View>
-                            ))
-                        ) : (
-                            <Text style={listSectionStyles.emptyText}>No Top Friends.</Text>
-                        )}
-                    </View>
-                </View>
                 <View style={{ height: 100 }} />
             </ScrollView>
         </View>
@@ -294,6 +288,42 @@ const friendsSectionStyles = StyleSheet.create({
     friendItem: { alignItems: 'center', width: '22%' }, // Percentage width
     friendPhoto: { width: 50, height: 50, borderRadius: 25, marginBottom: 5, borderWidth: 1, borderColor: '#555' },
     friendName: { color: '#ccc', fontSize: 10, textAlign: 'center' }
+});
+
+const reviewSectionStyles = StyleSheet.create({
+    container: {
+        backgroundColor: '#1E1B2C',
+        padding: 18,
+        borderRadius: 12,
+        marginBottom: 15,
+        borderWidth: 1,
+        borderColor: '#d4a03e',
+        shadowColor: "#d4a03e",
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.15,
+        shadowRadius: 4,
+        elevation: 4,
+    },
+    headerRow: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        marginBottom: 8,
+    },
+    titleContainer: {
+        flexDirection: 'row',
+        alignItems: 'center',
+    },
+    title: {
+        fontSize: 16,
+        fontWeight: 'bold',
+        color: '#FFFFFF',
+    },
+    subtitle: {
+        fontSize: 12,
+        color: '#aaa',
+        lineHeight: 16,
+    },
 });
 
 export default ProfileScreen;

@@ -440,38 +440,7 @@ const ProfileSettings = ({ navigation }) => {
 
                 <View style={styles.separator} />
 
-                {/* Social */}
-                <View style={styles.section}>
-                    <Text style={styles.label}>My Network</Text>
-                    <View style={styles.statsRow}>
-                        <TouchableOpacity style={styles.statItem} onPress={() => navigation.navigate('FollowList', { title: 'Following', userList: following, currentUserId: auth.currentUser.uid, isOwnFollowing: true })}>
-                            <Text style={styles.statNum}>{following.length}</Text>
-                            <Text style={styles.statLabel}>Following</Text>
-                        </TouchableOpacity>
-                        <TouchableOpacity style={styles.statItem} onPress={() => navigation.navigate('FollowList', { title: 'Followers', userList: followers, currentUserId: auth.currentUser.uid, isOwnFollowers: true })}>
-                            <Text style={styles.statNum}>{followers.length}</Text>
-                            <Text style={styles.statLabel}>Followers</Text>
-                        </TouchableOpacity>
-                    </View>
-                    <TouchableOpacity style={styles.outlineButton} onPress={() => { setFriendSearchQuery(''); setFriendSearchResults(following); setIsFriendModalVisible(true); }}>
-                        <Text style={styles.outlineButtonText}>Find Friends</Text>
-                    </TouchableOpacity>
 
-                    <Text style={[styles.label, { marginTop: 20 }]}>Top 4 Friends</Text>
-                    <View style={styles.topFriendsGrid}>
-                        {((hydratedTopFriends.length > 0 ? hydratedTopFriends : topFriends)).length > 0 ? (
-                            (hydratedTopFriends.length > 0 ? hydratedTopFriends : topFriends).map(item => (
-                                <View key={item.uid} style={styles.topFriendItemGrid}>
-                                    <Image source={item.profilePhoto ? { uri: item.profilePhoto } : require('../assets/profile_placeholder.jpg')} style={styles.topFriendImg} />
-                                    <TouchableOpacity style={styles.removeFriendBadge} onPress={() => toggleTopFriend(item)}><Icon name="times" size={10} color="#fff" /></TouchableOpacity>
-                                    <Text style={styles.topFriendName} numberOfLines={1}>{item.username}</Text>
-                                </View>
-                            ))
-                        ) : (<Text style={{ color: '#555', fontStyle: 'italic', width: '100%' }}>No Top Friends selected.</Text>)}
-                    </View>
-                </View>
-
-                <View style={styles.separator} />
 
                 {/* Notification */}
                 <View style={[styles.section, { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }]}>
@@ -481,21 +450,6 @@ const ProfileSettings = ({ navigation }) => {
 
                 <View style={styles.separator} />
 
-                {/* Rating System */}
-                <View style={styles.section}>
-                    <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: 8 }}>
-                        <Text style={[styles.label, { marginBottom: 0 }]}>Preferred Rating System</Text>
-                        <TouchableOpacity style={{ flexDirection: 'row', alignItems: 'center' }} onPress={() => navigation.navigate('RatingInstructions')}>
-                            <Icon name="info-circle" size={16} color="#D4AF37" style={{ marginRight: 5 }} />
-                            <Text style={{ color: '#D4AF37', fontSize: 12, fontWeight: 'bold' }}>Instructions</Text>
-                        </TouchableOpacity>
-                    </View>
-                    <View style={styles.pickerWrapper}>
-                        <Picker selectedValue={selectedRatingSystem} onValueChange={setSelectedRatingSystem} style={styles.picker}>
-                            {ratingMethods.map((m) => <Picker.Item key={m.id} label={m.name} value={m.id} color="#000" />)}
-                        </Picker>
-                    </View>
-                </View>
 
                 {/* Password - Placeholder similar to before */}
                 <TouchableOpacity style={styles.passwordButton} onPress={() => Alert.alert("Note", "Password change requires re-auth.")}>
@@ -503,44 +457,22 @@ const ProfileSettings = ({ navigation }) => {
                     <Text style={styles.passwordButtonText}>Change Password</Text>
                 </TouchableOpacity>
 
-                <View style={styles.separator} />
 
-                {/* Top 8 Albums */}
-                <View style={styles.section}>
-                    <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: 10 }}>
-                        <Text style={styles.label}>My Top 8 Albums</Text>
-                        {topAlbums.length < 8 && (
-                            <TouchableOpacity onPress={() => setIsSearchModalVisible(true)}>
-                                <Icon name="plus-circle" size={24} color="#D4AF37" />
-                            </TouchableOpacity>
-                        )}
-                    </View>
-                    <FlatList
-                        horizontal
-                        data={topAlbums}
-                        keyExtractor={item => item.id.toString()}
-                        renderItem={({ item }) => (
-                            <TouchableOpacity style={styles.top8Item} onPress={() => removeTopAlbum(item.id)}>
-                                {item.artwork ? (
-                                    <Image source={{ uri: formatArtworkUrl(item.artwork.url, 200, 200) }} style={styles.top8Image} />
-                                ) : (
-                                    <View style={[styles.top8Image, { backgroundColor: '#333', justifyContent: 'center', alignItems: 'center' }]}><Text style={{ color: '#fff', fontSize: 10 }}>No Art</Text></View>
-                                )}
-                                <View style={styles.removeBadge}><Icon name="times" size={10} color="#fff" /></View>
-                            </TouchableOpacity>
-                        )}
-                    />
-                </View>
 
                 {/* About & Footer */}
                 <View style={styles.section}>
                     <Text style={styles.label}>About</Text>
-                    <View style={styles.aboutRow}><Text style={styles.aboutText}>App Version</Text><Text style={[styles.aboutText, { color: '#888' }]}>1.0.0</Text></View>
+                    <View style={styles.aboutRow}>
+                        <Text style={styles.aboutText}>App Version</Text>
+                        <Text style={[styles.aboutText, { color: '#888' }]}>1.0.0</Text>
+                    </View>
                     <TouchableOpacity style={styles.aboutRow} onPress={() => Linking.openURL('https://sites.google.com/view/tomo-termsofservice/home')}>
-                        <Text style={styles.aboutText}>Terms of Service</Text><Icon name="chevron-right" size={14} color="#666" />
+                        <Text style={styles.aboutText}>Terms of Service</Text>
+                        <Icon name="chevron-right" size={14} color="#666" />
                     </TouchableOpacity>
                     <TouchableOpacity style={styles.aboutRow} onPress={() => Linking.openURL('https://sites.google.com/view/tomo-privacypolicy/home')}>
-                        <Text style={styles.aboutText}>Privacy Policy</Text><Icon name="chevron-right" size={14} color="#666" />
+                        <Text style={styles.aboutText}>Privacy Policy</Text>
+                        <Icon name="chevron-right" size={14} color="#666" />
                     </TouchableOpacity>
                     <View style={styles.disclaimerRow}>
                         <Text style={[styles.aboutText, { color: '#888', fontSize: 10, textAlign: 'center', lineHeight: 14 }]}>
@@ -551,82 +483,10 @@ const ProfileSettings = ({ navigation }) => {
 
                 <View style={[styles.section, { marginTop: 20, marginBottom: 40 }]}>
                     <TouchableOpacity style={styles.logoutButton} onPress={handleLogout}><Text style={styles.logoutText}>Log Out</Text></TouchableOpacity>
-                    <TouchableOpacity style={styles.deleteButton} onPress={handleDeleteAccount}><Text style={styles.deleteText}>Deactivate Account</Text></TouchableOpacity>
+                    <TouchableOpacity style={styles.deleteButton} onPress={handleDeleteAccount}><Text style={styles.deleteText}>Delete Account</Text></TouchableOpacity>
                 </View>
 
             </ScrollView>
-
-            {/* Friend Search Modal */}
-            <Modal visible={isFriendModalVisible} animationType="slide">
-                <SafeAreaView style={styles.searchModalContainer}>
-                    <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : undefined} style={{ flex: 1 }}>
-                        <View style={styles.searchHeader}>
-                            <TouchableOpacity style={styles.closeButton} onPress={() => setIsFriendModalVisible(false)}><Icon name="chevron-left" size={24} color="#ff8c00" /></TouchableOpacity>
-                            <TextInput style={styles.searchInput} placeholder="Search users..." placeholderTextColor="#999" value={friendSearchQuery} onChangeText={searchUsers} autoFocus />
-                        </View>
-                        <FlatList
-                            data={friendSearchResults}
-                            keyExtractor={item => item.uid}
-                            keyboardShouldPersistTaps="handled"
-                            contentContainerStyle={{ paddingBottom: 20 }}
-                            renderItem={({ item }) => {
-                                const isFollowing = following.some(f => f.uid === item.uid);
-                                const isTop = topFriends.some(f => f.uid === item.uid);
-                                return (
-                                    <View style={styles.friendRow}>
-                                        <TouchableOpacity style={{ flexDirection: 'row', alignItems: 'center', flex: 1 }} onPress={() => navigation.navigate('PublicProfile', { userId: item.uid })}>
-                                            <Image source={item.profilePhoto ? { uri: item.profilePhoto } : require('../assets/profile_placeholder.jpg')} style={styles.friendListImg} />
-                                            <Text style={styles.friendListname}>{item.username}</Text>
-                                        </TouchableOpacity>
-                                        {!isFollowing && <TouchableOpacity style={styles.followBtn} onPress={() => followUser(item)}><Text style={{ color: '#D4AF37', fontWeight: 'bold' }}>Follow</Text></TouchableOpacity>}
-                                        {isFollowing && <TouchableOpacity style={[styles.topFriendBtn, isTop && { backgroundColor: '#ff8c00' }]} onPress={() => toggleTopFriend(item)}><Text style={{ color: '#000000ff' }}>{isTop ? 'In Top 4' : 'Add Top 4'}</Text></TouchableOpacity>}
-                                    </View>
-                                )
-                            }}
-                        />
-                    </KeyboardAvoidingView>
-                </SafeAreaView>
-            </Modal>
-
-            {/* Music Search Modal */}
-            <Modal visible={isSearchModalVisible} animationType="slide">
-                <SafeAreaView style={styles.searchModalContainer}>
-                    <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : undefined} style={{ flex: 1 }}>
-                        <View style={styles.searchHeader}>
-                            <TouchableOpacity style={styles.closeButton} onPress={() => setIsSearchModalVisible(false)}>
-                                <Icon name="chevron-left" size={24} color="#ff8c00" />
-                            </TouchableOpacity>
-                            <TextInput
-                                style={styles.searchInput}
-                                placeholder="Search albums..."
-                                placeholderTextColor="#999"
-                                value={searchQuery}
-                                onChangeText={searchMusicHandler}
-                                autoFocus
-                            />
-                        </View>
-                        <FlatList
-                            data={searchResults}
-                            keyExtractor={item => item.id}
-                            keyboardShouldPersistTaps="handled"
-                            contentContainerStyle={{ paddingBottom: 20 }}
-                            renderItem={({ item }) => (
-                                <TouchableOpacity style={styles.searchItem} onPress={() => addTopAlbum(item)}>
-                                    {item.attributes.artwork ? (
-                                        <Image source={{ uri: formatArtworkUrl(item.attributes.artwork.url, 100, 100) }} style={styles.searchPoster} />
-                                    ) : (
-                                        <View style={[styles.searchPoster, { backgroundColor: '#333' }]} />
-                                    )}
-                                    <View>
-                                        <Text style={styles.searchTitle}>{item.attributes.name}</Text>
-                                        <Text style={styles.searchSubtitle} numberOfLines={1}>{item.attributes.artistName}</Text>
-                                    </View>
-                                </TouchableOpacity>
-                            )}
-                        />
-                    </KeyboardAvoidingView>
-                </SafeAreaView>
-            </Modal>
         </SafeAreaView>
     );
 };

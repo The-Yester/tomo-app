@@ -103,6 +103,20 @@ const ListScreen = ({ navigation }) => {
         return [...pinned, ...custom];
     }, [musicLists, overallRatedAlbums, sortBy]);
 
+    const releaseYears = useMemo(() => {
+        if (!overallRatedAlbums) return [];
+        const years = new Set();
+        overallRatedAlbums.forEach(album => {
+            if (album.releaseDate && typeof album.releaseDate === 'string' && album.releaseDate.length >= 4) {
+                const year = album.releaseDate.substring(0, 4);
+                if (/^\d{4}$/.test(year)) {
+                    years.add(year);
+                }
+            }
+        });
+        return Array.from(years).sort((a, b) => b.localeCompare(a));
+    }, [overallRatedAlbums]);
+
     return (
         <SafeAreaView style={styles.container}>
             <View style={styles.header}>
@@ -111,6 +125,31 @@ const ListScreen = ({ navigation }) => {
                     <Icon name="sort" size={24} color="#000" />
                 </TouchableOpacity>
             </View>
+
+            {/* Browse by Release Year Banner */}
+            {releaseYears.length > 0 && (
+                <View style={styles.yearBannerContainer}>
+                    <View style={styles.yearBannerHeader}>
+                        <Icon name="calendar" size={14} color="#d4a03e" style={{ marginRight: 6 }} />
+                        <Text style={styles.yearBannerTitle}>Browse by Release Year</Text>
+                    </View>
+                    <FlatList
+                        horizontal
+                        data={releaseYears}
+                        keyExtractor={(item) => item}
+                        showsHorizontalScrollIndicator={false}
+                        contentContainerStyle={styles.yearPillsContainer}
+                        renderItem={({ item }) => (
+                            <TouchableOpacity
+                                style={styles.yearPill}
+                                onPress={() => navigateToListDetails({ id: `YEAR_${item}`, name: `Albums of ${item}` })}
+                            >
+                                <Text style={styles.yearPillText}>{item}</Text>
+                            </TouchableOpacity>
+                        )}
+                    />
+                </View>
+            )}
 
             <View style={styles.subHeader}>
                 <Text style={styles.sortLabel}>Custom Lists: {sortBy}</Text>
@@ -294,6 +333,47 @@ const styles = StyleSheet.create({
     closeButtonText: {
         color: '#ff4444',
         fontSize: 16
+    },
+    yearBannerContainer: {
+        backgroundColor: '#FFFFFF',
+        borderRadius: 16,
+        padding: 12,
+        marginBottom: 15,
+        borderWidth: 1,
+        borderColor: '#E0E0E0',
+        shadowColor: "#000",
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.05,
+        shadowRadius: 3,
+        elevation: 2,
+    },
+    yearBannerHeader: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        marginBottom: 8,
+    },
+    yearBannerTitle: {
+        fontSize: 14,
+        fontWeight: 'bold',
+        color: '#000',
+        fontFamily: 'Trebuchet MS',
+    },
+    yearPillsContainer: {
+        paddingVertical: 4,
+    },
+    yearPill: {
+        backgroundColor: '#F2F2F2',
+        paddingHorizontal: 16,
+        paddingVertical: 8,
+        borderRadius: 20,
+        marginRight: 8,
+        borderWidth: 1,
+        borderColor: '#C6A87C',
+    },
+    yearPillText: {
+        fontSize: 13,
+        fontWeight: '600',
+        color: '#000',
     }
 });
 
