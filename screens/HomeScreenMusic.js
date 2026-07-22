@@ -796,7 +796,7 @@ const HomeScreenMusic = () => {
                                 <Text style={styles.userName} numberOfLines={1}>{userProfile?.name || 'Tomo User'}</Text>
                                 <Text style={styles.userHandle}>@{userProfile?.username || 'username'}</Text>
                             </View>
-                            <View style={{ alignItems: 'flex-end', justifyContent: 'center' }}>
+                            <View style={{ alignItems: 'flex-end', justifyContent: 'center', marginRight: 20 }}>
                                 <TouchableOpacity 
                                     style={styles.editProfileBtn} 
                                     onPress={() => navigation.navigate('ProfileSettings')}
@@ -807,7 +807,7 @@ const HomeScreenMusic = () => {
                                     style={styles.pickRatingStyleBtn} 
                                     onPress={() => setIsRatingStyleModalVisible(true)}
                                 >
-                                    <Text style={styles.pickRatingStyleBtnText}>Pick Rating Style</Text>
+                                    <Text style={styles.pickRatingStyleBtnText}>Pick Rating</Text>
                                 </TouchableOpacity>
                             </View>
                         </View>
@@ -1443,9 +1443,9 @@ const styles = StyleSheet.create({
         backgroundColor: 'transparent',
         borderWidth: 1.5,
         borderColor: '#ccc',
-        width: 140,
-        paddingVertical: 8,
-        borderRadius: 20,
+        width: 95,
+        paddingVertical: 5,
+        borderRadius: 13,
         marginLeft: 10,
         alignItems: 'center',
         justifyContent: 'center',
@@ -1453,8 +1453,8 @@ const styles = StyleSheet.create({
     editProfileBtnText: {
         color: '#666',
         fontWeight: 'bold',
-        fontSize: 11,
-        letterSpacing: 0.3
+        fontSize: 11.5,
+        letterSpacing: 0
     },
     bioText: {
         fontSize: 13,
@@ -1525,20 +1525,22 @@ const styles = StyleSheet.create({
     },
     findFriendsBtn: {
         backgroundColor: '#000',
-        paddingVertical: 6,
-        paddingHorizontal: 12,
-        borderRadius: 15,
+        width: 95,
+        paddingVertical: 5,
+        borderRadius: 13,
         shadowColor: "#000",
         shadowOffset: { width: 0, height: 1 },
         shadowOpacity: 0.2,
         shadowRadius: 1.5,
         elevation: 2,
+        alignItems: 'center',
+        justifyContent: 'center',
     },
     findFriendsBtnText: {
         color: '#E5C585',
         fontWeight: 'bold',
-        fontSize: 11,
-        letterSpacing: 0.5,
+        fontSize: 10.5,
+        letterSpacing: 0,
     },
     searchModalContainer: { flex: 1, backgroundColor: '#F2F2F2' },
     searchHeader: { 
@@ -1955,9 +1957,9 @@ const styles = StyleSheet.create({
         marginTop: 6,
         marginLeft: 10,
         backgroundColor: '#D4AF37', // Gold
-        width: 140,
-        paddingVertical: 8,
-        borderRadius: 20,
+        width: 95,
+        paddingVertical: 5,
+        borderRadius: 13,
         alignItems: 'center',
         justifyContent: 'center',
         shadowColor: "#000",
@@ -1968,9 +1970,9 @@ const styles = StyleSheet.create({
     },
     pickRatingStyleBtnText: {
         color: '#fff',
-        fontSize: 11,
+        fontSize: 11.5,
         fontWeight: 'bold',
-        letterSpacing: 0.3,
+        letterSpacing: 0,
     },
     styleOption: {
         backgroundColor: '#1E1E1E',
